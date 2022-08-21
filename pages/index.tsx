@@ -1,6 +1,34 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
+const API_URL = '';
+const API_AUTH = `https://accounts.spotify.com/authorize?`;
+
+const CLIENT_ID = '8fbfe3145bd04bd48f730d4b654f5603';
+const CLIENT_SECRET = '7a84ba72a7344870a405b648b1f2bb2c';
+
+const SCOPE = `
+  streaming
+  user-read-email
+  user-read-private
+  user-library-read
+  user-library-modify
+  user-read-playback-state
+  user-modify-playback-state
+  `;
+const redirect_uri = 'http://localhost:3000/callback';
+
+async function fetchAuth() {
+  const authUrl = `${API_AUTH}client_id=${CLIENT_ID}&response_type=code&redirect_uri=${redirect_uri}&scope=${SCOPE}`;
+  const encodedUri = encodeURI(authUrl);
+  // const result = fetch(encodedUri);
+  console.log(authUrl);
+  console.log(encodedUri);
+}
+
+// function fetchAuth() {
+//   return 1;
+// }
 const Home: NextPage = () => {
   return (
     <div className={'bg-yellow-50'}>
@@ -12,6 +40,9 @@ const Home: NextPage = () => {
       <div>
         <h1 className="text-neutral-900">hello</h1>
       </div>
+      <button className="text-orange-800" onClick={fetchAuth}>
+        test
+      </button>
     </div>
   );
 };
