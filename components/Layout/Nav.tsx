@@ -1,10 +1,13 @@
+import LoginButton from '@components/Button/LoginButton';
 import Link from 'next/link';
 
 function Nav() {
   return (
     <nav>
-      <Link href={'/'}>navigation element</Link>
-      <Link href={'/profile'}>navigation element</Link>
+      <Link className="text-green-600" href={'/'}>
+        navigation element
+      </Link>
+      <LoginButton />
     </nav>
   );
 }

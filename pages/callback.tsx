@@ -1,4 +1,7 @@
-const callback = () => {
-  return <div>you did it</div>;
+import { useRouter } from 'next/router';
+
+const Callback = () => {
+  return <div></div>;
 };
-export default callback;
+
+export default Callback;
