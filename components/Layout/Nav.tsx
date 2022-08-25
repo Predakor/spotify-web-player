@@ -1,3 +1,4 @@
+import LoginButton from '@components/Button/LoginButton';
 import UserAccount from '@components/UserAccount/UserAccount';
 import Link from 'next/link';
 
@@ -16,6 +17,7 @@ function Nav() {
       <Link href={'profile'}>
         <UserAccount />
       </Link>
+      <LoginButton />
     </nav>
   );
 }

@@ -49,10 +49,10 @@ export default NextAuth({
       if (Date.now() < token.accesTokenExpires) {
         return token;
       }
-      return await refreshAccesToken(token as newToken);
+      return await refreshAccesToken(token as SpotifyToken);
     },
     async session({ session, token }): Promise<SpotifySession> {
-      const { accesToken, refreshToken, name } = token as newToken;
+      const { accesToken, refreshToken, name } = token as SpotifyToken;
       return {
         ...session,
         user: {
