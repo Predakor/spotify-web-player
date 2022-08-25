@@ -1,5 +1,6 @@
 import SpotifyWebApi from 'spotify-web-api-node';
 
+const BASE_LINK = 'https://accounts.spotify.com';
 const scopes = [
   'streaming',
   'user-read-email',
@@ -9,14 +10,13 @@ const scopes = [
   'user-read-playback-state',
   'user-modify-playback-state',
 ].join(',');
-
 const params = {
   scope: scopes,
 };
 
 const queryParamString = new URLSearchParams(params);
 
-const AUTH_URL = `https://accounts.spotify.com/authorize?${queryParamString.toString()}`;
+const AUTH_URL = `${BASE_LINK}/authorize?${queryParamString.toString()}`;
 
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.CLIENT_ID,

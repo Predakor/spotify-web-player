@@ -1,13 +1,9 @@
 import NextAuth from 'next-auth/next';
 import SpotifyProvider from 'next-auth/providers/spotify';
 import spotifyApi, { AUTH_URL } from '@utils/spotify';
-import { JWT } from 'next-auth/jwt';
+import { SpotifySession, SpotifyToken } from 'types/spotifyUser';
 
-interface newToken extends JWT {
-  accesToken: string;
-  refreshToken: string;
-}
-async function refreshAccesToken(token: newToken) {
+async function refreshAccesToken(token: SpotifyToken): Promise<SpotifyToken> {
   try {
     spotifyApi.setAccessToken(token.accesToken);
     spotifyApi.setRefreshToken(token.refreshToken);
@@ -55,7 +51,7 @@ export default NextAuth({
       }
       return await refreshAccesToken(token as newToken);
     },
-    async session({ session, token }) {
+    async session({ session, token }): Promise<SpotifySession> {
       const { accesToken, refreshToken, name } = token as newToken;
       return {
         ...session,
