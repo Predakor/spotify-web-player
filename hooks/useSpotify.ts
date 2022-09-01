@@ -16,3 +16,15 @@ export default function useSpotify() {
   }, [session]);
   return spotifyApi;
 }
+
+export const nextSong = () => spotifyApi.skipToNext();
+export const prevSong = () => spotifyApi.skipToPrevious();
+export const toogleShugle = () => spotifyApi.setShuffle(true);
+export const repeatSong = async () => {
+  const data = (await spotifyApi.getMyCurrentPlaybackState()).body;
+
+  if (data.repeat_state === 'context') return spotifyApi.setRepeat('track');
+  if (data.repeat_state === 'track') return spotifyApi.setRepeat('context');
+
+  return spotifyApi.setRepeat('off');
+};
