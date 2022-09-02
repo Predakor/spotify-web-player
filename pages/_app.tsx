@@ -1,6 +1,6 @@
 import Layout from '@components/Layout';
 import type { AppProps } from 'next/app';
-import { wrapper } from 'store/store';
+import { wrapper } from 'store';
 import { SessionProvider } from 'next-auth/react';
 import '../styles/globals.css';
 

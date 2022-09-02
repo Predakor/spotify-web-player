@@ -3,19 +3,18 @@ import useSpotify from 'hooks/useSpotify';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
-function Playlist() {
+type Playlist = SpotifyApi.PlaylistObjectSimplified;
+
+const Playlist = () => {
   const session = useSession();
   const spotifyApi = useSpotify();
 
-  const [playlists, setPlaylists] = useState<
-    SpotifyApi.PlaylistObjectSimplified[]
-  >([]);
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   useEffect(() => {
     if (!spotifyApi.getAccessToken()) return;
-    spotifyApi.getUserPlaylists().then((data) => {
-      setPlaylists(data.body.items);
-    });
+
+    spotifyApi.getUserPlaylists().then((data) => setPlaylists(data.body.items));
   }, [session, spotifyApi]);
 
   return (
@@ -28,5 +27,5 @@ function Playlist() {
       </div>
     </div>
   );
-}
+};
 export default Playlist;

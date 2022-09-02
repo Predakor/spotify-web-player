@@ -1,13 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { authSlice } from './authSlice';
 import { createWrapper } from 'next-redux-wrapper';
+import currentSongSlice from './currentSongSlice';
 
 const makeStore = () =>
   configureStore({
     reducer: {
-      [authSlice.name]: authSlice.reducer,
+      song: currentSongSlice.reducer,
     },
-    devTools: true,
   });
 
 export type AppStore = ReturnType<typeof makeStore>;
@@ -18,5 +17,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action
 >;
+export const songActions = currentSongSlice.actions;
 
 export const wrapper = createWrapper<AppStore>(makeStore);

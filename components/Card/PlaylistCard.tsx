@@ -1,14 +1,18 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Card, { CardProps } from './index';
 
 interface PlaylistCardProps extends CardProps {
   data: SpotifyApi.PlaylistObjectSimplified;
 }
-export default function PlaylistCard({ data, onClick }: PlaylistCardProps) {
-  const { name, description, images } = data;
+export default function PlaylistCard({ data }: PlaylistCardProps) {
+  const { id, name, description, images } = data;
+  const router = useRouter();
   const [image] = images;
+
+  const selectPlaylist = () => router.push(`/playlist/${id}`);
   return (
-    <Card onClick={onClick}>
+    <Card onClick={selectPlaylist}>
       <h2 className="text-lg" key={name}>
         {name}
       </h2>
@@ -17,8 +21,8 @@ export default function PlaylistCard({ data, onClick }: PlaylistCardProps) {
         <Image
           src={image.url}
           alt="playlist thumnbnail"
-          width={image.width / 2}
-          height={image.height / 2}
+          width={200}
+          height={200}
         />
       )}
     </Card>
