@@ -3,12 +3,12 @@ import useSpotifyControls from 'hooks/useSpotifyControls';
 
 const Player = () => {
   const spotifyApi = useSpotify();
-  const { nextSong, prevSong, repeatSong, toogleShugle, play, pause } =
+  const { nextSong, prevSong, repeatSong, toogleShugle, resume, pause } =
     useSpotifyControls();
 
   const clickHandler = async () => {
     const data = (await spotifyApi.getMyCurrentPlaybackState()).body;
-    data.is_playing ? pause() : play();
+    data.is_playing ? pause() : resume();
   };
 
   return (

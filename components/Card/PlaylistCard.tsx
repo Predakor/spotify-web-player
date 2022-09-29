@@ -13,9 +13,7 @@ export default function PlaylistCard({ data }: PlaylistCardProps) {
   const selectPlaylist = () => router.push(`/playlist/${id}`);
   return (
     <Card onClick={selectPlaylist}>
-      <h2 className="text-lg" key={name}>
-        {name}
-      </h2>
+      <h2 className="text-lg">{name}</h2>
       <p>{description}</p>
       {image && (
         <Image

@@ -1,11 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
-import currentSongSlice from './currentSongSlice';
+import currentSongReducer, { currentSongSlice } from './currentSongSlice';
 
 const makeStore = () =>
   configureStore({
     reducer: {
-      song: currentSongSlice.reducer,
+      song: currentSongReducer,
     },
   });
 
