@@ -1,16 +1,16 @@
-import useSongInfo from 'hooks/useSongInfo';
 import Image from 'next/image';
 
-const CurrentSong = () => {
-  const songInfo = useSongInfo();
-  if (!songInfo) return;
+const CurrentSong = ({ songInfo }: { songInfo: Spotify.Track }) => {
+  if (!songInfo) return <></>;
 
-  const { name, artists, images } = songInfo.album;
+  console.log(songInfo);
+
+  const { name, album, artists } = songInfo;
 
   return (
-    <div className="flex gap-4 w">
+    <div className="flex gap-4 ">
       <Image
-        src={images[0].url}
+        src={album.images[0].url}
         alt="current song thumbnail"
         width={50}
         height={50}
