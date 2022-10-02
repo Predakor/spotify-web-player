@@ -1,5 +1,5 @@
 import useSpotify from 'hooks/useSpotify';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdVolumeMute, MdVolumeDown, MdVolumeUp } from 'react-icons/md';
 
 const VolumeIcon = ({ volume }: { volume: number }) => {
@@ -26,7 +26,7 @@ const VolumeControl = () => {
   };
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 justify-self-end">
       <div onClick={muteHandler}>
         <VolumeIcon volume={volume} />
       </div>
