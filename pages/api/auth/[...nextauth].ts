@@ -37,6 +37,8 @@ export default NextAuth({
   },
   callbacks: {
     async jwt({ token, account, user }) {
+      const spotifyToken = token as SpotifyToken;
+
       if (account && user) {
         return {
           ...token,
@@ -46,14 +48,12 @@ export default NextAuth({
           accessTokenExpires: account.expires_at && account.expires_at * 1000,
         };
       }
-      if (Date.now() < token.accesTokenExpires) return token;
+      if (Date.now() < spotifyToken.accesTokenExpires) return spotifyToken;
 
-      return await refreshAccesToken(token as SpotifyToken);
+      return await refreshAccesToken(spotifyToken);
     },
     async session({ session, token }): Promise<SpotifySession> {
       const { accesToken, refreshToken } = token as SpotifyToken;
-      console.log(token);
-
       return {
         ...session,
         user: {

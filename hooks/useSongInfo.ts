@@ -6,7 +6,9 @@ import useSpotify from './useSpotify';
 export default function useSongInfo() {
   const dispatch = useDispatch();
   const spotifyApi = useSpotify();
-  const songID = useSelector((state) => state.song.currentSong);
+  const songID = useSelector(
+    (state: { song: { currentSong: string } }) => state.song.currentSong
+  );
   const [songInfo, setSongInfo] = useState<SpotifyApi.SingleTrackResponse>();
 
   useEffect(() => {
