@@ -6,16 +6,20 @@ import { useEffect, useState } from 'react';
 type Playlist = SpotifyApi.PlaylistObjectSimplified;
 
 const Playlist = () => {
-  const session = useSession();
   const spotifyApi = useSpotify();
-
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   useEffect(() => {
     if (!spotifyApi.getAccessToken()) return;
 
-    spotifyApi.getUserPlaylists().then((data) => setPlaylists(data.body.items));
-  }, [session, spotifyApi]);
+    spotifyApi.getUserPlaylists().then((data) => {
+      try {
+        setPlaylists(data.body.items);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  }, [spotifyApi]);
 
   return (
     <div>

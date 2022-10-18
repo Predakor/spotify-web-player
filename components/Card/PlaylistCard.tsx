@@ -12,17 +12,22 @@ export default function PlaylistCard({ data }: PlaylistCardProps) {
 
   const selectPlaylist = () => router.push(`/playlist/${id}`);
   return (
-    <Card onClick={selectPlaylist}>
-      <h2 className="text-lg">{name}</h2>
-      <p>{description}</p>
-      {image && (
-        <Image
-          src={image.url}
-          alt="playlist thumnbnail"
-          width={200}
-          height={200}
-        />
-      )}
+    <Card
+      className="relative rounded bg-gray-800 bg-opacity-60 p-5
+      hover:bg-opacity-100 hover:cursor-pointer transition-colors"
+      onClick={selectPlaylist}
+    >
+      <Image
+        className="rounded"
+        src={image.url}
+        alt="album cover picture"
+        width={50}
+        height={50}
+        layout="responsive"
+      />
+
+      <h2 className="text-xl py-5">{name}</h2>
+      <p className="text-ellipsis">{description}</p>
     </Card>
   );
 }
