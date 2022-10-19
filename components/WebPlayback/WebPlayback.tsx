@@ -35,7 +35,7 @@ const WebPlayback = () => {
 
   return (
     <div className="grid grid-cols-3 items-center justify-items-center w-full ">
-      {player && (
+      {player && spotifyApi && (
         <>
           <CurrentSong songInfo={currentTrack} />
           <Player />

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import React from 'react';
 
 const CurrentSong = ({ songInfo }: { songInfo: Spotify.Track | undefined }) => {
   if (!songInfo) return <div></div>;
@@ -20,4 +21,4 @@ const CurrentSong = ({ songInfo }: { songInfo: Spotify.Track | undefined }) => {
     </div>
   );
 };
-export default CurrentSong;
+export default React.memo(CurrentSong);

@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import UserIcon from './UserIcon';
 
@@ -12,7 +12,9 @@ function UserAccount() {
     <div className="flex items-center gap-1 ml-auto rounded-xl px-3">
       <UserIcon image={image} />
       <span>{name}</span>
-      <MdKeyboardArrowDown />
+      <div onClick={() => signOut()}>
+        <MdKeyboardArrowDown />
+      </div>
     </div>
   );
 }

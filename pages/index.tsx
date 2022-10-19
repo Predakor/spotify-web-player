@@ -1,10 +1,9 @@
 import PlaylistCard from '@components/Card/PlaylistCard';
 import useSpotify from 'hooks/useSpotify';
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-const Home: NextPage = () => {
+const Home = () => {
   const spotifyApi = useSpotify();
   const [featuredPlaylists, setFeaturedPlaylists] = useState<
     SpotifyApi.PlaylistObjectSimplified[]

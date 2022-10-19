@@ -1,25 +1,25 @@
-import { getSession, GetSessionParams } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { type } from 'os';
 import { ReactNode } from 'react';
 import Footer from './Footer';
 import Nav from './Nav';
 
 function Layout({ children }: { children: ReactNode }) {
+  const session = useSession();
+  const router = useRouter();
+
+  if (router.asPath === '/login') return <main>{children}</main>;
+
   return (
-    <>
-      <Nav />
-      <main>{children}</main>
-      <Footer />
-    </>
+    session.status === 'authenticated' && (
+      <>
+        <Nav />
+        <main>{children}</main>
+        <Footer />
+      </>
+    )
   );
 }
 export default Layout;
 export { Footer, Nav };
-
-export async function getServerSideProps(context: GetSessionParams) {
-  const session = await getSession(context);
-  return {
-    props: {
-      session,
-    },
-  };
-}
