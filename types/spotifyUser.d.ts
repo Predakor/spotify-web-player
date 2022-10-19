@@ -8,6 +8,7 @@ export interface SpotifyUser extends User {
 }
 export interface SpotifySession extends Session {
   user: SpotifyUser;
+  error?: string;
 }
 export interface SpotifyToken extends JWT {
   accesToken: string;
