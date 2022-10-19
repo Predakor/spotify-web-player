@@ -31,7 +31,7 @@ export default NextAuth({
       authorization: AUTH_URL,
     }),
   ],
-  secret: process.env.CLIENT_SECRET,
+  secret: process.env.SECRET,
   pages: {
     signIn: '/login',
   },
