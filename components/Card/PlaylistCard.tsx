@@ -13,7 +13,7 @@ export default function PlaylistCard({ data }: PlaylistCardProps) {
   const selectPlaylist = () => router.push(`/playlist/${id}`);
   return (
     <Card
-      className="relative rounded bg-gray-800 bg-opacity-60 p-5
+      className="rounded bg-gray-800 bg-opacity-60 p-5
       hover:bg-opacity-100 hover:cursor-pointer transition-colors"
       onClick={selectPlaylist}
     >
@@ -26,8 +26,8 @@ export default function PlaylistCard({ data }: PlaylistCardProps) {
         layout="responsive"
       />
 
-      <h2 className="text-xl py-5">{name}</h2>
-      <p className="text-ellipsis">{description}</p>
+      <h2 className="text-xl text-secondary-100 font-semibold py-5">{name}</h2>
+      <p className="text-secondary-300 text-ellipsis">{description}</p>
     </Card>
   );
 }

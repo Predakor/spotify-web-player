@@ -6,14 +6,13 @@ import { ReactNode } from 'react';
 function NavLink({ href, children }: { href: string; children?: ReactNode }) {
   const path = useRouter().pathname;
   const isActivePage = path === href;
-  const activeClass = 'text-green-500';
 
   return (
     <Link href={href}>
       <a
         className={`${
-          isActivePage ? activeClass : ''
-        } hover:text-green-600 transition-colors `}
+          isActivePage ? 'text-primary-500' : ''
+        } hover:text-primary-600 transition-colors `}
       >
         {children}
       </a>
@@ -23,7 +22,7 @@ function NavLink({ href, children }: { href: string; children?: ReactNode }) {
 
 function Nav() {
   return (
-    <nav className="flex gap-1 p-1 text-xl">
+    <nav className="flex gap-1 items-center text-xl ">
       <NavLink href={'/'}>Home</NavLink>
       <NavLink href={'/playlist'}>Playlist</NavLink>
       <NavLink href={'/stats'}>Stats</NavLink>

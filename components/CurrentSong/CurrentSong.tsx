@@ -15,8 +15,8 @@ const CurrentSong = ({ songInfo }: { songInfo: Spotify.Track | undefined }) => {
         height={50}
       />
       <div>
-        <h3 className="text-gray-50 text-lg">{name}</h3>
-        <p className="text-gray-400">{artists[0].name}</p>
+        <h3 className="text-secondary-100 text-lg">{name}</h3>
+        <p className="text-secondary-400">{artists[0].name}</p>
       </div>
     </div>
   );
