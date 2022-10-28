@@ -3,15 +3,18 @@ import { getProviders, signIn } from 'next-auth/react';
 
 function Login({ providers }: { providers: OAuthProvider }) {
   return (
-    <div>
-      <h1>You need to be logged in to use this website</h1>
-
+    <div className="flex flex-col items-center justify-center h-screen  bg-gradient-to-b from-black to-primary-900">
+      <h1 className="text-2xl">Log in to continue</h1>
       {Object.values(providers).map((provider) => {
         const { id, name } = provider;
         const login = () => signIn(id, { callbackUrl: '/' });
         return (
-          <button onClick={login} className="text-green-600" key={name}>
-            Loggin with {provider.name}
+          <button
+            className="text-secondary-200 p-2 hover:bg-primary-100"
+            onClick={login}
+            key={name}
+          >
+            Loggin with {name}
           </button>
         );
       })}
