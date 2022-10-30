@@ -1,37 +1,35 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 interface ProgressBarProps {
-  value: number;
-  max: number;
-  onFinish?: VoidFunction;
-  onChange?: VoidFunction;
-  children?: ReactNode;
+  current: number;
+  duration: number;
 }
 
-const ProgressBar = ({
-  value,
-  max,
-  onFinish,
-  children,
-  onChange,
-}: ProgressBarProps) => {
-  const [trackProgress, setTrackProgress] = useState(value);
-  if (trackProgress >= max) onFinish && onFinish();
+const ProgressBar = ({ current, duration }: ProgressBarProps) => {
+  const [trackProgress, setTrackProgress] = useState(current);
 
   useEffect(() => {
-    setTrackProgress(value);
     const intervalId = setInterval(() => {
       setTrackProgress((oldProgress) => oldProgress + 1000);
     }, 1000);
-
+    setTrackProgress(current);
     return () => clearInterval(intervalId);
-  }, [value]);
+  }, [current, duration]);
+
+  const changeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setTrackProgress(e.target.valueAsNumber);
+  }, []);
 
   return (
-    <div>
-      <progress value={trackProgress} max={max} onChange={onChange}>
-        {children}
-      </progress>
+    <div className="relative">
+      <input
+        className="absolute w-full rounded hover:z-20"
+        type="range"
+        min={0}
+        value={trackProgress}
+        max={duration}
+        onChange={(e) => changeHandler(e)}
+      />
     </div>
   );
 };

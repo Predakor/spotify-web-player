@@ -2,15 +2,13 @@ import useSpotify from 'hooks/useSpotify';
 import { useEffect, useState } from 'react';
 import { MdVolumeMute, MdVolumeDown, MdVolumeUp } from 'react-icons/md';
 
-const VolumeIcon = ({ volume }: { volume: number }) => {
-  if (volume > 60) return <MdVolumeUp />;
-  if (volume > 0) return <MdVolumeDown />;
-  return <MdVolumeMute />;
-};
+interface VolumeControlProps {
+  initialVolume: number;
+}
 
-const VolumeControl = () => {
+const VolumeControl = ({ initialVolume }: VolumeControlProps) => {
   const spotifyApi = useSpotify();
-  const [volume, setVolume] = useState(50);
+  const [volume, setVolume] = useState(initialVolume);
   const [mutedVolume, setMutedVolume] = useState(volume);
 
   useEffect(() => {
@@ -40,5 +38,11 @@ const VolumeControl = () => {
       />
     </div>
   );
+};
+
+const VolumeIcon = ({ volume }: { volume: number }) => {
+  if (volume > 60) return <MdVolumeUp />;
+  if (volume > 0) return <MdVolumeDown />;
+  return <MdVolumeMute />;
 };
 export default VolumeControl;
