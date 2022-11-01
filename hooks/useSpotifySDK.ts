@@ -19,7 +19,7 @@ const useSpotifySDK = () => {
         getOAuthToken: (cb) => {
           cb(token);
         },
-        volume: 0.5,
+        volume: parseInt(localStorage.getItem('volume') || '50') / 100,
       });
 
       setPlayer(player);

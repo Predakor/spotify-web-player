@@ -6,20 +6,23 @@ import useSpotify from 'hooks/useSpotify';
 import useSpotifySDK from 'hooks/useSpotifySDK';
 import { useEffect, useState } from 'react';
 
-const WebPlayback = () => {
-  const spotifyApi = useSpotify();
+interface WebPlaybackProps {
+  initialPlaybackState: SpotifyApi.CurrentPlaybackResponse;
+}
+const WebPlayback = ({ initialPlaybackState }: WebPlaybackProps) => {
   const player = useSpotifySDK();
+  const spotifyApi = useSpotify();
 
-  const [currentTrack, setCurrentTrack] = useState<Spotify.Track | undefined>();
-  const [is_paused, setPaused] = useState(false);
-  const [volume, setVolume] = useState(0);
-  const [trackProgress, setTrackProgress] = useState(0);
+  const { item, progress_ms, is_playing } = initialPlaybackState;
+
+  const [currentTrack, setCurrentTrack] = useState(item);
+  const [trackProgress, setTrackProgress] = useState(progress_ms);
+  const [trackDuration, setTrackDuration] = useState(item?.duration_ms || 0);
 
   useEffect(() => {
     if (!player) return;
     player.addListener('ready', ({ device_id }) => {
-      spotifyApi.transferMyPlayback([device_id], { play: true });
-      setVolume(20);
+      spotifyApi.transferMyPlayback([device_id], { play: is_playing });
     });
     player.addListener('not_ready', ({ device_id }) => {
       console.log('Device ID has gone offline', device_id);
@@ -27,24 +30,27 @@ const WebPlayback = () => {
     player.addListener('player_state_changed', (state) => {
       if (!state) return;
 
-      setCurrentTrack(state.track_window.current_track);
-      setTrackProgress(state.track_window.current_track.duration_ms);
-      setPaused(state.paused);
+      setCurrentTrack(
+        state.track_window
+          .current_track as unknown as SpotifyApi.TrackObjectFull
+      );
+      setTrackProgress(state.position);
+      setTrackDuration(state.duration);
     });
-  }, [player, spotifyApi]);
+  }, [player]);
 
   return (
     <div className="grid grid-cols-3 items-center justify-items-center">
-      <CurrentSong songInfo={currentTrack} />
+      <CurrentSong songInfo={currentTrack as unknown as Spotify.Track} />
       <div>
         <Player />
-        {currentTrack ? (
-          <ProgressBar current={0} duration={trackProgress} />
+        {item ? (
+          <ProgressBar current={trackProgress || 0} duration={trackDuration} />
         ) : (
           <div />
         )}
       </div>
-      {currentTrack ? <VolumeControl initialVolume={volume} /> : <div />}
+      {currentTrack ? <VolumeControl /> : <div />}
     </div>
   );
 };

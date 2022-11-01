@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-const CurrentSong = ({ songInfo }: { songInfo: Spotify.Track | undefined }) => {
+const CurrentSong = ({ songInfo }: { songInfo: Spotify.Track | null }) => {
   if (!songInfo) return <div className="h-14"></div>;
 
   const { name, album, artists } = songInfo;
@@ -18,8 +18,12 @@ const CurrentSong = ({ songInfo }: { songInfo: Spotify.Track | undefined }) => {
       </div>
 
       <div>
-        <h3 className="text-secondary-100 text-lg">{name}</h3>
-        <p className="text-secondary-400">{artists[0].name}</p>
+        <h3 className="text-secondary-100 text-lg">
+          <a href={songInfo.uid}>{name}</a>
+        </h3>
+        <p className="text-secondary-400">
+          <a href={artists[0].url}>{artists[0].name}</a>
+        </p>
       </div>
     </div>
   );

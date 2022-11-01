@@ -1,6 +1,5 @@
 import PlaylistCard from '@components/Card/PlaylistCard';
 import useSpotify from 'hooks/useSpotify';
-import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 type Playlist = SpotifyApi.PlaylistObjectSimplified;

@@ -3,16 +3,22 @@ import { useEffect, useState } from 'react';
 import { MdVolumeMute, MdVolumeDown, MdVolumeUp } from 'react-icons/md';
 
 interface VolumeControlProps {
-  initialVolume: number;
+  initialVolume?: number;
 }
 
-const VolumeControl = ({ initialVolume }: VolumeControlProps) => {
+const VolumeControl = ({}: VolumeControlProps) => {
   const spotifyApi = useSpotify();
-  const [volume, setVolume] = useState(initialVolume);
+  const [volume, setVolume] = useState(
+    parseInt(localStorage.getItem('volume') || '50')
+  );
   const [mutedVolume, setMutedVolume] = useState(volume);
 
   useEffect(() => {
-    const timeoutID = setTimeout(() => spotifyApi.setVolume(volume), 100);
+    const timeoutID = setTimeout(() => {
+      spotifyApi.setVolume(volume);
+      localStorage.setItem('volume', volume.toString());
+    }, 100);
+
     return () => clearTimeout(timeoutID);
   }, [spotifyApi, volume]);
 
