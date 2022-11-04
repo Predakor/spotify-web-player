@@ -1,13 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export type songType = {
+  song: string | undefined;
+};
+
+const initialState: songType = {
+  song: '',
+};
+
 export const currentSongSlice = createSlice({
   name: 'song',
-  initialState: {
-    currentSong: '',
-  },
+  initialState,
   reducers: {
-    changeSong: (state, action) => {
-      state.currentSong = action.payload;
+    changeSong: (state, action: { payload: string | undefined }) => {
+      state.song = action.payload;
     },
   },
 });
