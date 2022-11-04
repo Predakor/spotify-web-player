@@ -3,7 +3,7 @@ import useSpotifyControls from 'hooks/useSpotifyControls';
 
 const Player = () => {
   const spotifyApi = useSpotify();
-  const { nextSong, prevSong, repeatSong, toogleShugle, resume, pause } =
+  const { nextSong, prevSong, repeatSong, toggleShuffle, resume, pause } =
     useSpotifyControls();
 
   const clickHandler = async () => {
@@ -13,7 +13,7 @@ const Player = () => {
 
   return (
     <div className="flex gap-4">
-      <button onClick={toogleShugle}>Shufle</button>
+      <button onClick={toggleShuffle}>Shufle</button>
       <button onClick={prevSong}>Prev</button>
       <button onClick={clickHandler}>Play/Pause</button>
       <button onClick={nextSong}>Next</button>
