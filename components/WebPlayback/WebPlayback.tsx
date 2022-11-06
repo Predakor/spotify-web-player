@@ -7,13 +7,15 @@ import { useEffect, useState } from 'react';
 
 interface WebPlaybackProps {
   player: Spotify.Player;
-  initialPlaybackState: SpotifyApi.CurrentPlaybackResponse;
+  initialPlaybackState:
+    | SpotifyApi.CurrentPlaybackResponse
+    | Record<string, never>;
 }
 const WebPlayback = ({ player, initialPlaybackState }: WebPlaybackProps) => {
-  const { item, progress_ms, is_playing } = initialPlaybackState;
+  const { item, progress_ms, is_playing } = initialPlaybackState || {};
 
   const [currentTrack, setCurrentTrack] = useState(item);
-  const [trackProgress, setTrackProgress] = useState(progress_ms);
+  const [trackProgress, setTrackProgress] = useState(progress_ms || 0);
   const [trackDuration, setTrackDuration] = useState(item?.duration_ms || 0);
 
   useEffect(() => {
@@ -30,10 +32,12 @@ const WebPlayback = ({ player, initialPlaybackState }: WebPlaybackProps) => {
 
   return (
     <div className="grid grid-cols-3 items-center justify-items-center">
-      <CurrentSong songInfo={currentTrack as unknown as Spotify.Track} />
+      {currentTrack && (
+        <CurrentSong songInfo={currentTrack as unknown as Spotify.Track} />
+      )}
       <div>
         <Player />
-        {item ? (
+        {currentTrack ? (
           <ProgressBar current={trackProgress || 0} duration={trackDuration} />
         ) : (
           <div />
