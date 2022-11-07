@@ -21,14 +21,14 @@ const Playlist = () => {
   }, [spotifyApi]);
 
   return (
-    <div>
-      <h1>This is playlists page</h1>
+    <>
+      <h1>Playlists</h1>
       <div>
         {playlists.map((playlist) => (
           <PlaylistCard data={playlist} key={playlist.id} />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 export default Playlist;

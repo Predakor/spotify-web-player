@@ -39,15 +39,17 @@ const Controls = () => {
       return spotifyApi.setRepeat('off');
     },
 
-    transferPlayback: (options: {
+    transferPlayback: async (options: {
       deviceID?: string;
       playOnTransfer?: boolean;
     }) => {
       const { deviceID = id, playOnTransfer } = options;
-      spotifyApi.transferMyPlayback([deviceID || id], { play: playOnTransfer });
+      return spotifyApi.transferMyPlayback([deviceID || id], {
+        play: playOnTransfer,
+      });
     },
 
-    getCurrentPlayback: async () => await currentPlaybackState(),
+    getCurrentPlayback: async () => currentPlaybackState(),
   };
 };
 export default Controls;

@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 @layer components {
-  body {
-    @apply p-0 m-0 font-sans;
-  }
-  main {
-    @apply flex-grow;
-  }
   * {
     @apply box-border;
+  }
+  html {
+    @apply h-screen;
+  }
+  body {
+    @apply h-full p-0 m-0 font-sans;
   }
   button {
     @apply rounded-lg p-1 bg-green-500;
@@ -19,7 +19,7 @@
     @apply text-inherit no-underline;
   }
   #__next {
-    @apply flex flex-col min-h-screen;
+    @apply flex flex-col h-full;
   }
 }
 
