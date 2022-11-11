@@ -1,9 +1,8 @@
-import Song from '@components/Song/Song';
-import Image from 'next/image';
 import useSpotify from 'hooks/useSpotify';
 import useSpotifyControls from 'hooks/useSpotifyControls';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import TrackList from '@components/TrackList/TrackList';
 
 type PlaylistType = SpotifyApi.SinglePlaylistResponse;
 
@@ -63,12 +62,7 @@ const Playlist = () => {
         </div>
       </header>
 
-      <div className="h-4/6">
-        {tracks.items.map(
-          (track) =>
-            track.track && <Song song={track.track} key={track.track.id} />
-        )}
-      </div>
+      <TrackList tracks={tracks.items} />
     </section>
   );
 };

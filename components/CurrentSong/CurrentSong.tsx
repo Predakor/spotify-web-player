@@ -1,31 +1,32 @@
+import Artists from '@components/Artists/Artists';
 import Image from 'next/image';
-import React from 'react';
 
-const CurrentSong = ({ songInfo }: { songInfo: Spotify.Track | null }) => {
+interface CurrentSongProps {
+  songInfo: SpotifyApi.TrackObjectFull | null;
+}
+
+const CurrentSong = ({ songInfo }: CurrentSongProps) => {
   if (!songInfo) return <div className="h-14"></div>;
 
   const { name, album, artists } = songInfo;
 
   return (
     <div className="flex gap-4 justify-self-start">
-      <div className="">
-        <Image
-          src={album.images[0].url}
-          alt="current song thumbnail"
-          width={48}
-          height={48}
-        />
-      </div>
+      <Image
+        src={album.images[0].url}
+        alt="current song thumbnail"
+        width={48}
+        height={48}
+      />
 
       <div>
         <h3 className="text-secondary-100 text-lg">
-          <a href={songInfo.uid}>{name}</a>
+          <a href={songInfo.href}>{name}</a>
         </h3>
-        <p className="text-secondary-400">
-          <a href={artists[0].url}>{artists[0].name}</a>
-        </p>
+
+        <Artists artists={artists} />
       </div>
     </div>
   );
 };
-export default React.memo(CurrentSong);
+export default CurrentSong;
