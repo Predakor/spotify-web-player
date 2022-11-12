@@ -10,7 +10,7 @@ function TrackList({ tracks }: TrackListProps) {
     'grid grid-cols-[auto,2fr,1fr,auto] items-center gap-5 p-2';
   return (
     <div className="flex flex-col gap-2 w-full min-h-4/6">
-      <div className={`${gridClasses} sticky top-20 z-10 bg-black`}>
+      <div className={`${gridClasses} sticky top-20 z-10 text-secondary-400`}>
         <span>#</span>
         <span>Track</span>
         <span>Album</span>

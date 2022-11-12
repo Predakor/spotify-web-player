@@ -24,7 +24,7 @@ function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main className="h-full">{children}</main>
+      <main className="flex-1">{children}</main>
       <Footer />
     </>
   );

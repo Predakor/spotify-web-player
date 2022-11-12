@@ -3,6 +3,7 @@ import useSpotifyControls from 'hooks/useSpotifyControls';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import TrackList from '@components/TrackList/TrackList';
+import Image from 'next/image';
 
 type PlaylistType = SpotifyApi.SinglePlaylistResponse;
 
@@ -32,23 +33,22 @@ const Playlist = () => {
     tracks,
     description,
     public: isPublic,
+    primary_color,
   } = playlistData;
 
   console.log(playlistData);
 
   return (
-    <section className="h-full flex flex-col gap-10 p-5">
-      <header className="flex gap-5 h-2/6 p-5 bg-primary-900 ">
-        <div className="relative h-full">
+    <section className="flex flex-col gap-10 p-5 ">
+      <span className="absolute left-0 top-0 h-4/5 w-full bg-gradient-to-b from-primary-100 to-black -z-10"></span>
+      <header className="flex gap-5 h-[40vh] py-5">
+        <div className="relative h-full shadow-2xl">
           <img src={images[0].url} alt="playlist cover" className="h-full" />
           {/* <Image
             src={images[0].url}
             alt="playlist cover"
-            width={images[0].width || 500}
-            height={images[0].height || 500}
-            layout={'fill'}
-            objectFit={'contain'}
-            objectPosition={0}
+            width={'100%'}
+            height="100%"
           /> */}
         </div>
         <div className="flex flex-col justify-evenly">
