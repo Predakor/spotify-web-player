@@ -12,18 +12,17 @@ function TrackList({ tracks }: TrackListProps) {
   const gridClasses = 'grid grid-cols-[3ch,2fr,1fr,5ch] items-center gap-5 p-2';
 
   return (
-    <div className="relative flex flex-col gap-2 w-full min-h-4/6">
+    <div className="flex flex-col gap-2 w-full min-h-4/6 ">
       <div
-        className={`${gridClasses} sticky top-20 z-10 text-secondary-400 ${
-          inView ? '' : 'bg-black transition-colors'
-        }`}
+        className={`${gridClasses} sticky top-20 mx-5 border-b border-secondary-500 
+        ${inView ? 'pr-0' : 'bg-black mx-0 px-5'}
+        text-secondary-400 z-10`}
       >
-        <span>#</span>
+        <span className="justify-self-end font-bold text-xl">#</span>
         <span>Track</span>
         <span>Album</span>
-        <span>3:33</span>
+        <span className="justify-self-end">3:33</span>
       </div>
-      <hr />
 
       {tracks.map((song, i) => {
         if (!song.track) return null;
@@ -31,13 +30,13 @@ function TrackList({ tracks }: TrackListProps) {
 
         return (
           <div
-            className={`${gridClasses} hover:bg-secondary-700 hover:bg-opacity-60 hover:cursor-pointer transition-colors`}
+            className={`${gridClasses} px-5 text-secondary-400 hover:bg-secondary-700 hover:bg-opacity-60 hover:cursor-pointer transition-colors`}
             key={id}
           >
-            <p>{i + 1}</p>
+            <p className="justify-self-end font-bold text-xl">{i + 1}</p>
             <CurrentSong songInfo={song.track} />
             <p>{album.name}</p>
-            <p>{msToText(duration_ms)}</p>
+            <p className="justify-self-end">{msToText(duration_ms)}</p>
           </div>
         );
       })}

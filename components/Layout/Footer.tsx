@@ -48,9 +48,15 @@ function Footer() {
   if (data === undefined) return <></>; //data is loading
 
   return (
-    <footer className="sticky bottom-0  bg-gray-900 p-4">
-      {activeDevice && <h2>Listening on {activeDevice.name}</h2>}
-      {player && <WebPlayback player={player} initialPlaybackState={data} />}
+    <footer className="sticky bottom-0  bg-gray-900 border-t border-secondary-800 before: ">
+      <div className="p-4">
+        {player && <WebPlayback player={player} initialPlaybackState={data} />}
+      </div>
+      {activeDevice && (
+        <h2 className="bg-primary-700 py-1 pr-4 text-right">
+          Listening on {activeDevice.name}
+        </h2>
+      )}
     </footer>
   );
 }

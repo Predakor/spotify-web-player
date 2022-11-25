@@ -20,7 +20,7 @@ const CurrentSong = ({ songInfo }: CurrentSongProps) => {
       />
 
       <div>
-        <h3 className="text-secondary-100 text-lg">
+        <h3 className="text-secondary-100 text-xl">
           <a href={songInfo.href}>{name}</a>
         </h3>
 

@@ -34,7 +34,7 @@ function PlaylistHeader({ playlist }: PlaylistHeaderProps) {
   } = playlist;
 
   return (
-    <header className="flex gap-5 h-[40vh] py-5" ref={targetRef}>
+    <header className="flex gap-5 h-[40vh] p-5" ref={targetRef}>
       <div className="relative h-full shadow-2xl">
         <img src={images[0].url} alt="playlist cover" className="h-full" />
       </div>
