@@ -4,13 +4,13 @@ import { changeID } from 'store/deviceSlice';
 import useSpotify from './useSpotify';
 
 const useSpotifySDK = () => {
-  const token = useSpotify().getAccessToken();
-
   const dispatch = useDispatch();
+  const spotifyApi = useSpotify();
 
   const [player, setPlayer] = useState<Spotify.Player>();
 
   useEffect(() => {
+    const token = spotifyApi.getAccessToken();
     if (!token || player) return;
 
     const script = document.createElement('script');
@@ -21,29 +21,21 @@ const useSpotifySDK = () => {
     window.onSpotifyWebPlaybackSDKReady = () => {
       const player = new window.Spotify.Player({
         name: 'Discofy',
-        getOAuthToken: (cb) => {
-          cb(token);
+        getOAuthToken: () => {
+          spotifyApi.getAccessToken();
         },
-        volume: parseInt(localStorage.getItem('volume') || '50') / 100,
+        volume: parseInt(localStorage.getItem('volume') || '5000') / 100,
       });
+      window.addEventListener('beforeunload', () => player.disconnect());
 
       player.on('ready', ({ device_id }) => {
         dispatch(changeID(device_id));
       });
 
-      window.addEventListener('beforeunload', () => {
-        document.removeChild(script);
-        player.disconnect();
-      });
-
       player.connect();
       setPlayer(player);
     };
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, [token]);
+  }, [spotifyApi]);
   return player;
 };
 export default useSpotifySDK;

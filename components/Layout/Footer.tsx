@@ -45,7 +45,7 @@ function Footer() {
     fetchData().catch((error) => console.error(error));
   }, [player]);
 
-  if (data === undefined) return <></>; //data is loading
+  if (data === undefined) return null; //data is loading
 
   return (
     <footer className="sticky bottom-0  bg-gray-900 border-t border-secondary-800 before: ">
