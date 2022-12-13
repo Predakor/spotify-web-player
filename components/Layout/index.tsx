@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import Footer from './Footer';
 import Header from './Header';
+import Nav from './Nav';
 
 function Layout({ children }: { children: ReactNode }) {
   const session = useSession();
@@ -19,12 +20,17 @@ function Layout({ children }: { children: ReactNode }) {
       </main>
     );
 
-  if (session.status !== 'authenticated') return <></>;
+  if (session.status !== 'authenticated') return null;
 
   return (
     <>
-      <Header />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1">
+        <Header />
+        {children}
+      </main>
+      <aside>
+        <Nav />
+      </aside>
       <Footer />
     </>
   );

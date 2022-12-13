@@ -2,6 +2,7 @@ import CurrentSong from '@components/CurrentSong/CurrentSong';
 import Player from '@components/Player/Player';
 import ProgressBar from '@components/ProgressBar/ProgressBar';
 import VolumeControl from '@components/VolumeControl/VolumeControl';
+import spotifyApi from '@utils/spotify';
 
 import { useEffect, useState } from 'react';
 
@@ -37,13 +38,11 @@ const WebPlayback = ({ player, initialPlaybackState }: WebPlaybackProps) => {
       )}
       <div>
         <Player />
-        {currentTrack ? (
+        {currentTrack && (
           <ProgressBar current={trackProgress || 0} duration={trackDuration} />
-        ) : (
-          <div />
         )}
       </div>
-      {currentTrack ? <VolumeControl /> : <div />}
+      {currentTrack && <VolumeControl />}
     </div>
   );
 };

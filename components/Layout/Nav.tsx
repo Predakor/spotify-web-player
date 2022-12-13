@@ -26,7 +26,6 @@ function Nav() {
       <NavLink href={'/'}>Home</NavLink>
       <NavLink href={'/playlist'}>Playlist</NavLink>
       <NavLink href={'/stats'}>Stats</NavLink>
-
       <UserAccount />
     </nav>
   );
