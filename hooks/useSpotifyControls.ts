@@ -1,3 +1,4 @@
+import { log } from 'console';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeSong } from 'store/currentSongSlice';
 import { selectDevice } from 'store/deviceSlice';
@@ -25,6 +26,7 @@ const Controls = () => {
       dispatch(changeSong(id));
       spotifyApi.play({ uris: [uri] });
     },
+
     playPlaylist: async (uri: string) => {
       spotifyApi.play({ context_uri: uri });
       const currentSongID = (await currentPlaybackState()).item?.id;
@@ -33,10 +35,9 @@ const Controls = () => {
 
     repeatSong: async () => {
       const repeatState = (await currentPlaybackState()).repeat_state;
-
-      if (repeatState === 'off') return spotifyApi.setRepeat('track');
-      if (repeatState === 'track') return spotifyApi.setRepeat('context');
-      return spotifyApi.setRepeat('off');
+      const nextState = getNextRepeatState(repeatState);
+      spotifyApi.setRepeat(nextState);
+      return nextState;
     },
 
     transferPlayback: async (options: {
@@ -53,3 +54,9 @@ const Controls = () => {
   };
 };
 export default Controls;
+
+const getNextRepeatState = (state: 'track' | 'context' | 'off') => {
+  if (state === 'off') return 'track';
+  if (state === 'track') return 'context';
+  return 'off';
+};

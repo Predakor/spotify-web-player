@@ -3,8 +3,8 @@ import spotifyApi from '@utils/spotify';
 import useSpotifyControls from 'hooks/useSpotifyControls';
 import useSpotifySDK from 'hooks/useSpotifySDK';
 import { memo, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeActive, changeID, selectDevice } from 'store/deviceSlice';
+import { useDispatch } from 'react-redux';
+import { changeActive } from 'store/deviceSlice';
 
 type initialData = SpotifyApi.CurrentPlaybackResponse | Record<string, never>;
 
@@ -14,43 +14,41 @@ function Footer() {
 
   const { getCurrentPlayback, transferPlayback } = useSpotifyControls();
 
-  const { id } = useSelector(selectDevice);
-  const [data, setData] = useState<initialData | undefined>();
+  const [playbackState, setPlaybackState] = useState<initialData | undefined>();
   const [activeDevice, setActiveDevice] = useState<SpotifyApi.UserDevice>();
 
   useEffect(() => {
     if (!player) return;
 
     const fetchData = async () => {
-      const data = await getCurrentPlayback();
-      if (data) {
-        const devices = (await spotifyApi.getMyDevices()).body.devices;
-        const activeDevice = devices.filter((device) => device.is_active)[0];
-        setActiveDevice(activeDevice);
-        setData(data);
-      } //no playback === no devices
-      else {
-        setData({});
-        player.on('ready', async ({ device_id }) => {
-          await transferPlayback({ deviceID: device_id });
-          dispatch(changeActive(true));
-          dispatch(changeID(device_id));
-          setActiveDevice(undefined);
+      const currentPlayback = await getCurrentPlayback();
 
-          setData(await getCurrentPlayback());
-        });
+      //transfer to current device if no playback
+      if (!currentPlayback) {
+        await transferPlayback({});
+        dispatch(changeActive(true));
+        setActiveDevice(undefined);
+        setPlaybackState({});
+        return;
       }
+
+      const devices = (await spotifyApi.getMyDevices()).body.devices;
+      const [activeDevice] = devices.filter((device) => device.is_active);
+      setActiveDevice(activeDevice);
+      setPlaybackState(currentPlayback);
     };
 
     fetchData().catch((error) => console.error(error));
   }, [player]);
 
-  if (data === undefined) return null; //data is loading
+  if (playbackState === undefined) return null; //data is loading
 
   return (
     <footer className="sticky bottom-0  bg-gray-900 border-t border-secondary-800 before: ">
       <div className="p-4">
-        {player && <WebPlayback player={player} initialPlaybackState={data} />}
+        {player && (
+          <WebPlayback player={player} initialPlaybackState={playbackState} />
+        )}
       </div>
       {activeDevice && (
         <h2 className="bg-primary-700 py-1 pr-4 text-right">
