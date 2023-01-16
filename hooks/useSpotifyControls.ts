@@ -1,4 +1,3 @@
-import { log } from 'console';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeSong } from 'store/currentSongSlice';
 import { selectDevice } from 'store/deviceSlice';
@@ -14,13 +13,31 @@ const Controls = () => {
     return (await spotifyApi.getMyCurrentPlaybackState()).body;
   };
 
-  return {
+  const controls = {
     nextSong: () => spotifyApi.skipToNext(),
     prevSong: () => spotifyApi.skipToPrevious(),
-    toggleShuffle: () => spotifyApi.setShuffle(true),
 
     pause: () => spotifyApi.pause(),
     resume: () => spotifyApi.play(),
+
+    toggleShuffle: async () => {
+      const { shuffle_state } = await currentPlaybackState();
+      spotifyApi.setShuffle(!shuffle_state);
+      return !shuffle_state;
+    },
+
+    tooglePlayBack: async () => {
+      const { is_playing } = await currentPlaybackState();
+      is_playing ? controls.pause() : controls.resume();
+      return !is_playing;
+    },
+
+    toogleRepeatState: async () => {
+      const { repeat_state } = await currentPlaybackState();
+      const nextState = getNextRepeatState(repeat_state);
+      spotifyApi.setRepeat(nextState);
+      return nextState;
+    },
 
     playSong: (uri: string, id: string) => {
       dispatch(changeSong(id));
@@ -31,13 +48,6 @@ const Controls = () => {
       spotifyApi.play({ context_uri: uri });
       const currentSongID = (await currentPlaybackState()).item?.id;
       dispatch(changeSong(currentSongID));
-    },
-
-    repeatSong: async () => {
-      const repeatState = (await currentPlaybackState()).repeat_state;
-      const nextState = getNextRepeatState(repeatState);
-      spotifyApi.setRepeat(nextState);
-      return nextState;
     },
 
     transferPlayback: async (options: {
@@ -52,11 +62,12 @@ const Controls = () => {
 
     getCurrentPlayback: async () => currentPlaybackState(),
   };
+  return controls;
 };
 export default Controls;
 
-const getNextRepeatState = (state: 'track' | 'context' | 'off') => {
-  if (state === 'off') return 'track';
-  if (state === 'track') return 'context';
+const getNextRepeatState = (state: 'off' | 'context' | 'track') => {
+  if (state === 'off') return 'context';
+  if (state === 'context') return 'track';
   return 'off';
 };

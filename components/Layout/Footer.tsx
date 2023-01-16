@@ -6,7 +6,7 @@ import { memo, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeActive } from 'store/deviceSlice';
 
-type initialData = SpotifyApi.CurrentPlaybackResponse | Record<string, never>;
+type initialData = SpotifyApi.CurrentPlaybackResponse | null;
 
 function Footer() {
   const player = useSpotifySDK();
@@ -14,42 +14,39 @@ function Footer() {
 
   const { getCurrentPlayback, transferPlayback } = useSpotifyControls();
 
-  const [playbackState, setPlaybackState] = useState<initialData | undefined>();
+  const [playbackState, setPlaybackState] = useState<initialData>(null);
   const [activeDevice, setActiveDevice] = useState<SpotifyApi.UserDevice>();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!player) return;
 
     const fetchData = async () => {
       const currentPlayback = await getCurrentPlayback();
-
       //transfer to current device if no playback
       if (!currentPlayback) {
-        await transferPlayback({});
+        transferPlayback({});
         dispatch(changeActive(true));
         setActiveDevice(undefined);
-        setPlaybackState({});
-        return;
+        setPlaybackState(null);
+        console.log('no playback');
+      } else {
+        const { devices } = (await spotifyApi.getMyDevices()).body;
+        const [activeDevice] = devices.filter((device) => device.is_active); // get active device from array
+        setActiveDevice(activeDevice);
+        setPlaybackState(currentPlayback);
+        console.log('playback');
       }
-
-      const devices = (await spotifyApi.getMyDevices()).body.devices;
-      const [activeDevice] = devices.filter((device) => device.is_active);
-      setActiveDevice(activeDevice);
-      setPlaybackState(currentPlayback);
+      return;
     };
-
-    fetchData().catch((error) => console.error(error));
+    fetchData().then(() => setIsLoading(false));
   }, [player]);
 
-  if (playbackState === undefined) return null; //data is loading
+  if (isLoading || !player) return null; //data is loading
 
   return (
-    <footer className="sticky bottom-0  bg-gray-900 border-t border-secondary-800 before: ">
-      <div className="p-4">
-        {player && (
-          <WebPlayback player={player} initialPlaybackState={playbackState} />
-        )}
-      </div>
+    <footer className="sticky bottom-0  bg-gray-900 border-t border-secondary-800">
+      {<WebPlayback player={player} initialPlaybackState={playbackState} />}
       {activeDevice && (
         <h2 className="bg-primary-700 py-1 pr-4 text-right">
           Listening on {activeDevice.name}

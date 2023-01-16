@@ -30,7 +30,6 @@ function PlaylistHeader({ playlist }: PlaylistHeaderProps) {
     images,
     description,
     public: isPublic,
-    primary_color,
   } = playlist;
 
   return (

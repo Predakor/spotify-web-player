@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { changeActive, changeID } from 'store/deviceSlice';
+import { changeID } from 'store/deviceSlice';
 import useSpotify from './useSpotify';
 
 const useSpotifySDK = () => {
@@ -28,30 +28,29 @@ const useSpotifySDK = () => {
       });
       window.addEventListener('beforeunload', () => player.disconnect());
 
-      setPlayer(player);
-
-      player.addListener('ready', async ({ device_id }) => {
+      player.on('ready', async ({ device_id }) => {
         console.log('Device active', device_id);
         dispatch(changeID(device_id));
       });
 
-      player.addListener('not_ready', ({ device_id }) => {
+      player.on('not_ready', ({ device_id }) => {
         console.log('Device has gone offline', device_id);
       });
 
-      player.addListener('initialization_error', ({ message }) => {
+      player.on('initialization_error', ({ message }) => {
         console.error(message);
       });
 
-      player.addListener('authentication_error', ({ message }) => {
+      player.on('authentication_error', ({ message }) => {
         console.error(message);
       });
 
-      player.addListener('account_error', ({ message }) => {
+      player.on('account_error', ({ message }) => {
         console.error(message);
       });
 
       player.connect();
+      setPlayer(player);
     };
   }, [spotifyApi]);
   return player;

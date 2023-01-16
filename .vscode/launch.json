@@ -17,7 +17,13 @@
             "request": "launch",
             "reAttach": true,
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}",
+            "pathMappings": [
+                {
+                    "url": "webpack://_n_e",
+                    "path": "${workspaceFolder}"
+                }
+            ]
         },
         {
             "name": "Attach",

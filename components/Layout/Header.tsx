@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
 import { selectInView } from '@store/scrollSlice';
+import { useSelector } from 'react-redux';
 import Nav from './Nav';
 
 function Header() {

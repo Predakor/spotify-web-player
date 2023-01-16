@@ -1,18 +1,16 @@
 import { msToText } from '@utils/time';
 import { ChangeEvent, useEffect, useState } from 'react';
-import useDebounce from '../../hooks/useDebounce';
-import spotifyApi from '../../utils/spotify';
+import spotifyApi from '@utils/spotify';
 
 export interface ProgressBarProps {
   current: number;
   duration: number;
+  onSongEnd: VoidFunction;
 }
 
-const ProgressBar = ({ current, duration }: ProgressBarProps) => {
+const ProgressBar = ({ current, duration, onSongEnd }: ProgressBarProps) => {
   const [trackProgress, setTrackProgress] = useState(current);
-  const [selectedProgress, setSelectedProgress] = useState<number | undefined>(
-    undefined
-  );
+  const [selectedProgress, setSelectedProgress] = useState<number>();
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedProgress(e.currentTarget.valueAsNumber);
@@ -30,17 +28,24 @@ const ProgressBar = ({ current, duration }: ProgressBarProps) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTrackProgress((oldProgress) => oldProgress + 1000);
+      setTrackProgress((oldProgress) => {
+        const newProgress = oldProgress + 1000;
+        if (newProgress < duration) return newProgress;
+
+        clearInterval(intervalId);
+        onSongEnd();
+        return 0;
+      });
     }, 1000);
     setTrackProgress(current);
     return () => clearInterval(intervalId);
-  }, [current, duration]);
+  }, [current, duration, onSongEnd]);
 
   return (
-    <div className="relative flex gap-2">
+    <div className="flex gap-2 w-full">
       <span>{msToText(trackProgress)}</span>
       <input
-        className="flex-1 rounded hover:z-20"
+        className="flex-1"
         type="range"
         min={0}
         value={trackProgress}

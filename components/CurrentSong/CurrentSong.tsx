@@ -2,7 +2,7 @@ import Artists from '@components/Artists/Artists';
 import Image from 'next/image';
 
 interface CurrentSongProps {
-  songInfo: SpotifyApi.TrackObjectFull | null;
+  songInfo: Spotify.Track | null;
 }
 
 const CurrentSong = ({ songInfo }: CurrentSongProps) => {
@@ -21,7 +21,7 @@ const CurrentSong = ({ songInfo }: CurrentSongProps) => {
 
       <div>
         <h3 className="text-secondary-100 text-xl">
-          <a href={songInfo.href}>{name}</a>
+          <a href={songInfo.artists[0].url}>{name}</a>
         </h3>
 
         <Artists artists={artists} />
