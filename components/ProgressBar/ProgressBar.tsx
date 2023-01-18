@@ -1,6 +1,8 @@
 import { msToText } from '@utils/time';
 import { ChangeEvent, useEffect, useState } from 'react';
 import spotifyApi from '@utils/spotify';
+import { useSelector } from 'react-redux';
+import { selectPlayback } from '@store/playbackSlice';
 
 export interface ProgressBarProps {
   current: number;
@@ -8,9 +10,11 @@ export interface ProgressBarProps {
   onSongEnd: VoidFunction;
 }
 
-const ProgressBar = ({ current, duration, onSongEnd }: ProgressBarProps) => {
-  const [trackProgress, setTrackProgress] = useState(current);
-  const [selectedProgress, setSelectedProgress] = useState<number>();
+const ProgressBar = ({ duration, onSongEnd }: ProgressBarProps) => {
+  const { is_playing, progress_ms, timestamp } = useSelector(selectPlayback);
+
+  const [trackProgress, setTrackProgress] = useState(progress_ms || 0);
+  const [selectedProgress, setSelectedProgress] = useState<number>(duration);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedProgress(e.currentTarget.valueAsNumber);
@@ -21,7 +25,7 @@ const ProgressBar = ({ current, duration, onSongEnd }: ProgressBarProps) => {
     const time = setTimeout(() => {
       spotifyApi.seek(selectedProgress);
       setTrackProgress(selectedProgress);
-    }, 150);
+    }, 200);
 
     return () => clearInterval(time);
   }, [selectedProgress]);
@@ -37,12 +41,14 @@ const ProgressBar = ({ current, duration, onSongEnd }: ProgressBarProps) => {
         return 0;
       });
     }, 1000);
-    setTrackProgress(current);
+
+    if (is_playing) clearInterval(intervalId);
+
     return () => clearInterval(intervalId);
-  }, [current, duration, onSongEnd]);
+  }, [is_playing, onSongEnd]);
 
   return (
-    <div className="flex gap-2 w-full">
+    <div className="flex gap-4 w-5/6 ">
       <span>{msToText(trackProgress)}</span>
       <input
         className="flex-1"

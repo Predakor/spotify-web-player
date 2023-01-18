@@ -1,5 +1,6 @@
+import { changeSong, tooglePlayback } from '@store/playbackSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSong } from 'store/currentSongSlice';
+
 import { selectDevice } from 'store/deviceSlice';
 import useSpotify from './useSpotify';
 
@@ -29,6 +30,7 @@ const Controls = () => {
     tooglePlayBack: async () => {
       const { is_playing } = await currentPlaybackState();
       is_playing ? controls.pause() : controls.resume();
+      dispatch(tooglePlayback(is_playing));
       return !is_playing;
     },
 
@@ -40,14 +42,14 @@ const Controls = () => {
     },
 
     playSong: (uri: string, id: string) => {
-      dispatch(changeSong(id));
+      // dispatch(changeSong(id));
       spotifyApi.play({ uris: [uri] });
     },
 
     playPlaylist: async (uri: string) => {
-      spotifyApi.play({ context_uri: uri });
-      const currentSongID = (await currentPlaybackState()).item?.id;
-      dispatch(changeSong(currentSongID));
+      await spotifyApi.play({ context_uri: uri });
+      const currentSong = (await currentPlaybackState()).item;
+      if (currentSong) dispatch(changeSong(currentSong));
     },
 
     transferPlayback: async (options: {

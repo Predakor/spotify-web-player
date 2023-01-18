@@ -5,6 +5,7 @@ import useSpotifySDK from 'hooks/useSpotifySDK';
 import { memo, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeActive } from 'store/deviceSlice';
+import { changePlayback } from 'store/playbackSlice';
 
 type initialData = SpotifyApi.CurrentPlaybackResponse | null;
 
@@ -37,7 +38,7 @@ function Footer() {
         setPlaybackState(currentPlayback);
         console.log('playback');
       }
-      return;
+      dispatch(changePlayback(currentPlayback));
     };
     fetchData().then(() => setIsLoading(false));
   }, [player]);
@@ -46,7 +47,7 @@ function Footer() {
 
   return (
     <footer className="sticky bottom-0  bg-gray-900 border-t border-secondary-800">
-      {<WebPlayback player={player} initialPlaybackState={playbackState} />}
+      <WebPlayback player={player} initialPlaybackState={playbackState} />
       {activeDevice && (
         <h2 className="bg-primary-700 py-1 pr-4 text-right">
           Listening on {activeDevice.name}

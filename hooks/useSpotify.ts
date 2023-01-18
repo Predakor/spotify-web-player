@@ -10,6 +10,7 @@ export default function useSpotify() {
   useEffect(() => {
     if (!session) return;
 
+    if (session.error === 'AccesTokenExpired') spotifyApi.refreshAccessToken();
     if (session.error === 'RefreshAccesTokenError') signIn();
 
     spotifyApi.setAccessToken(session.user.accesToken);

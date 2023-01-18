@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSong } from 'store/currentSongSlice';
+import { changeSong } from '@store/playbackState';
 import useSpotify from './useSpotify';
 
 export default function useSongInfo() {
