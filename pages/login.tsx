@@ -3,7 +3,7 @@ import { getProviders, signIn } from 'next-auth/react';
 
 function Login({ providers }: { providers: OAuthProvider }) {
   return (
-    <div className="flex flex-col items-center justify-center h-screen  bg-gradient-to-b from-black to-primary-900">
+    <div className="flex flex-col items-center justify-center h-screen w-screen bg-gradient-to-b from-black to-primary-900">
       <h1 className="text-2xl">Log in to continue</h1>
       {Object.values(providers).map((provider) => {
         const { id, name } = provider;

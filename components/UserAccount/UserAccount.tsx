@@ -15,28 +15,24 @@ function UserAccount() {
 
   const profile = () => console.warn('not implemented go to profile page');
 
-  const logOut = () => {
-    //show confirm sign out modal
-    return signOut();
-  };
+  const logOut = () => signOut();
+
   const handleDropdownMenu = () => {
     setExpanded((prevState) => !prevState);
   };
   return (
     <div
-      className="sticky flex flex-col ml-auto bg-black rounded-full cursor-pointer"
+      className="hidden sticky sm:flex flex-col w-fit ml-auto bg-black rounded-full cursor-pointer"
       onClick={handleDropdownMenu}
     >
-      <div className="flex sm:items-center sm:gap-3 p-1 sm:pr-3">
-        <UserIcon image={image} onClick={() => console.log(1)} />
-        <span className="hidden font-semibold sm:block">{name}</span>
-        <div className="hidden sm:block">
-          {expanded ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
-        </div>
+      <div className="flex items-center gap-2 p-1">
+        <UserIcon image={image} />
+        <span className=" font-semibold ">{name}</span>
+        <div>{expanded ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</div>
       </div>
 
       {expanded && (
-        <div className="absolute top-full w-full p-2 bg-black">
+        <div className="absolute top-full w-full p-2 bg-black ">
           <p onClick={settings}>Settings</p>
           <p onClick={profile}>Profile</p>
           <p onClick={logOut}>Log Out</p>

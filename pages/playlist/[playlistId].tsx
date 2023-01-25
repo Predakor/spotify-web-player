@@ -23,8 +23,8 @@ const Playlist = () => {
   if (!playlistData) return <h3>loading</h3>;
 
   return (
-    <section className="flex flex-col gap-10 py-5 ">
-      <span className="absolute top-0 h-4/5 w-full bg-gradient-to-b from-primary-100 to-black -z-10" />
+    <section className="relative flex flex-col gap-10 py-5 ">
+      <span className="absolute top-0 h-[70vh] w-full bg-gradient-to-b from-primary-100 to-black -z-10" />
       <PlaylistHeader playlist={playlistData} />
       <TrackList tracks={playlistData.tracks.items} />
     </section>
