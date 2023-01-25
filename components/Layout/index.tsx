@@ -1,9 +1,9 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
+import Aside from './Aside';
 import Footer from './Footer';
 import Header from './Header';
-import Nav from './Nav';
 
 function Layout({ children }: { children: ReactNode }) {
   const session = useSession();
@@ -24,9 +24,7 @@ function Layout({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <aside className="p-2 text-2xl">
-        <Nav />
-      </aside>
+      <Aside />
       <main className="flex-1">
         <Header />
         {children}

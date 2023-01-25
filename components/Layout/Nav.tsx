@@ -20,7 +20,7 @@ function IconComponent({ name, active }: { name: string; active: boolean }) {
 function Nav() {
   const { pathname } = useRouter();
   return (
-    <>
+    <nav className="flex flex-col gap-2" aria-label="primary">
       {navData.map((data) => {
         const { href, text, icon } = data;
         const active = pathname === href;
@@ -30,7 +30,7 @@ function Nav() {
           </NavLink>
         );
       })}
-    </>
+    </nav>
   );
 }
 export default Nav;

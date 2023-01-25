@@ -63,6 +63,13 @@ const Controls = () => {
     },
 
     getCurrentPlayback: async () => currentPlaybackState(),
+    getUserPlaylists: async (
+      user?: string,
+      options?: { limit?: number; offset?: number }
+    ) => {
+      if (!user) return spotifyApi.getUserPlaylists();
+      return spotifyApi.getUserPlaylists(user, options);
+    },
   };
   return controls;
 };
