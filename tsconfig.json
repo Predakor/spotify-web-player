@@ -36,6 +36,9 @@
       ],
       "@store/*": [
         "store/*"
+      ],
+      "@icons/*": [
+        "icons/*"
       ]
     },
     "incremental": true

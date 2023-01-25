@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { MdOutlineAccountCircle } from 'react-icons/md';
+import { AccountIcons } from '@icons/index';
 
 interface UserIconProps {
   image: string | null | undefined;
@@ -8,7 +8,7 @@ interface UserIconProps {
 
 function UserIcon({ image, onClick }: UserIconProps) {
   return !image ? (
-    <MdOutlineAccountCircle onClick={onClick} />
+    <AccountIcons.MdOutlineAccountCircle onClick={onClick} />
   ) : (
     <Image
       className="rounded-full"

@@ -24,7 +24,7 @@ function Layout({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <aside className="">
+      <aside className="p-2 text-2xl">
         <Nav />
       </aside>
       <main className="flex-1">

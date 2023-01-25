@@ -1,16 +1,16 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+
 import { ReactNode } from 'react';
 
 export interface NavLinkProps {
   href: string;
+  active: boolean;
   text?: string;
   children?: ReactNode;
 }
 
-function NavLink({ href, text, children }: NavLinkProps) {
-  const path = useRouter().pathname;
-  const activeStyle = path === href ? 'text-primary-500' : '';
+function NavLink({ href, active, text, children }: NavLinkProps) {
+  const activeStyle = active ? 'text-primary-500' : '';
 
   return (
     <Link href={href}>
