@@ -1,32 +1,26 @@
-import UserAccount from '@components/UserAccount/UserAccount';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
-
-function NavLink({ href, children }: { href: string; children?: ReactNode }) {
-  const path = useRouter().pathname;
-  const isActivePage = path === href;
-
-  return (
-    <Link href={href}>
-      <a
-        className={`${
-          isActivePage ? 'text-primary-500' : ''
-        } hover:text-primary-600 transition-colors `}
-      >
-        {children}
-      </a>
-    </Link>
-  );
-}
+import NavLink from '@components/NavLink/NavLink';
+import {
+  MdHomeFilled,
+  MdOutlineLibraryMusic,
+  MdOutlineAnalytics,
+  MdOutlineSearch,
+} from 'react-icons/md';
 
 function Nav() {
   return (
-    <nav className="flex gap-1 items-center text-xl ">
-      <NavLink href={'/'}>Home</NavLink>
-      <NavLink href={'/playlist'}>Playlist</NavLink>
-      <NavLink href={'/stats'}>Stats</NavLink>
-      <UserAccount />
+    <nav className="flex flex-col gap-1 p-2 text-2xl ">
+      <NavLink href={'/'} text={'Home'}>
+        <MdHomeFilled />
+      </NavLink>
+      <NavLink href={'/playlist'} text={'Playlist'}>
+        <MdOutlineLibraryMusic />
+      </NavLink>
+      <NavLink href={'/stats'} text={'Stats'}>
+        <MdOutlineAnalytics />
+      </NavLink>
+      <NavLink href={'/search'} text={'Search'}>
+        <MdOutlineSearch />
+      </NavLink>
     </nav>
   );
 }

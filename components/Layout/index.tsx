@@ -24,13 +24,13 @@ function Layout({ children }: { children: ReactNode }) {
 
   return (
     <>
+      <aside className="">
+        <Nav />
+      </aside>
       <main className="flex-1">
         <Header />
         {children}
       </main>
-      <aside>
-        <Nav />
-      </aside>
       <Footer />
     </>
   );

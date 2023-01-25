@@ -46,7 +46,7 @@ function Footer() {
   if (isLoading || !player) return null; //data is loading
 
   return (
-    <footer className="sticky bottom-0  bg-gray-900 border-t border-secondary-800">
+    <footer className="sticky bottom-0 w-full  bg-gray-900 border-t border-secondary-800">
       <WebPlayback player={player} initialPlaybackState={playbackState} />
       {activeDevice && (
         <h2 className="bg-primary-700 py-1 pr-4 text-right">

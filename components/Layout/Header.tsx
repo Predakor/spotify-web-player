@@ -1,6 +1,6 @@
+import UserAccount from '@components/UserAccount/UserAccount';
 import { selectInView } from '@store/scrollSlice';
 import { useSelector } from 'react-redux';
-import Nav from './Nav';
 
 function Header() {
   const inView = useSelector(selectInView);
@@ -10,7 +10,7 @@ function Header() {
       ${inView ? 'bg-none' : 'bg-primary-400'} 
       z-10 transition-colors`}
     >
-      <Nav />
+      <UserAccount />
     </header>
   );
 }
