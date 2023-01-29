@@ -2,15 +2,15 @@ import { useSelector } from 'react-redux';
 import { selectSearch } from '@store/searchSlice';
 
 function SearchResults() {
-  const { data, status } = useSelector(selectSearch);
+  const { query, types, data, status } = useSelector(selectSearch);
 
-  if (!data) return <></>;
+  if (!data || !query) return <></>;
   if (status === 'pending') return <p>please wait</p>;
 
   const { albums, artists, episodes, playlists, shows, tracks } = data;
 
   return (
-    <section>
+    <section className="">
       {albums && (
         <div>
           <h2>Albums</h2>

@@ -16,7 +16,7 @@
     @apply text-inherit no-underline;
   }
   #__next {
-    @apply flex flex-wrap min-h-screen;
+    @apply flex flex-wrap content-between min-h-screen;
   }
 }
 

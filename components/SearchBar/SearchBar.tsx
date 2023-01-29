@@ -1,14 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import useSearch from '@hooks/useSearch';
 import { SearchIcon } from '@icons/NavIcons';
-
-type searchType =
-  | 'album'
-  | 'artist'
-  | 'playlist'
-  | 'track'
-  | 'show'
-  | 'episode';
+import { searchType } from 'types/spotifyTypes';
 
 export interface SearchBarProps {
   types?: searchType[];
@@ -19,11 +12,7 @@ function SearchBar({ types }: SearchBarProps) {
   const searchFor = useSearch();
 
   const changeHandler = (e: HTMLInputElement) => setInputValue(e.value);
-
-  const searchHandler = () => {
-    if (!inputValue) return;
-    searchFor(inputValue, types);
-  };
+  const searchHandler = () => searchFor(inputValue, types);
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

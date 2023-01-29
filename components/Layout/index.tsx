@@ -21,7 +21,7 @@ function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <Aside />
-      <main className="flex-1">{children}</main>
+      <main className="flex flex-col flex-1">{children}</main>
       <Footer />
     </>
   );
