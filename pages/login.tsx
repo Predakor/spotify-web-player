@@ -1,7 +1,8 @@
+import { ReactElement } from 'react';
 import { OAuthProvider } from 'next-auth/providers';
 import { getProviders, signIn } from 'next-auth/react';
 
-function Login({ providers }: { providers: OAuthProvider }) {
+const Login = ({ providers }: { providers: OAuthProvider }) => {
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-gradient-to-b from-black to-primary-900">
       <h1 className="text-2xl">Log in to continue</h1>
@@ -20,7 +21,9 @@ function Login({ providers }: { providers: OAuthProvider }) {
       })}
     </div>
   );
-}
+};
+
+Login.getLayout = (page: ReactElement) => page;
 export default Login;
 
 export async function getServerSideProps() {

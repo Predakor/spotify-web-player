@@ -1,6 +1,6 @@
-import useSpotify from '@hooks/useSpotify';
+import { FormEvent, useEffect, useState } from 'react';
+import useSearch from '@hooks/useSearch';
 import { SearchIcon } from '@icons/NavIcons';
-import { useState, FormEvent, useCallback, useEffect } from 'react';
 
 type searchType =
   | 'album'
@@ -9,52 +9,31 @@ type searchType =
   | 'track'
   | 'show'
   | 'episode';
+
 export interface SearchBarProps {
-  setResults: (results: SpotifyApi.SearchResponse[]) => void;
   types?: searchType[];
 }
 
-function SearchBar({ setResults, types }: SearchBarProps) {
+function SearchBar({ types }: SearchBarProps) {
   const [inputValue, setInputValue] = useState('');
-  useState<SpotifyApi.TrackObjectFull[]>();
-  const spotifyApi = useSpotify();
+  const searchFor = useSearch();
 
-  const changeHandler = (e: HTMLInputElement) => {
-    setInputValue(e.value);
+  const changeHandler = (e: HTMLInputElement) => setInputValue(e.value);
+
+  const searchHandler = () => {
+    if (!inputValue) return;
+    searchFor(inputValue, types);
   };
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    searchForTrack();
+    searchHandler();
   };
 
-  const searchForTrack = useCallback(async () => {
-    try {
-      if (!types) {
-        types = ['album', 'artist', 'playlist', 'track', 'show', 'episode'];
-      }
-
-      const promises = types.map((type) => {
-        return spotifyApi.search(inputValue, [type]);
-      });
-
-      const responses = await Promise.all(promises);
-      const results = responses.map((response) => response.body);
-      setResults(results);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [inputValue, setResults, spotifyApi]);
-
   useEffect(() => {
-    const timeoutID = setTimeout(() => {
-      if (!inputValue) return setResults([]);
-
-      searchForTrack();
-    }, 200);
-
+    const timeoutID = setTimeout(searchHandler, 300);
     return () => clearTimeout(timeoutID);
-  }, [inputValue, searchForTrack]);
+  }, [inputValue]);
 
   return (
     <form

@@ -1,8 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
-import playbackSliceReducer, { playbackSlice } from './playbackSlice';
 import deviceSliceReducer, { deviceSlice } from './deviceSlice';
+import playbackSliceReducer, { playbackSlice } from './playbackSlice';
 import scrollSliceReducer, { scrollSlice } from './scrollSlice';
+import searchSliceReducer, { searchSlice } from './searchSlice';
 
 const makeStore = () =>
   configureStore({
@@ -10,6 +11,7 @@ const makeStore = () =>
       playback: playbackSliceReducer,
       device: deviceSliceReducer,
       scroll: scrollSliceReducer,
+      search: searchSliceReducer,
     },
   });
 
@@ -25,5 +27,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 export const playbackActions = playbackSlice.actions;
 export const deviceActions = deviceSlice.actions;
 export const scrollActions = scrollSlice.actions;
+export const searchActions = searchSlice.actions;
 
 export const wrapper = createWrapper<AppStore>(makeStore);

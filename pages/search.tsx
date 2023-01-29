@@ -1,16 +1,32 @@
+import { ReactElement } from 'react';
+import Layout, { Header } from '@components/Layout';
 import SearchBar from '@components/SearchBar/SearchBar';
 import SearchResults from '@components/SearchResults/SearchResults';
-import { useState } from 'react';
+import Head from 'next/head';
+import { NextPageWithLayout } from './_app';
 
-function Search() {
-  const [searchResults, setSearchResults] =
-    useState<SpotifyApi.SearchResponse[]>();
-
+const Search: NextPageWithLayout = () => {
   return (
-    <div>
-      <SearchBar setResults={setSearchResults} />
-      <SearchResults results={searchResults} />
-    </div>
+    <>
+      <Head>
+        <title>Discofy</title>
+      </Head>
+      <div>
+        <SearchResults />
+      </div>
+    </>
   );
-}
+};
+
+Search.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      <Header className="flex">
+        <SearchBar />
+      </Header>
+      {page}
+    </Layout>
+  );
+};
+
 export default Search;

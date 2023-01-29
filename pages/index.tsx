@@ -1,7 +1,7 @@
+import { useEffect, useState } from 'react';
 import PlaylistCard from '@components/Card/PlaylistCard';
 import useSpotify from 'hooks/useSpotify';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
 
 const Home = () => {
   const spotifyApi = useSpotify();

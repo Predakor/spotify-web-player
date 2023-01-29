@@ -1,15 +1,11 @@
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
+import { useSession } from 'next-auth/react';
 import Aside from './Aside';
 import Footer from './Footer';
 import Header from './Header';
 
 function Layout({ children }: { children: ReactNode }) {
   const session = useSession();
-  const router = useRouter();
-
-  if (router.asPath === '/login') return <main>{children}</main>;
 
   if (session.status === 'loading')
     return (
@@ -25,10 +21,7 @@ function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <Aside />
-      <main className="flex-1">
-        <Header />
-        {children}
-      </main>
+      <main className="flex-1">{children}</main>
       <Footer />
     </>
   );

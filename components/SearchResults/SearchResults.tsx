@@ -1,37 +1,33 @@
-interface SearchResultsProps {
-  results: SpotifyApi.SearchResponse[] | undefined;
-}
+import { useSelector } from 'react-redux';
+import { selectSearch } from '@store/searchSlice';
 
-function SearchResults({ results }: SearchResultsProps) {
-  if (!results) return null;
-  const types = [
-    'albums',
-    'artists',
-    'playlists',
-    'tracks',
-    'shows',
-    'episodes',
-  ];
+function SearchResults() {
+  const { data, status } = useSelector(selectSearch);
+
+  if (!data) return <></>;
+  if (status === 'pending') return <p>please wait</p>;
+
+  const { albums, artists, episodes, playlists, shows, tracks } = data;
 
   return (
-    <div>
-      {results.map((result, i) => {
-        const type = types[i];
-        const currentType = result[type];
-        const { items } = currentType;
-        return (
-          <div key={i}>
-            <h3>{type}</h3>
-            {items.map((item) => {
-              return <p key={item.name}>{item.name}</p>;
+    <section>
+      {albums && (
+        <div>
+          <h2>Albums</h2>
+          <>
+            {albums.items.map((album) => {
+              const { id, name, total_tracks } = album;
+              return (
+                <div key={id}>
+                  <h3>{name}</h3>
+                  <p>Tracks:{total_tracks}</p>
+                </div>
+              );
             })}
-            {1}
-          </div>
-        );
-
-        // return <p key={albums?.next}>{albums?.next}</p>;
-      })}
-    </div>
+          </>
+        </div>
+      )}
+    </section>
   );
 }
 export default SearchResults;
