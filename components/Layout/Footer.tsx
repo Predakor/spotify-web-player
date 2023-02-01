@@ -1,11 +1,11 @@
-import WebPlayback from '@components/WebPlayback/WebPlayback';
+import { memo, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import Playback from '@components/Playback';
+import { setPlaybackData } from '@store/playbackSlice';
 import spotifyApi from '@utils/spotify';
 import useSpotifyControls from 'hooks/useSpotifyControls';
 import useSpotifySDK from 'hooks/useSpotifySDK';
-import { memo, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { changeActive } from 'store/deviceSlice';
-import { changePlayback } from 'store/playbackSlice';
 
 type initialData = SpotifyApi.CurrentPlaybackResponse | null;
 
@@ -30,15 +30,13 @@ function Footer() {
         dispatch(changeActive(true));
         setActiveDevice(undefined);
         setPlaybackState(null);
-        console.log('no playback');
       } else {
         const { devices } = (await spotifyApi.getMyDevices()).body;
         const [activeDevice] = devices.filter((device) => device.is_active); // get active device from array
         setActiveDevice(activeDevice);
         setPlaybackState(currentPlayback);
-        console.log('playback');
       }
-      dispatch(changePlayback(currentPlayback));
+      dispatch(setPlaybackData(currentPlayback));
     };
     fetchData().then(() => setIsLoading(false));
   }, [player]);
@@ -47,7 +45,8 @@ function Footer() {
 
   return (
     <footer className="sticky bottom-0 w-full  bg-gray-900 border-t border-secondary-800">
-      <WebPlayback player={player} initialPlaybackState={playbackState} />
+      <Playback />
+      {/* <WebPlayback player={player} initialPlaybackState={playbackState} /> */}
       {activeDevice && (
         <h2 className="bg-primary-700 py-1 pr-4 text-right">
           Listening on {activeDevice.name}

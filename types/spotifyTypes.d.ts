@@ -5,3 +5,5 @@ export type searchType =
   | 'track'
   | 'show'
   | 'episode';
+
+export type RepeatState = 'off' | 'context' | 'track';

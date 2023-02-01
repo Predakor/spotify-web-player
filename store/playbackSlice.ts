@@ -1,52 +1,50 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RepeatState } from 'types/spotifyTypes';
 import { AppState } from '.';
 
-type PlaybackState = SpotifyApi.CurrentPlaybackResponse;
-
-type PlaybackSong = SpotifyApi.TrackObjectFull | SpotifyApi.EpisodeObjectFull;
-
-const initialState: PlaybackState | undefined = {
-  timestamp: 0,
-  device: {
-    id: '',
-    is_active: false,
-    is_restricted: false,
-    name: '',
-    type: '',
-    volume_percent: 50,
-  },
-  actions: {
-    disallows: {},
-  },
-  progress_ms: null,
-  is_playing: false,
-  item: null,
-  context: null,
-  currently_playing_type: 'unknown',
-  shuffle_state: false,
-  repeat_state: 'off',
+type PlaybackData = SpotifyApi.CurrentPlaybackResponse;
+export interface PlaybackState {
+  status: 'pending' | 'completed' | undefined;
+  data: PlaybackData | null | undefined;
+}
+const initialState: PlaybackState = {
+  status: undefined,
+  data: undefined,
 };
 
 export const playbackSlice = createSlice({
   name: 'playback',
   initialState,
   reducers: {
-    tooglePlayback: (state, action: { payload: boolean }) => {
-      if (state) state.is_playing = action.payload;
+    setPlaybackData: (state, action: { payload: PlaybackData }) => {
+      state.data = action.payload;
     },
-    changePlayback: (state, action: { payload: PlaybackState }) => {
-      state = action.payload;
+    setIsPlaying: (state, action: { payload: boolean }) => {
+      if (state.data) state.data.is_playing = action.payload;
     },
-    changeSong: (state, action: { payload: PlaybackSong }) => {
-      state.item = action.payload;
+    setShuffleState: (state, action: { payload: boolean }) => {
+      if (state.data) state.data.shuffle_state = action.payload;
+    },
+    setRepeatState: (state, action: { payload: RepeatState }) => {
+      if (state.data) state.data.repeat_state = action.payload;
+    },
+    setPostion: (state, action: { payload: number }) => {
+      if (state.data) state.data.timestamp = action.payload;
     },
   },
 });
 
-const selectTrack = (state: AppState) => state.playback.item;
-const selectPlayback = (state: AppState) => state.playback;
+const selectPlaybackSlice = (state: AppState) => state.playback;
+const selectPlaybackData = (state: AppState) => state.playback.data;
+const selectTrack = (state: AppState) => state.playback.data?.item;
+const selectProgress = (state: AppState) => state.playback.data?.progress_ms;
 
-export const { tooglePlayback, changePlayback, changeSong } =
-  playbackSlice.actions;
-export { selectTrack, selectPlayback };
+export const {
+  setIsPlaying,
+  setPostion,
+  setRepeatState,
+  setShuffleState,
+  setPlaybackData,
+} = playbackSlice.actions;
+export { selectPlaybackSlice, selectPlaybackData, selectTrack, selectProgress };
 export default playbackSlice.reducer;

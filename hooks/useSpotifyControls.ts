@@ -1,7 +1,11 @@
-import { changeSong, tooglePlayback } from '@store/playbackSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
+import {
+  setShuffleState,
+  setIsPlaying,
+  setRepeatState,
+} from '@store/playbackSlice';
 import { selectDevice } from 'store/deviceSlice';
+import { RepeatState } from 'types/spotifyTypes';
 import useSpotify from './useSpotify';
 
 const Controls = () => {
@@ -24,13 +28,14 @@ const Controls = () => {
     toggleShuffle: async () => {
       const { shuffle_state } = await currentPlaybackState();
       spotifyApi.setShuffle(!shuffle_state);
+      dispatch(setShuffleState(!shuffle_state));
       return !shuffle_state;
     },
 
     tooglePlayBack: async () => {
       const { is_playing } = await currentPlaybackState();
       is_playing ? controls.pause() : controls.resume();
-      dispatch(tooglePlayback(is_playing));
+      dispatch(setIsPlaying(!is_playing));
       return !is_playing;
     },
 
@@ -38,6 +43,7 @@ const Controls = () => {
       const { repeat_state } = await currentPlaybackState();
       const nextState = getNextRepeatState(repeat_state);
       spotifyApi.setRepeat(nextState);
+      dispatch(setRepeatState(nextState));
       return nextState;
     },
 
@@ -48,8 +54,8 @@ const Controls = () => {
 
     playPlaylist: async (uri: string) => {
       await spotifyApi.play({ context_uri: uri });
-      const currentSong = (await currentPlaybackState()).item;
-      if (currentSong) dispatch(changeSong(currentSong));
+      const currentSong = await currentPlaybackState();
+      // if (currentSong) dispatch(selectPlaybackData(currentSong));
     },
 
     transferPlayback: async (options: {
@@ -75,7 +81,7 @@ const Controls = () => {
 };
 export default Controls;
 
-const getNextRepeatState = (state: 'off' | 'context' | 'track') => {
+const getNextRepeatState = (state: RepeatState) => {
   if (state === 'off') return 'context';
   if (state === 'context') return 'track';
   return 'off';
