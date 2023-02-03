@@ -1,26 +1,32 @@
-import useSpotify from 'hooks/useSpotify';
 import { useEffect, useState } from 'react';
 import { MdVolumeMute, MdVolumeDown, MdVolumeUp } from 'react-icons/md';
+import { useSelector } from 'react-redux';
+import { selectPlaybackData } from '@store/playbackSlice';
+import useSpotify from 'hooks/useSpotify';
 
 interface VolumeControlProps {
   initialVolume?: number;
 }
 
 const VolumeControl = ({}: VolumeControlProps) => {
+  const playbackData = useSelector(selectPlaybackData);
   const spotifyApi = useSpotify();
   const [volume, setVolume] = useState(
     parseInt(localStorage.getItem('volume') || '50')
   );
   const [mutedVolume, setMutedVolume] = useState(volume);
 
-  useEffect(() => {
-    const timeoutID = setTimeout(() => {
-      spotifyApi.setVolume(volume);
-      localStorage.setItem('volume', volume.toString());
-    }, 100);
+  const changeVolume = () => {
+    localStorage.setItem('volume', volume.toString());
 
+    if (!playbackData?.device.is_active) return;
+    spotifyApi.setVolume(volume);
+  };
+
+  useEffect(() => {
+    const timeoutID = setTimeout(changeVolume, 100);
     return () => clearTimeout(timeoutID);
-  }, [spotifyApi, volume]);
+  }, [changeVolume, spotifyApi, volume]);
 
   const muteHandler = () => {
     if (volume === 0) return setVolume(mutedVolume);

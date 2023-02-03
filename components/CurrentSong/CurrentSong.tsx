@@ -1,14 +1,17 @@
+import { useSelector } from 'react-redux';
 import Artists from '@components/Artists/Artists';
+import { selectTrack } from '@store/playbackSlice';
 import Image from 'next/image';
 
-interface CurrentSongProps {
-  songInfo: Spotify.Track | null;
-}
+const CurrentSong = () => {
+  const trackInfo = useSelector(selectTrack);
 
-const CurrentSong = ({ songInfo }: CurrentSongProps) => {
-  if (!songInfo) return <div className="h-14"></div>;
+  if (!trackInfo) return <div className="h-14"></div>;
+  if (trackInfo.type === 'episode') return null;
 
-  const { name, album, artists } = songInfo;
+  const { name, album, artists } = trackInfo;
+
+  const [artist] = artists;
 
   return (
     <div className="flex gap-4 justify-self-start">
@@ -21,7 +24,7 @@ const CurrentSong = ({ songInfo }: CurrentSongProps) => {
 
       <div>
         <h3 className="text-secondary-100 text-xl">
-          <a href={songInfo.artists[0].url}>{name}</a>
+          <a href={artist.href}>{name}</a>
         </h3>
 
         <Artists artists={artists} />

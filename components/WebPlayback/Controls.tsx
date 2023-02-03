@@ -9,7 +9,7 @@ import {
 import useSpotifyControls from '@hooks/useSpotifyControls';
 import { selectPlaybackData } from '@store/playbackSlice';
 
-function Controls({}: { playbackData: SpotifyApi.CurrentPlaybackResponse }) {
+function Controls() {
   const { shuffle_state, is_playing, repeat_state } =
     useSelector(selectPlaybackData) || {};
   const playbackControls = useSpotifyControls();

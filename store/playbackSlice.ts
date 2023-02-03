@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { RepeatState } from 'types/spotifyTypes';
 import { AppState } from '.';
 
@@ -33,7 +33,7 @@ export const playbackSlice = createSlice({
     },
   },
 });
-
+const selectIsPlaying = (state: AppState) => state.playback.data?.is_playing;
 const selectPlaybackSlice = (state: AppState) => state.playback;
 const selectPlaybackData = (state: AppState) => state.playback.data;
 const selectTrack = (state: AppState) => state.playback.data?.item;
@@ -46,5 +46,11 @@ export const {
   setShuffleState,
   setPlaybackData,
 } = playbackSlice.actions;
-export { selectPlaybackSlice, selectPlaybackData, selectTrack, selectProgress };
+export {
+  selectIsPlaying,
+  selectPlaybackSlice,
+  selectPlaybackData,
+  selectTrack,
+  selectProgress,
+};
 export default playbackSlice.reducer;

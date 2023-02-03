@@ -1,10 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   setShuffleState,
   setIsPlaying,
   setRepeatState,
 } from '@store/playbackSlice';
-import { selectDevice } from 'store/deviceSlice';
 import { RepeatState } from 'types/spotifyTypes';
 import useSpotify from './useSpotify';
 
@@ -12,7 +11,6 @@ const Controls = () => {
   const spotifyApi = useSpotify();
 
   const dispatch = useDispatch();
-  const { id } = useSelector(selectDevice);
 
   const currentPlaybackState = async () => {
     return (await spotifyApi.getMyCurrentPlaybackState()).body;
@@ -56,16 +54,6 @@ const Controls = () => {
       await spotifyApi.play({ context_uri: uri });
       const currentSong = await currentPlaybackState();
       // if (currentSong) dispatch(selectPlaybackData(currentSong));
-    },
-
-    transferPlayback: async (options: {
-      deviceID?: string;
-      playOnTransfer?: boolean;
-    }) => {
-      const { deviceID = id, playOnTransfer } = options;
-      return spotifyApi.transferMyPlayback([deviceID || id], {
-        play: playOnTransfer,
-      });
     },
 
     getCurrentPlayback: async () => currentPlaybackState(),

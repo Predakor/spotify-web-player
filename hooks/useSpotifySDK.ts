@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { changeID } from 'store/deviceSlice';
+import { setThisDevice } from '@store/devicesSlice';
 import useSpotify from './useSpotify';
 
 const useSpotifySDK = () => {
@@ -30,7 +30,7 @@ const useSpotifySDK = () => {
 
       player.on('ready', async ({ device_id }) => {
         console.log('Device active', device_id);
-        dispatch(changeID(device_id));
+        dispatch(setThisDevice(device_id));
       });
 
       player.on('not_ready', ({ device_id }) => {
