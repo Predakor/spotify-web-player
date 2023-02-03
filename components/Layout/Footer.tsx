@@ -26,7 +26,6 @@ function Footer() {
       const currentPlayback = await getCurrentPlayback();
       if (currentPlayback) {
         dispatch(setActiveDevice(currentPlayback.device.id || ''));
-        dispatch(setPlaybackData(currentPlayback));
       }
       const { devices } = (await spotifyApi.getMyDevices()).body;
       dispatch(setDevices(devices));

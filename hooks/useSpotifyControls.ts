@@ -3,6 +3,7 @@ import {
   setShuffleState,
   setIsPlaying,
   setRepeatState,
+  setPlaybackData,
 } from '@store/playbackSlice';
 import { RepeatState } from 'types/spotifyTypes';
 import useSpotify from './useSpotify';
@@ -17,8 +18,24 @@ const Controls = () => {
   };
 
   const controls = {
-    nextSong: () => spotifyApi.skipToNext(),
-    prevSong: () => spotifyApi.skipToPrevious(),
+    nextSong: async () => {
+      try {
+        await spotifyApi.skipToNext();
+        controls.getCurrentPlayback();
+        return {};
+      } catch (error) {
+        return error;
+      }
+    },
+    prevSong: async () => {
+      try {
+        await spotifyApi.skipToPrevious();
+        controls.getCurrentPlayback();
+        return {};
+      } catch (error) {
+        return error;
+      }
+    },
 
     pause: () => spotifyApi.pause(),
     resume: () => spotifyApi.play(),
@@ -56,7 +73,11 @@ const Controls = () => {
       // if (currentSong) dispatch(selectPlaybackData(currentSong));
     },
 
-    getCurrentPlayback: async () => currentPlaybackState(),
+    getCurrentPlayback: async function () {
+      const playbackState = await currentPlaybackState();
+      dispatch(setPlaybackData(playbackState));
+      return playbackState;
+    },
     getUserPlaylists: async (
       user?: string,
       options?: { limit?: number; offset?: number }

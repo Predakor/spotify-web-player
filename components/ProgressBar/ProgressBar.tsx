@@ -39,6 +39,7 @@ const ProgressBar = ({ onSongEnd }: { onSongEnd: () => void }) => {
 
         if (trackProgress >= duration) {
           clearInterval(intervalId);
+          setTrackProgress(0);
           onSongEnd();
           return;
         }
@@ -49,7 +50,7 @@ const ProgressBar = ({ onSongEnd }: { onSongEnd: () => void }) => {
       Date.now()
     );
     return () => clearInterval(intervalId);
-  }, [duration, is_playing, onSongEnd]);
+  }, [duration, is_playing, onSongEnd, trackProgress]);
 
   const visible = !playbackData ? 'invisible' : '';
   return (
