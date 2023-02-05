@@ -22,16 +22,16 @@ export const devicesSlice = createSlice({
       state.connectedDevices = action.payload;
     },
     setThisDevice: (state, action: { payload: string }) => {
-      state.thisDevice === action.payload;
+      state.thisDevice = action.payload;
     },
     setActiveDevice: (state, action: { payload: string }) => {
-      state.activeDevice === action.payload;
+      state.activeDevice = action.payload;
     },
   },
 });
 
 const selectDeviceByID = (devices: Device[], id: string) => {
-  return devices.find((device) => device.id === id);
+  return devices.find((device) => (device.id = id));
 };
 const selectDevices = (state: AppState) => state.devices;
 

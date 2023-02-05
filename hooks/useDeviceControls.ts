@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDevices, setActiveDevice } from '@store/devicesSlice';
+import {
+  selectDevices,
+  setActiveDevice,
+  setDevices,
+} from '@store/devicesSlice';
 import { selectIsPlaying } from '@store/playbackSlice';
 import useSpotify from './useSpotify';
 
@@ -7,8 +11,7 @@ const useDeviceControls = () => {
   const spotifyApi = useSpotify();
   const dispatch = useDispatch();
   const isPlaying = useSelector(selectIsPlaying);
-  const { activeDevice, thisDevice, connectedDevices } =
-    useSelector(selectDevices);
+  const { thisDevice } = useSelector(selectDevices);
 
   const controls = {
     transferPlaybackToThisDevice: async () => {
@@ -22,8 +25,25 @@ const useDeviceControls = () => {
       }
     },
 
-    transferPlayback: (deviceID: string, play?: boolean) => {
-      spotifyApi.transferMyPlayback([deviceID], { play: play ?? false });
+    transferPlayback: async (deviceID: string, play?: boolean) => {
+      const options = { play: play ?? isPlaying };
+      try {
+        await spotifyApi.transferMyPlayback([deviceID], options);
+        await controls.getDevices();
+        dispatch(setActiveDevice(deviceID));
+      } catch (error) {
+        return error;
+      }
+    },
+
+    getDevices: async () => {
+      try {
+        const devices = (await spotifyApi.getMyDevices()).body.devices;
+        dispatch(setDevices(devices));
+        return devices;
+      } catch (error) {
+        return error;
+      }
     },
   };
   return controls;
