@@ -1,13 +1,38 @@
+import { useEffect, useState } from 'react';
+import useTrackControls from '@hooks/useTrackControls';
 import LikeIcon from '@icons/LikeIcon';
 import Button, { ButtonProps } from '.';
 
-export interface LikeButtonProps extends ButtonProps {
-  liked: boolean;
+interface LikeButtonProps {
+  songId: string;
+  _liked?: boolean;
 }
 
-function LikeButton({ onClick, liked }: LikeButtonProps) {
+function LikeButton({ songId, _liked = false }: LikeButtonProps) {
+  const [liked, setLiked] = useState(_liked);
+
+  const { checkIFLiked, toogleLikeState } = useTrackControls();
+
+  useEffect(() => {
+    checkIFLiked([songId])
+      .then(([response]) => setLiked(response))
+      .catch(() => 1); //add error handling?
+  }, [songId, checkIFLiked]);
+
+  const clickHandler = async () => {
+    try {
+      const result = await toogleLikeState([songId], liked);
+      setLiked(result);
+    } catch (error) {}
+  };
+  const active = liked ? 'text-primary-500' : '';
   return (
-    <Button onClick={onClick} ariaLabel="Like/Dislike song" ariaPressed={liked}>
+    <Button
+      className={`${active}`}
+      onClick={clickHandler}
+      ariaLabel="Like/Dislike song"
+      ariaPressed={liked}
+    >
       <LikeIcon liked={liked} />
     </Button>
   );

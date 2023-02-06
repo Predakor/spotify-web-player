@@ -1,6 +1,6 @@
+import { useEffect } from 'react';
 import spotifyApi from '@utils/spotify';
 import { signIn, useSession } from 'next-auth/react';
-import { useEffect } from 'react';
 import { SpotifySession } from 'types/spotifyUser';
 
 export default function useSpotify() {

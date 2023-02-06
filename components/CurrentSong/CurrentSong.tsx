@@ -7,11 +7,9 @@ import Image from 'next/image';
 const CurrentSong = () => {
   const trackInfo = useSelector(selectTrack);
 
-  if (!trackInfo) return <div className="h-14"></div>;
-  if (trackInfo.type === 'episode') return null;
+  if (!(trackInfo?.type === 'track')) return <div className="h-14" />;
 
-  const { name, album, artists } = trackInfo;
-
+  const { id, name, album, artists } = trackInfo;
   const [artist] = artists;
 
   return (
@@ -31,7 +29,7 @@ const CurrentSong = () => {
         <Artists artists={artists} />
       </div>
 
-      <LikeButton liked={false} onClick={() => 1} />
+      <LikeButton songId={id} />
     </div>
   );
 };
