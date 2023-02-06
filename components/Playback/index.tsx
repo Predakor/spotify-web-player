@@ -1,8 +1,8 @@
 import CurrentSong from '@components/CurrentSong/CurrentSong';
 import Devices from '@components/Devices/Devices';
+import Controls from '@components/Playback/Controls';
+import VolumeControl from '@components/Playback/VolumeControl/VolumeControl';
 import ProgressBar from '@components/ProgressBar/ProgressBar';
-import VolumeControl from '@components/VolumeControl/VolumeControl';
-import Controls from '@components/WebPlayback/Controls';
 import useSpotifyControls from '@hooks/useSpotifyControls';
 
 function PlaybackPanel() {
@@ -16,7 +16,7 @@ function PlaybackPanel() {
         <Controls />
         <ProgressBar onSongEnd={getCurrentPlayback} />
       </div>
-      <div className="flex items-center w-1/5">
+      <div className="flex items-center justify-end w-1/5">
         <Devices />
         <VolumeControl />
       </div>

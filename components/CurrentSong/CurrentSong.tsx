@@ -18,12 +18,12 @@ const CurrentSong = () => {
       <Image
         src={album.images[0].url}
         alt="current song thumbnail"
-        width={48}
-        height={48}
+        width={50}
+        height={50}
       />
 
-      <div>
-        <h3 className="text-secondary-100 text-xl">
+      <div className="flex-1 inline-block truncate">
+        <h3 role={'marquee'} className="text-secondary-100 text-xl">
           <a href={artist.href}>{name}</a>
         </h3>
 

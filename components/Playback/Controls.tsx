@@ -40,7 +40,7 @@ function Controls() {
         disabled={disabled}
       />
       <BackButton onClick={backHandler} disabled={disabled} />
-      <PlayButton onClick={playHandler} isPlaying={is_playing} />
+      <PlayButton onClick={playHandler} isPlaying={!is_playing} />
       <SkipButton onClick={skipHandler} disabled={disabled} />
       <RepeatButton
         onClick={repeatHandler}

@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setThisDevice } from '@store/devicesSlice';
+import { setPlaybackData } from '@store/playbackSlice';
 import useSpotify from './useSpotify';
+import useSpotifyControls from './useSpotifyControls';
 
 const useSpotifySDK = () => {
   const dispatch = useDispatch();
+  const { getCurrentPlayback } = useSpotifyControls();
   const spotifyApi = useSpotify();
 
   const [player, setPlayer] = useState<Spotify.Player | undefined>(undefined);
@@ -49,10 +52,14 @@ const useSpotifySDK = () => {
         console.error(message);
       });
 
+      player.on('player_state_changed', async () => {
+        getCurrentPlayback();
+      });
+
       player.connect();
       setPlayer(player);
     };
-  }, [spotifyApi]);
+  }, [dispatch, getCurrentPlayback, player, spotifyApi]);
   return player;
 };
 export default useSpotifySDK;

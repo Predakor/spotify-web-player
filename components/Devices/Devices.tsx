@@ -1,12 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Dropdown from '@components/Dropdown/Dropdown';
-import useSpotify from '@hooks/useSpotify';
 import DeviceIcons from '@icons/DeviceIcons';
-import {
-  selectThisDevice,
-  setDevices as setConnectedDevices,
-} from '@store/devicesSlice';
+import { selectThisDevice } from '@store/devicesSlice';
 import { selectPlaybackData } from '@store/playbackSlice';
 import DeviceMenu from './DeviceMenu';
 
@@ -17,7 +13,7 @@ function Devices() {
 
   if (!playbackData) return null;
 
-  const { id, type, name } = playbackData.device;
+  const { id, type } = playbackData.device;
   const isActiveDevice = id === thisDevice?.id;
 
   const display = !isActiveDevice ? 'text-primary-500' : '';
