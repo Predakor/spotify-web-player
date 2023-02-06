@@ -1,11 +1,13 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import useSpotifyControls from '@hooks/useSpotifyControls';
 import { selectPlaybackData } from '@store/playbackSlice';
 import spotifyApi from '@utils/spotify';
 import { msToText } from '@utils/time';
 
-const ProgressBar = ({ onSongEnd }: { onSongEnd: () => void }) => {
+const ProgressBar = () => {
   const playbackData = useSelector(selectPlaybackData);
+  const { getCurrentPlayback } = useSpotifyControls();
 
   const { is_playing, item, progress_ms } = playbackData || {};
   const duration = item?.duration_ms || 0;
@@ -40,7 +42,7 @@ const ProgressBar = ({ onSongEnd }: { onSongEnd: () => void }) => {
         if (trackProgress >= duration) {
           clearInterval(intervalId);
           setTrackProgress(0);
-          onSongEnd();
+          getCurrentPlayback();
           return;
         }
 
@@ -50,7 +52,7 @@ const ProgressBar = ({ onSongEnd }: { onSongEnd: () => void }) => {
       Date.now()
     );
     return () => clearInterval(intervalId);
-  }, [duration, is_playing, onSongEnd, trackProgress]);
+  }, [duration, getCurrentPlayback, is_playing, trackProgress]);
 
   const visible = !playbackData ? 'invisible' : '';
   return (

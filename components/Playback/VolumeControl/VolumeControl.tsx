@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import VolumeIcon from '@icons/VolumeIcon';
+import MuteVolumeButton from '@components/Button/MuteVolumeButton';
 import { selectActiveDevice } from '@store/devicesSlice';
 import useSpotify from 'hooks/useSpotify';
 
@@ -35,15 +35,8 @@ const VolumeControl = () => {
   };
 
   return (
-    <div className="flex gap-4 justify-self-end">
-      <button
-        className="bg-inherit text-2xl"
-        onClick={muteHandler}
-        type="button"
-        aria-label="Mute"
-      >
-        <VolumeIcon volume={volume} />
-      </button>
+    <div className="flex justify-self-end">
+      <MuteVolumeButton volume={volume} onClick={muteHandler} />
       <input
         type="range"
         value={volume}

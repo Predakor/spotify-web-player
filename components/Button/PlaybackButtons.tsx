@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import {
   BackIcon,
   PlaybackIcon,
@@ -7,75 +6,46 @@ import {
   SkipIcon,
 } from '@icons/PlaybackIcons';
 import { RepeatState } from 'types/spotifyTypes';
+import Button, { ButtonProps } from '.';
 
-export interface PlaybackButtonProps {
-  onClick: VoidFunction;
-  disabled?: boolean;
-  hideDisabled?: boolean;
-  children?: ReactNode;
-  className?: string;
-  ariaLabel?: string;
-}
-
-function PlaybackButton({
-  onClick,
-  children,
-  disabled = false,
-  hideDisabled = false,
-  className = '',
-  ariaLabel = 'Playback control',
-}: PlaybackButtonProps) {
-  const hide = hideDisabled && disabled ? 'invisible' : '';
+function BackButton({ onClick, disabled }: ButtonProps) {
   return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`${hide} bg-transparent text-2xl ${className}`}
-      aria-label={ariaLabel}
-    >
-      {children}
-    </button>
-  );
-}
-
-function BackButton({ onClick, disabled }: PlaybackButtonProps) {
-  return (
-    <PlaybackButton
+    <Button
       className="text-3xl"
       onClick={onClick}
       disabled={disabled}
-      ariaLabel={'previous Song'}
+      ariaLabel={'Previous song'}
     >
       <BackIcon />
-    </PlaybackButton>
+    </Button>
   );
 }
 function PlayButton({
   onClick,
   isPlaying,
   disabled,
-}: PlaybackButtonProps & { isPlaying?: boolean }) {
+}: ButtonProps & { isPlaying?: boolean }) {
   return (
-    <PlaybackButton
-      className="bg-primary-100 text-4xl text-secondary-900 rounded-full"
+    <Button
+      className="h-fit bg-primary-100 text-3xl text-secondary-900 rounded-full"
       onClick={onClick}
-      ariaLabel={'Play/Pause'}
       disabled={disabled}
+      ariaLabel={'Play/Pause'}
     >
       <PlaybackIcon isPlaying={isPlaying ?? false} />
-    </PlaybackButton>
+    </Button>
   );
 }
-function SkipButton({ onClick, disabled }: PlaybackButtonProps) {
+function SkipButton({ onClick, disabled }: ButtonProps) {
   return (
-    <PlaybackButton
+    <Button
       className="text-3xl"
       onClick={onClick}
       disabled={disabled}
       ariaLabel={'Next song'}
     >
       <SkipIcon />
-    </PlaybackButton>
+    </Button>
   );
 }
 
@@ -83,16 +53,16 @@ function RepeatButton({
   onClick,
   repeatState,
   disabled,
-}: PlaybackButtonProps & { repeatState?: RepeatState }) {
+}: ButtonProps & { repeatState?: RepeatState }) {
   return (
-    <PlaybackButton
+    <Button
       onClick={onClick}
       disabled={disabled}
-      hideDisabled={true}
-      ariaLabel={'Playback repeat'}
+      ariaLabel={'Playback repeat state'}
+      ariaPressed={repeatState !== 'off'}
     >
       <RepeatIcon repeatState={repeatState ?? 'off'} />
-    </PlaybackButton>
+    </Button>
   );
 }
 
@@ -100,18 +70,17 @@ function ShuffleButton({
   onClick,
   shuffleState,
   disabled,
-}: PlaybackButtonProps & { shuffleState?: boolean }) {
+}: ButtonProps & { shuffleState?: boolean }) {
   return (
-    <PlaybackButton
+    <Button
       onClick={onClick}
       disabled={disabled}
-      hideDisabled={true}
-      className={'text-buttonActive'}
+      ariaLabel={'Switch shuffle state'}
+      ariaPressed={shuffleState}
     >
       <ShuffleIcon shuffleState={shuffleState ?? false} />
-    </PlaybackButton>
+    </Button>
   );
 }
 
 export { ShuffleButton, BackButton, PlayButton, SkipButton, RepeatButton };
-export default PlaybackButton;

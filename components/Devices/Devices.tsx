@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import DeviceButton from '@components/Button/DeviceButton';
 import Dropdown from '@components/Dropdown/Dropdown';
 import DeviceIcons from '@icons/DeviceIcons';
 import { selectThisDevice } from '@store/devicesSlice';
@@ -16,17 +17,14 @@ function Devices() {
   const { id, type } = playbackData.device;
   const isActiveDevice = id === thisDevice?.id;
 
-  const display = !isActiveDevice ? 'text-primary-500' : '';
   return (
-    <div className="relative">
-      <button
-        className={`${display} bg-inherit text-2xl`}
+    <div className="relative h-fit">
+      <DeviceButton
         onClick={() => setMenuExpanded((prevState) => !prevState)}
-        type="button"
-        aria-label="connected devices"
-      >
-        <DeviceIcons device={type} />
-      </button>
+        className={!isActiveDevice ? 'text-primary-500' : ''}
+        menuExpanded={menuExpanded}
+        deviceType={type}
+      />
 
       <Dropdown expanded={menuExpanded}>
         <DeviceMenu />

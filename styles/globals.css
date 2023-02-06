@@ -9,14 +9,15 @@
   body {
     @apply p-0 m-0 font-sans;
   }
-  button {
-    @apply rounded-lg p-1 bg-primary-500;
-  }
   a {
     @apply text-inherit no-underline;
   }
   #__next {
     @apply flex flex-wrap content-between min-h-screen;
+  }
+
+  .button {
+    @apply p-2 text-2xl text-primary-100;
   }
 }
 

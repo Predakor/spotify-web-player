@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import Artists from '@components/Artists/Artists';
+import LikeButton from '@components/Button/FavoriteButton';
 import { selectTrack } from '@store/playbackSlice';
 import Image from 'next/image';
 
@@ -23,12 +24,14 @@ const CurrentSong = () => {
       />
 
       <div className="flex-1 inline-block truncate">
-        <h3 role={'marquee'} className="text-secondary-100 text-xl">
+        <h3 className="text-secondary-100 text-xl">
           <a href={artist.href}>{name}</a>
         </h3>
 
         <Artists artists={artists} />
       </div>
+
+      <LikeButton liked={false} onClick={() => 1} />
     </div>
   );
 };
