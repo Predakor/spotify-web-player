@@ -23,8 +23,11 @@ const Home = () => {
     <>
       <Head>
         <title>Discofy</title>
-        <meta name="description" content="Custom spotify web player " />
-        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content="Custom spotify web player build using react with next.js "
+          lang="en"
+        />
       </Head>
       <section className="px-5">
         <h1 className="text-2xl text-center py-5">
