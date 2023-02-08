@@ -6,7 +6,6 @@ import Header from './Header';
 
 function Layout({ children }: { children: ReactNode }) {
   const session = useSession();
-
   if (session.status === 'loading')
     return (
       <main className="flex items-center justify-center w-full h-full">

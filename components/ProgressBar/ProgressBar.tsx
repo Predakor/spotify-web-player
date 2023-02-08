@@ -1,73 +1,70 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import useSpotifyControls from '@hooks/useSpotifyControls';
+import useInterval from '@hooks/useInterval';
 import { selectPlaybackData } from '@store/playbackSlice';
-import spotifyApi from '@utils/spotify';
 import { msToText } from '@utils/time';
 
 const ProgressBar = () => {
   const playbackData = useSelector(selectPlaybackData);
-  const { getCurrentPlayback } = useSpotifyControls();
 
   const { is_playing, item, progress_ms } = playbackData || {};
+
+  const progress = progress_ms || 0;
   const duration = item?.duration_ms || 0;
-
-  const [trackProgress, setTrackProgress] = useState(progress_ms || 0);
-  const [selectedProgress, setSelectedProgress] = useState<number>();
-
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setSelectedProgress(e.currentTarget.valueAsNumber);
-  };
-
-  useEffect(() => {
-    if (!selectedProgress) return;
-    const debounce = setTimeout(() => {
-      spotifyApi.seek(selectedProgress);
-      setTrackProgress(selectedProgress);
-    }, 200);
-    return () => clearTimeout(debounce);
-  }, [selectedProgress]);
-
-  useEffect(() => {
-    if (!is_playing) return;
-    const intervalId = setInterval(
-      (lastIntervalTime: number) => {
-        if (!is_playing) {
-          clearInterval(intervalId);
-          setTrackProgress((oldProgress) => {
-            return oldProgress + (Date.now() - lastIntervalTime);
-          });
-        }
-
-        if (trackProgress >= duration) {
-          clearInterval(intervalId);
-          setTrackProgress(0);
-          getCurrentPlayback();
-          return;
-        }
-
-        setTrackProgress((oldProgress) => oldProgress + 1000);
-      },
-      1000,
-      Date.now()
-    );
-    return () => clearInterval(intervalId);
-  }, [duration, getCurrentPlayback, is_playing, trackProgress]);
 
   const visible = !playbackData ? 'invisible' : '';
   return (
     <div className="flex gap-4 w-5/6 ">
-      <span className={visible}>{msToText(trackProgress)}</span>
-      <input
-        className={`flex-1 ${visible}`}
-        type="range"
-        min={0}
-        max={duration}
-        value={trackProgress}
-        onChange={changeHandler}
+      <ProgresBarInput
+        track={{
+          progress: progress,
+          duration: duration,
+        }}
+        playing={is_playing ?? false}
+        onChange={() => 1}
+        disabled={false}
       />
       <span className={visible}>{msToText(duration)}</span>
     </div>
   );
 };
+
+type PropsType = {
+  track: { progress: number; duration: number };
+  playing: boolean;
+  onChange: () => void;
+  disabled: boolean;
+};
+function ProgresBarInput({ track, playing, onChange, disabled }: PropsType) {
+  const [progress, setProgress] = useState(track.progress);
+
+  useInterval(
+    useCallback(
+      () =>
+        setProgress((prev) => {
+          return prev + 1000 >= track.duration ? 0 : prev + 1000;
+        }),
+      [track.duration]
+    ),
+    playing ? 1000 : null
+  );
+  useEffect(() => {
+    setProgress(track.progress);
+  }, [track]);
+
+  return (
+    <>
+      <span>{msToText(progress)}</span>
+      <input
+        className={`flex-1`}
+        type="range"
+        min={0}
+        max={track.duration}
+        value={progress}
+        onChange={onChange}
+        disabled={disabled}
+      />
+    </>
+  );
+}
 export default ProgressBar;

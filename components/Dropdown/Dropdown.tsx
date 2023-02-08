@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { lazy, ReactNode } from 'react';
 
 export interface DropdownProps {
   expanded: boolean;
@@ -8,6 +8,6 @@ export interface DropdownProps {
 }
 
 function Dropdown({ expanded, children }: DropdownProps) {
-  return expanded ? <>{children}</> : null;
+  return <div className={!expanded ? 'invisible' : ''}>{children}</div>;
 }
 export default Dropdown;

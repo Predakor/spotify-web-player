@@ -2,7 +2,7 @@ import DeviceIcons from '@icons/DeviceIcons';
 import Button, { ButtonProps } from '.';
 
 export interface DeviceButtonProps extends ButtonProps {
-  deviceType: string;
+  deviceType: string | undefined;
   menuExpanded: boolean;
 }
 

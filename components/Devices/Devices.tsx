@@ -1,20 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DeviceButton from '@components/Button/DeviceButton';
 import Dropdown from '@components/Dropdown/Dropdown';
-import DeviceIcons from '@icons/DeviceIcons';
-import { selectThisDevice } from '@store/devicesSlice';
-import { selectPlaybackData } from '@store/playbackSlice';
-import DeviceMenu from './DeviceMenu';
+import useDeviceControls from '@hooks/useDeviceControls';
+import { selectActiveDevice, selectThisDevice } from '@store/devicesSlice';
+import DeviceMenu from './DeviceDropdown/DeviceDropdown';
 
 function Devices() {
-  const playbackData = useSelector(selectPlaybackData);
   const thisDevice = useSelector(selectThisDevice);
+  const activeDevice = useSelector(selectActiveDevice);
+
+  const { getDevices } = useDeviceControls();
   const [menuExpanded, setMenuExpanded] = useState(false);
 
-  if (!playbackData) return null;
+  useEffect(() => {
+    if (menuExpanded) getDevices();
+  }, [getDevices, menuExpanded]);
 
-  const { id, type } = playbackData.device;
+  const { id, type } = activeDevice ?? {};
   const isActiveDevice = id === thisDevice?.id;
 
   return (
@@ -26,9 +29,11 @@ function Devices() {
         deviceType={type}
       />
 
-      <Dropdown expanded={menuExpanded}>
-        <DeviceMenu />
-      </Dropdown>
+      {thisDevice && (
+        <Dropdown expanded={menuExpanded}>
+          <DeviceMenu activeDevice={activeDevice} thisDevice={thisDevice} />
+        </Dropdown>
+      )}
     </div>
   );
 }

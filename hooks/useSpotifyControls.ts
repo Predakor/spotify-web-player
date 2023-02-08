@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   setShuffleState,
@@ -10,83 +11,97 @@ import useSpotify from './useSpotify';
 
 const Controls = () => {
   const spotifyApi = useSpotify();
-
   const dispatch = useDispatch();
 
-  const currentPlaybackState = async () => {
-    return (await spotifyApi.getMyCurrentPlaybackState()).body;
-  };
+  useEffect(() => {
+    controlsRef.current = controlsRef.current;
+  }, [dispatch, spotifyApi]);
 
-  const controls = {
+  const controlsRef = useRef({
+    pause: () => spotifyApi.pause(),
+    resume: () => spotifyApi.play(),
+    playback: async () => (await spotifyApi.getMyCurrentPlaybackState()).body,
+
     nextSong: async () => {
       try {
         await spotifyApi.skipToNext();
-        controls.getCurrentPlayback();
-        return {};
+        controlsRef.current.getCurrentPlayback();
       } catch (error) {
-        return error;
+        throw error;
       }
     },
+
     prevSong: async () => {
       try {
         await spotifyApi.skipToPrevious();
-        controls.getCurrentPlayback();
-        return {};
+        controlsRef.current.getCurrentPlayback();
       } catch (error) {
-        return error;
+        throw error;
       }
     },
 
-    pause: () => spotifyApi.pause(),
-    resume: () => spotifyApi.play(),
-
     toggleShuffle: async () => {
-      const { shuffle_state } = await currentPlaybackState();
-      spotifyApi.setShuffle(!shuffle_state);
-      dispatch(setShuffleState(!shuffle_state));
-      return !shuffle_state;
+      try {
+        const { shuffle_state } = await controlsRef.current.playback();
+        spotifyApi.setShuffle(!shuffle_state);
+        dispatch(setShuffleState(!shuffle_state));
+      } catch (error) {
+        throw error;
+      }
     },
 
     tooglePlayBack: async () => {
-      const { is_playing } = await currentPlaybackState();
-      is_playing ? controls.pause() : controls.resume();
-      dispatch(setIsPlaying(!is_playing));
-      return !is_playing;
+      try {
+        const { is_playing } = await controlsRef.current.playback();
+        const { pause, resume } = controlsRef.current;
+        is_playing ? pause() : resume();
+        dispatch(setIsPlaying(!is_playing));
+        return !is_playing;
+      } catch (error) {
+        throw error;
+      }
     },
 
     toogleRepeatState: async () => {
-      const { repeat_state } = await currentPlaybackState();
-      const nextState = getNextRepeatState(repeat_state);
-      spotifyApi.setRepeat(nextState);
-      dispatch(setRepeatState(nextState));
-      return nextState;
-    },
-
-    playSong: (uri: string, id: string) => {
-      // dispatch(changeSong(id));
-      spotifyApi.play({ uris: [uri] });
-    },
-
-    playPlaylist: async (uri: string) => {
-      await spotifyApi.play({ context_uri: uri });
-      const currentSong = await currentPlaybackState();
-      // if (currentSong) dispatch(selectPlaybackData(currentSong));
+      try {
+        const { repeat_state } = await controlsRef.current.playback();
+        const nextState = getNextRepeatState(repeat_state);
+        spotifyApi.setRepeat(nextState);
+        dispatch(setRepeatState(nextState));
+        return nextState;
+      } catch (error) {
+        console.error('error in useSpotifyControls');
+        throw error;
+      }
     },
 
     getCurrentPlayback: async function () {
-      const playbackState = await currentPlaybackState();
-      dispatch(setPlaybackData(playbackState));
-      return playbackState;
+      try {
+        const playbackState = (await spotifyApi.getMyCurrentPlaybackState())
+          .body;
+        dispatch(setPlaybackData(playbackState));
+        return playbackState;
+      } catch (error) {
+        console.error('error in useSpotifyControls');
+        throw error;
+      }
     },
+
     getUserPlaylists: async (
       user?: string,
       options?: { limit?: number; offset?: number }
     ) => {
-      if (!user) return spotifyApi.getUserPlaylists();
-      return spotifyApi.getUserPlaylists(user, options);
+      try {
+        if (!user) return spotifyApi.getUserPlaylists();
+        return spotifyApi.getUserPlaylists(user, options);
+      } catch (error) {
+        console.error('error in useSpotifyControls');
+        throw error;
+      }
     },
-  };
-  return controls;
+  });
+
+  return controlsRef.current;
 };
 export default Controls;
 

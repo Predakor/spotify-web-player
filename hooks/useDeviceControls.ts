@@ -1,51 +1,42 @@
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectDevices,
-  setActiveDevice,
-  setDevices,
-} from '@store/devicesSlice';
-import { selectIsPlaying } from '@store/playbackSlice';
+import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { setActiveDevice, setDevices } from '@store/devicesSlice';
 import useSpotify from './useSpotify';
 
 const useDeviceControls = () => {
   const spotifyApi = useSpotify();
   const dispatch = useDispatch();
-  const isPlaying = useSelector(selectIsPlaying);
-  const { thisDevice } = useSelector(selectDevices);
-
-  const controls = {
-    transferPlaybackToThisDevice: async () => {
-      if (!thisDevice) return;
-      const options = { play: isPlaying };
+  const controls = useRef({
+    transferPlaybackToThisDevice: async (thisDeviceID: string) => {
       try {
-        await spotifyApi.transferMyPlayback([thisDevice], options);
-        dispatch(setActiveDevice(thisDevice));
+        await controls.current.transferPlayback(thisDeviceID);
+        dispatch(setActiveDevice(thisDeviceID));
       } catch (error) {
         console.error('there was a error in deviceControls');
       }
     },
 
     transferPlayback: async (deviceID: string, play?: boolean) => {
-      const options = { play: play ?? isPlaying };
+      const options = { play: play ?? false };
       try {
         await spotifyApi.transferMyPlayback([deviceID], options);
-        await controls.getDevices();
+        await controls.current.getDevices();
         dispatch(setActiveDevice(deviceID));
       } catch (error) {
-        return error;
+        throw error;
       }
     },
 
     getDevices: async () => {
       try {
-        const devices = (await spotifyApi.getMyDevices()).body.devices;
+        const { devices } = (await spotifyApi.getMyDevices()).body;
         dispatch(setDevices(devices));
         return devices;
       } catch (error) {
-        return error;
+        throw error;
       }
     },
-  };
-  return controls;
+  });
+  return controls.current;
 };
 export default useDeviceControls;

@@ -1,65 +1,59 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setThisDevice } from '@store/devicesSlice';
-import { setPlaybackData } from '@store/playbackSlice';
-import useSpotify from './useSpotify';
-import useSpotifyControls from './useSpotifyControls';
 
-const useSpotifySDK = () => {
+interface options {
+  volume: number;
+  getToken: () => Promise<string>;
+}
+
+function createSDK({ volume, getToken }: options) {
+  return new Spotify.Player({
+    name: 'Discofy',
+    getOAuthToken: async (cb) => {
+      cb(await getToken());
+    },
+    volume: volume,
+  });
+}
+
+const useSpotifySDK = ({ volume, getToken }: options) => {
+  const playerRef = useRef<Spotify.Player>();
+  const [isReady, setIsReady] = useState(false);
   const dispatch = useDispatch();
-  const { getCurrentPlayback } = useSpotifyControls();
-  const spotifyApi = useSpotify();
-
-  const [player, setPlayer] = useState<Spotify.Player | undefined>(undefined);
-
   useEffect(() => {
-    const token = spotifyApi.getAccessToken();
-    if (!token || player) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://sdk.scdn.co/spotify-player.js';
-    script.async = true;
-    document.body.appendChild(script);
+    if (!window.Spotify) {
+      const script = document.createElement('script');
+      script.src = 'https://sdk.scdn.co/spotify-player.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
 
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const player = new Spotify.Player({
-        name: 'Discofy',
-        getOAuthToken: (cb) => {
-          cb(spotifyApi.getAccessToken() || '');
-        },
-        volume: parseInt(localStorage.getItem('volume') || '5000') / 100,
-      });
-      window.addEventListener('beforeunload', () => player.disconnect());
-
-      player.on('ready', async ({ device_id }) => {
-        console.log('Device active', device_id);
-        dispatch(setThisDevice(device_id));
-      });
-
-      player.on('not_ready', ({ device_id }) => {
-        console.log('Device has gone offline', device_id);
-      });
-
-      player.on('initialization_error', ({ message }) => {
-        console.error(message);
-      });
-
-      player.on('authentication_error', ({ message }) => {
-        console.error(message);
-      });
-
-      player.on('account_error', ({ message }) => {
-        console.error(message);
-      });
-
-      player.on('player_state_changed', async () => {
-        getCurrentPlayback();
-      });
-
-      player.connect();
-      setPlayer(player);
+      playerRef.current = createSDK({ getToken: getToken, volume: volume });
+      setIsReady(true);
     };
-  }, [dispatch, getCurrentPlayback, player, spotifyApi]);
-  return player;
+
+    if (window.Spotify) {
+      playerRef.current = createSDK({ getToken: getToken, volume: volume });
+      setIsReady(true);
+    }
+
+    window.addEventListener('beforeunload', () =>
+      playerRef.current?.disconnect()
+    );
+    return () => {
+      playerRef.current?.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!playerRef.current || !isReady) return;
+    playerRef.current.on('ready', ({ device_id }) => {
+      dispatch(setThisDevice(device_id));
+    });
+  }, [dispatch, isReady]);
+
+  return playerRef.current;
 };
 export default useSpotifySDK;
