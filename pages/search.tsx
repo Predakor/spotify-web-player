@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
-import Layout, { Header } from '@components/Layout';
 import SearchBar from '@components/SearchBar/SearchBar';
 import SearchCategories from '@components/SearchCategories/SearchCategories';
 import SearchResults from '@components/SearchResults/SearchResults';
+import Layout, { Header } from 'Layout';
 import Head from 'next/head';
 import { NextPageWithLayout } from './_app';
 
@@ -19,13 +19,16 @@ const Search: NextPageWithLayout = () => {
   );
 };
 
-Search.getLayout = function getLayout(page: ReactElement) {
+Search.getLayout = function (page: ReactElement) {
   return (
-    <Layout>
-      <Header className="flex flex-wrap">
-        <SearchBar />
-        <SearchCategories />
-      </Header>
+    <Layout
+      header={
+        <Header className="flex-wrap">
+          <SearchBar />
+          <SearchCategories />
+        </Header>
+      }
+    >
       {page}
     </Layout>
   );

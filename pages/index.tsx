@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import PlaylistCard from '@components/Card/PlaylistCard';
+import Layout, { Header } from 'Layout';
 import useSpotify from 'hooks/useSpotify';
 import Head from 'next/head';
+import { NextPageWithLayout } from './_app';
 
-const Home = () => {
+const Home: NextPageWithLayout = () => {
   const spotifyApi = useSpotify();
   const [featuredPlaylists, setFeaturedPlaylists] = useState<
     SpotifyApi.PlaylistObjectSimplified[]
@@ -30,9 +32,6 @@ const Home = () => {
         />
       </Head>
       <section className="px-5">
-        <h1 className="text-2xl text-center py-5">
-          Hey, Let&apos;s listen something
-        </h1>
         <div className="grid grid-cols-2 gap-10 p-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {featuredPlaylists &&
             featuredPlaylists.map((playlist) => (

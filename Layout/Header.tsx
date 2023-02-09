@@ -10,13 +10,16 @@ export interface HeaderProps {
 function Header({ className = '', children }: HeaderProps) {
   const inView = useSelector(selectInView);
   const viewStyle = inView ? 'bg-none' : 'bg-primary-400';
+
   return (
-    <header
-      className={`sticky top-0 p-4 ${viewStyle} ${className} z-10 transition-colors`}
-    >
-      {children}
-      <UserAccount />
-    </header>
+    <>
+      <header
+        className={`${className} flex items-center p-4 ${viewStyle} ${className} transition-colors z-10`}
+      >
+        {children}
+        <UserAccount />
+      </header>
+    </>
   );
 }
 export default Header;

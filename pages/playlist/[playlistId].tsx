@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import PlaylistHeader from '@components/PlaylistHeader/PlaylistHeader';
 import TrackList from '@components/TrackList/TrackList';
 import useSpotify from 'hooks/useSpotify';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 type PlaylistType = SpotifyApi.SinglePlaylistResponse;
 
@@ -24,7 +24,6 @@ const Playlist = () => {
 
   return (
     <section className="relative flex flex-col gap-10 py-5 ">
-      <span className="absolute top-0 h-[70vh] w-full bg-gradient-to-b from-primary-100 to-black -z-10" />
       <PlaylistHeader playlist={playlistData} />
       <TrackList tracks={playlistData.tracks.items} />
     </section>

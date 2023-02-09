@@ -3,8 +3,16 @@ import { useSession } from 'next-auth/react';
 import Aside from './Aside';
 import Footer from './Footer';
 import Header from './Header';
+import Main from './Main';
 
-function Layout({ children }: { children: ReactNode }) {
+interface LayoutProps {
+  children?: ReactNode;
+  extendHeader?: ReactNode;
+  header?: ReactNode;
+  main?: ReactNode;
+}
+
+function Layout({ children, header, extendHeader, main }: LayoutProps) {
   const session = useSession();
   if (session.status === 'loading')
     return (
@@ -15,13 +23,12 @@ function Layout({ children }: { children: ReactNode }) {
       </main>
     );
 
-  if (session.status !== 'authenticated') return null;
-
   return (
     <>
-      <Aside />
-      <main className="flex flex-col flex-1">{children}</main>
-      <Footer />
+      <Aside className={'row-span-3'} />
+      {header ?? <Header className="sticky top-0">{extendHeader}</Header>}
+      {main ?? <Main className="relative">{children}</Main>}
+      <Footer className={'sticky bottom-0 col-span-2'} />
     </>
   );
 }

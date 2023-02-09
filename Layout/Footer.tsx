@@ -7,7 +7,7 @@ import { selectActiveDevice, selectThisDevice } from '@store/devicesSlice';
 import spotifyApi from '@utils/spotify';
 import useSpotifyControls from 'hooks/useSpotifyControls';
 
-function Footer() {
+function Footer({ className = '' }: { className: string }) {
   const player = useSpotifySDK({
     getToken: async () => spotifyApi.getAccessToken() || '',
     volume: 0.5,
@@ -19,7 +19,6 @@ function Footer() {
     player?.connect();
   }, [player]);
 
-  console.count('first');
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,7 +29,9 @@ function Footer() {
     fetchData();
   }, [getCurrentPlayback, getDevices]);
   return (
-    <footer className="sticky bottom-0 w-full  bg-gray-900 border-t border-secondary-800">
+    <footer
+      className={`${className} bg-gray-900 border-t border-secondary-800`}
+    >
       <Playback />
       <ActiveDevice />
     </footer>
