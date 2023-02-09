@@ -77,8 +77,7 @@ const Controls = () => {
 
     getCurrentPlayback: async function () {
       try {
-        const playbackState = (await spotifyApi.getMyCurrentPlaybackState())
-          .body;
+        const playbackState = await controlsRef.current.playback();
         dispatch(setPlaybackData(playbackState));
         return playbackState;
       } catch (error) {
@@ -87,6 +86,28 @@ const Controls = () => {
       }
     },
 
+    playPlaylist: async (uri: string, target: string) => {
+      try {
+        await spotifyApi.play({
+          context_uri: uri,
+          device_id: target,
+          position_ms: 1,
+        });
+      } catch (error) {
+        throw error;
+      }
+    },
+    playSong: async (uris: string[], target: string) => {
+      try {
+        await spotifyApi.play({
+          uris: uris,
+          device_id: target,
+          position_ms: 1,
+        });
+      } catch (error) {
+        throw error;
+      }
+    },
     getUserPlaylists: async (
       user?: string,
       options?: { limit?: number; offset?: number }
@@ -96,6 +117,15 @@ const Controls = () => {
         return spotifyApi.getUserPlaylists(user, options);
       } catch (error) {
         console.error('error in useSpotifyControls');
+        throw error;
+      }
+    },
+    getPlaylistTracks: async (id: string) => {
+      try {
+        const data = await spotifyApi.getPlaylist(id);
+        //do some dispatch
+        return data.body;
+      } catch (error) {
         throw error;
       }
     },

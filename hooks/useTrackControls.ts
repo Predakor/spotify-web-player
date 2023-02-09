@@ -1,8 +1,10 @@
+import { useRef } from 'react';
 import useSpotify from './useSpotify';
 
 function useTrackControls() {
   const spotifyApi = useSpotify();
-  const controls = {
+
+  const controlsRef = useRef({
     likeTrack: async (id: string[]) => {
       try {
         await spotifyApi.addToMySavedTracks(id);
@@ -23,23 +25,23 @@ function useTrackControls() {
     },
     toogleLikeState: async (id: string[], liked: boolean) => {
       try {
-        return await (liked
-          ? controls.disLikeTrack(id)
-          : controls.likeTrack(id));
+        const { disLikeTrack, likeTrack } = controlsRef.current;
+        return await (liked ? disLikeTrack(id) : likeTrack(id));
       } catch (error) {
         throw error;
       }
     },
 
-    checkIFLiked: async (id: string[]) => {
+    checkIFLiked: async (ids: string[]) => {
       try {
-        return (await spotifyApi.containsMySavedTracks(id)).body;
+        if (ids.length > 50) ids = ids.slice(0, 49);
+        return (await spotifyApi.containsMySavedTracks(ids)).body;
       } catch (error) {
         console.error(`useTrackContorls ${error}`);
         throw error;
       }
     },
-  };
-  return controls;
+  });
+  return controlsRef.current;
 }
 export default useTrackControls;

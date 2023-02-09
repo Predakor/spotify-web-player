@@ -1,24 +1,26 @@
 import { useEffect, useState } from 'react';
-import PlaylistHeader from '@components/PlaylistHeader/PlaylistHeader';
-import TrackList from '@components/TrackList/TrackList';
-import useSpotify from 'hooks/useSpotify';
+import PlaylistHeader from '@components/Playlist/PlaylistHeader';
+import TrackList from '@components/Playlist/PlaylistTracks';
+import useSpotifyControls from '@hooks/useSpotifyControls';
 import { useRouter } from 'next/router';
 
 type PlaylistType = SpotifyApi.SinglePlaylistResponse;
 
 const Playlist = () => {
   const router = useRouter();
-  const spotifyApi = useSpotify();
 
-  const playlistId = router.query.playlistId as string;
+  const { playlistId } = router.query;
+  const { getPlaylistTracks } = useSpotifyControls();
   const [playlistData, setPlaylistData] = useState<PlaylistType>();
 
   useEffect(() => {
-    if (!spotifyApi.getAccessToken()) return;
-    spotifyApi
-      .getPlaylist(playlistId)
-      .then((data) => setPlaylistData(data.body));
-  }, [playlistId, spotifyApi]);
+    if (!playlistId) return;
+    const id = playlistId.toString();
+
+    getPlaylistTracks(id).then((response) => {
+      setPlaylistData(response);
+    });
+  }, [playlistId]);
 
   if (!playlistData) return <h3>loading</h3>;
 

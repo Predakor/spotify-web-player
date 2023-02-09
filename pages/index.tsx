@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import PlaylistCard from '@components/Card/PlaylistCard';
+import PlaylistCard from '@components/Playlist/PlaylistCard';
 import Layout, { Header } from 'Layout';
 import useSpotify from 'hooks/useSpotify';
 import Head from 'next/head';

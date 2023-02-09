@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import {
   BackButton,
-  PlayButton,
+  PlaybackButton,
   RepeatButton,
   ShuffleButton,
   SkipButton,
@@ -40,7 +40,11 @@ function Controls() {
         disabled={disabled}
       />
       <BackButton onClick={backHandler} disabled={disabled} />
-      <PlayButton onClick={playHandler} isPlaying={!is_playing} />
+      <PlaybackButton
+        onClick={playHandler}
+        isPlaying={!is_playing}
+        className={'bg-primary-50'}
+      />
       <SkipButton onClick={skipHandler} disabled={disabled} />
       <RepeatButton
         onClick={repeatHandler}

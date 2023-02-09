@@ -13,12 +13,6 @@ function LikeButton({ songId, _liked = false }: LikeButtonProps) {
 
   const { checkIFLiked, toogleLikeState } = useTrackControls();
 
-  useEffect(() => {
-    checkIFLiked([songId])
-      .then(([response]) => setLiked(response))
-      .catch(() => 1); //add error handling?
-  }, [songId, checkIFLiked]);
-
   const clickHandler = async () => {
     try {
       const result = await toogleLikeState([songId], liked);

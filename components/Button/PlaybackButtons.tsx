@@ -20,17 +20,16 @@ function BackButton({ onClick, disabled }: ButtonProps) {
     </Button>
   );
 }
-function PlayButton({
-  onClick,
-  isPlaying,
-  disabled,
-}: ButtonProps & { isPlaying?: boolean }) {
+function PlaybackButton(props: ButtonProps & { isPlaying?: boolean }) {
+  const { onClick, isPlaying, className = '', disabled } = props;
   return (
     <Button
-      className="h-fit bg-primary-100 text-3xl text-secondary-900 rounded-full"
+      {...props}
+      className={`${className} text-3xl text-secondary-900 rounded-full`}
       onClick={onClick}
       disabled={disabled}
       ariaLabel={'Play/Pause'}
+      ariaPressed={isPlaying}
     >
       <PlaybackIcon isPlaying={isPlaying ?? false} />
     </Button>
@@ -83,4 +82,4 @@ function ShuffleButton({
   );
 }
 
-export { ShuffleButton, BackButton, PlayButton, SkipButton, RepeatButton };
+export { ShuffleButton, BackButton, PlaybackButton, SkipButton, RepeatButton };

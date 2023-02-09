@@ -8,7 +8,7 @@ export interface CardProps {
 
 export default function Card({ children, className = '', onClick }: CardProps) {
   return (
-    <div className={` ${className}`} onClick={onClick}>
+    <div className={`card ${className}`} onClick={onClick}>
       {children}
     </div>
   );

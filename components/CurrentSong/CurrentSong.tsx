@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import Artists from '@components/Artists/Artists';
-import LikeButton from '@components/Button/FavoriteButton';
+import LikeButton from '@components/Button/LikedButton';
 import { selectTrack } from '@store/playbackSlice';
 import Image from 'next/image';
 

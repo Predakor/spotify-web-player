@@ -7,7 +7,7 @@
     @apply box-border;
   }
   body {
-    @apply p-0 m-0 font-sans;
+    @apply p-0 m-0 bg-background text-text font-sans;
   }
   a {
     @apply text-inherit no-underline;
@@ -17,16 +17,23 @@
   }
 
   .button {
-    @apply p-2 text-2xl text-primary-100;
+    @apply p-2 text-2xl text-text-important;
+  }
+  .card {
+    @apply p-4 bg-background-100 rounded;
+    @apply transition-opacity duration-500;
+  }
+  .card:hover {
+    @apply hover:bg-background-200 hover:bg-opacity-70 hover:cursor-pointer;
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
   body {
-    color: white;
-    background: black;
+    color: black;
+    background: white;
   }
 }

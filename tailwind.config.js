@@ -12,7 +12,17 @@ module.exports = {
       colors: {
         primary: colors.green,
         secondary: colors.gray,
-        background: colors.slate,
+        text: {
+          important: '#fffffff2',
+          DEFAULT: '#ffffffbf',
+          disabled: '#ffffff66',
+        },
+        background: {
+          300: '#',
+          200: '#3E2C41',
+          100: '#121212 ',
+          DEFAULT: '#000000',
+        },
       },
     },
   },

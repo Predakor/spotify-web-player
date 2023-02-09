@@ -7,3 +7,5 @@ export type searchType =
   | 'episode';
 
 export type RepeatState = 'off' | 'context' | 'track';
+
+export type LikedTrack = SpotifyApi.TrackObjectFull & { liked: boolean };
