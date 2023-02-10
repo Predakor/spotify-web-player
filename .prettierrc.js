@@ -4,4 +4,5 @@ module.exports = {
   singleQuote: true,
   tabWidth: 2,
   importOrder: ['^react(.*)', '<THIRD_PARTY_MODULES>', '@/(.*)', '^[./]'],
+  plugins: [require('prettier-plugin-tailwindcss')],
 };
