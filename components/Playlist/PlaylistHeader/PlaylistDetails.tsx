@@ -16,7 +16,7 @@ function PlaylistDescription({ playlist }: PlaylistType) {
       <h1 className="text-7xl font-bold text-text-important">{name}</h1>
       <p className="">{description}</p>
       <span className="flex">
-        <UserAvatar imageURL={image.url} />
+        <UserAvatar imageURL={image?.url} />
         <p>{followers.total}</p>
       </span>
       <PlaylistPlaybackButton
