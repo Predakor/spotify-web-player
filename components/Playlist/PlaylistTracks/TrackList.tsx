@@ -1,5 +1,5 @@
 import useMergeSavedTracks from '@hooks/useMergedSavedTracks';
-import { Track } from '.';
+import { Track } from './PlaylistTracks';
 import TrackRow from './TrackRow';
 
 function TrackList({ fetchedTracks }: { fetchedTracks: Track[] }) {

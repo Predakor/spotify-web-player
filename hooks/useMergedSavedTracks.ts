@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Track } from '@components/Playlist/PlaylistTracks';
+import { Track } from '@components/Playlist/PlaylistTracks/PlaylistTracks';
 import { LikedTrack } from 'types/spotifyTypes';
 import useTrackControls from './useTrackControls';
 

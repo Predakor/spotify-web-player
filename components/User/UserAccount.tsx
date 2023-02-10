@@ -1,7 +1,7 @@
-import { signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
-import UserIcon from './UserIcon';
+import { signOut, useSession } from 'next-auth/react';
+import UserIcon from './UserAvatar';
 
 function UserAccount() {
   const { data: session } = useSession();
@@ -22,7 +22,7 @@ function UserAccount() {
   };
   return (
     <div
-      className="hidden sticky sm:flex flex-col w-fit ml-auto bg-black rounded-full cursor-pointer"
+      className="sticky ml-auto hidden w-fit cursor-pointer flex-col rounded-full bg-black sm:flex"
       onClick={handleDropdownMenu}
     >
       <div className="flex items-center gap-2 p-1">
@@ -32,7 +32,7 @@ function UserAccount() {
       </div>
 
       {expanded && (
-        <div className="absolute top-full w-full p-2 bg-black ">
+        <div className="absolute top-full w-full bg-black p-2 ">
           <p onClick={settings}>Settings</p>
           <p onClick={profile}>Profile</p>
           <p onClick={logOut}>Log Out</p>

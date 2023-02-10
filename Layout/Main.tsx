@@ -2,13 +2,12 @@ import { ReactNode } from 'react';
 
 interface MainProps {
   children: ReactNode;
-  className: string;
 }
 
-function Main({ children, className }: MainProps) {
+function Main({ children }: MainProps) {
   return (
-    <main className={`${className}`}>
-      <span className="absolute -top-20 h-[70vh] w-full bg-gradient-to-b from-primary-200 -z-10" />
+    <main>
+      <span className="absolute left-0 -top-20 -z-50 h-[70vh] w-full bg-gradient-to-b from-primary-200" />
       {children}
     </main>
   );

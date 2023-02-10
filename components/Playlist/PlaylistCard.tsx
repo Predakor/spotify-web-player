@@ -20,8 +20,8 @@ export default function PlaylistCard({ data }: { data: Playlist }) {
   const selectPlaylist = () => router.push(`/playlist/${id}`);
 
   return (
-    <Card className="p-0 md:p-4 group" onClick={selectPlaylist}>
-      <div className="relative w-full aspect-square ">
+    <Card className="group p-0 md:p-4" onClick={selectPlaylist}>
+      <div className="relative aspect-square w-full ">
         <Image src={image.url} alt="album cover picture" layout="fill" />
 
         <PlaylistPlaybackButton
@@ -31,8 +31,8 @@ export default function PlaylistCard({ data }: { data: Playlist }) {
         />
       </div>
 
-      <div className="hidden md:block text-ellipsis overflow-clip">
-        <p className="py-5 text-xl text-text-important font-semibold">{name}</p>
+      <div className="hidden overflow-clip text-ellipsis md:block">
+        <p className="py-5 text-xl font-semibold text-text-important">{name}</p>
         <p>{description}</p>
       </div>
     </Card>

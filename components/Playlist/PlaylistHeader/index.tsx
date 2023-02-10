@@ -23,7 +23,7 @@ function PlaylistHeader({ playlist }: PlaylistType) {
   }, [observer]);
 
   return (
-    <header className="flex gap-5 h-[30vh] p-5" ref={targetRef}>
+    <header className="flex h-[30vh] gap-5 p-5" ref={targetRef}>
       <PlaylistCover images={playlist.images} />
       <PlaylistDescription playlist={playlist} />
     </header>

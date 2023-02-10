@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PlaylistHeader from '@components/Playlist/PlaylistHeader';
-import TrackList from '@components/Playlist/PlaylistTracks';
+import TrackList from '@components/Playlist/PlaylistTracks/PlaylistTracks';
 import useSpotifyControls from '@hooks/useSpotifyControls';
 import { useRouter } from 'next/router';
 

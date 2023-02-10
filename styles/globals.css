@@ -7,24 +7,24 @@
     @apply box-border;
   }
   body {
-    @apply p-0 m-0 bg-background text-text font-sans;
+    @apply m-0 bg-background p-0 font-sans text-text;
   }
   a {
     @apply text-inherit no-underline;
   }
   #__next {
-    @apply grid grid-cols-[auto,1fr] grid-rows-[auto,1fr,auto] min-h-screen;
+    @apply grid min-h-screen grid-cols-[auto,1fr] grid-rows-[auto,1fr,auto];
   }
 
   .button {
     @apply p-2 text-2xl text-text-important;
   }
   .card {
-    @apply p-4 bg-background-100 rounded;
+    @apply rounded bg-background-100 p-4;
     @apply transition-opacity duration-500;
   }
   .card:hover {
-    @apply hover:bg-background-200 hover:bg-opacity-70 hover:cursor-pointer;
+    @apply hover:cursor-pointer hover:bg-background-200 hover:bg-opacity-70;
   }
 }
 

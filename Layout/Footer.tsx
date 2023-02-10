@@ -30,7 +30,7 @@ function Footer({ className = '' }: { className: string }) {
   }, [getCurrentPlayback, getDevices]);
   return (
     <footer
-      className={`${className} bg-gray-900 border-t border-secondary-800`}
+      className={`${className} border-t border-secondary-800 bg-gray-900`}
     >
       <Playback />
       <ActiveDevice />

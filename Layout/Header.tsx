@@ -1,23 +1,29 @@
 import { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
-import UserAccount from '@components/UserAccount/UserAccount';
+import User from '@components/User/User';
 import { selectInView } from '@store/scrollSlice';
+import { SpotifyUser } from 'types/spotifyUser';
 
 export interface HeaderProps {
-  className?: string;
+  user: SpotifyUser;
   children?: ReactNode;
 }
-function Header({ className = '', children }: HeaderProps) {
+function Header({ user, children }: HeaderProps) {
   const inView = useSelector(selectInView);
   const viewStyle = inView ? 'bg-none' : 'bg-primary-400';
 
   return (
     <>
       <header
-        className={`${className} flex items-center p-4 ${viewStyle} ${className} transition-colors z-10`}
+        className={`sticky top-0 flex flex-wrap items-center bg-transparent ${viewStyle} z-10 p-4 transition-colors`}
       >
+        <div>
+          <button>{'<'}</button>
+          <button>{'>'}</button>
+        </div>
+
         {children}
-        <UserAccount />
+        <User user={user} />
       </header>
     </>
   );
