@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import PlaylistCard from '@components/Playlist/PlaylistCard';
-import Layout, { Header } from 'Layout';
 import useSpotify from 'hooks/useSpotify';
 import Head from 'next/head';
 import { NextPageWithLayout } from './_app';
@@ -31,13 +30,11 @@ const Home: NextPageWithLayout = () => {
           lang="en"
         />
       </Head>
-      <section className="px-5">
-        <div className="grid grid-cols-2 gap-10 p-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {featuredPlaylists &&
-            featuredPlaylists.map((playlist) => (
-              <PlaylistCard data={playlist} key={playlist.id} />
-            ))}
-        </div>
+      <section className="grid grid-cols-2 gap-10 p-3 md:grid-cols-3 lg:grid-cols-4 ">
+        {featuredPlaylists &&
+          featuredPlaylists.map((playlist) => (
+            <PlaylistCard data={playlist} key={playlist.id} />
+          ))}
       </section>
     </>
   );

@@ -1,5 +1,6 @@
 import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import Playback from '@components/Playback';
 import useDeviceControls from '@hooks/useDeviceControls';
 import useSpotifySDK from '@hooks/useSpotifySDK';
@@ -7,7 +8,7 @@ import { selectActiveDevice, selectThisDevice } from '@store/devicesSlice';
 import spotifyApi from '@utils/spotify';
 import useSpotifyControls from 'hooks/useSpotifyControls';
 
-function Footer({ className = '' }: { className: string }) {
+function Footer() {
   const player = useSpotifySDK({
     getToken: async () => spotifyApi.getAccessToken() || '',
     volume: 0.5,
@@ -28,10 +29,9 @@ function Footer({ className = '' }: { className: string }) {
     };
     fetchData();
   }, [getCurrentPlayback, getDevices]);
+
   return (
-    <footer
-      className={`${className} border-t border-secondary-800 bg-gray-900`}
-    >
+    <footer className="sticky bottom-0 border-t border-secondary-800 bg-background-100 lg:col-span-2">
       <Playback />
       <ActiveDevice />
     </footer>

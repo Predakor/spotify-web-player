@@ -4,18 +4,14 @@
 
 @layer components {
   * {
-    @apply box-border;
+    @apply m-0 box-border p-0;
   }
   body {
-    @apply m-0 bg-background p-0 font-sans text-text;
+    @apply overflow-x-clip bg-background font-sans text-text;
   }
   a {
     @apply text-inherit no-underline;
   }
-  #__next {
-    @apply grid min-h-screen grid-cols-[auto,1fr] grid-rows-[auto,1fr,auto];
-  }
-
   .button {
     @apply p-2 text-2xl text-text-important;
   }

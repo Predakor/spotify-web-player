@@ -1,5 +1,4 @@
 import NavLink from '@components/NavLink/NavLink';
-import { useRouter } from 'next/router';
 import {
   HomeIcon,
   LibraryIcon,
@@ -7,6 +6,7 @@ import {
   StatisticIcon,
 } from '@icons/NavIcons';
 import navData from '@utils/navData';
+import { useRouter } from 'next/router';
 
 function IconComponent({ name, active }: { name: string; active: boolean }) {
   const icons: any = {

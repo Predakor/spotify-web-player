@@ -18,7 +18,7 @@ const Song = ({ track }: { track: SpotifyApi.TrackObjectFull }) => {
 
       <div className="inline-block flex-1 truncate">
         <Link href={'library/tracks/id'} prefetch={false}>
-          <a className="text-xl text-secondary-100" href={artist.href}>
+          <a className="text-xl text-text-important" href={artist.href}>
             {name}
           </a>
         </Link>

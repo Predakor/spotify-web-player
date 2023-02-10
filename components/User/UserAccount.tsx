@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import { signOut, useSession } from 'next-auth/react';
-import UserIcon from './UserAvatar';
+import UserAvatar from './UserAvatar';
 
 function UserAccount() {
   const { data: session } = useSession();
@@ -26,7 +26,7 @@ function UserAccount() {
       onClick={handleDropdownMenu}
     >
       <div className="flex items-center gap-2 p-1">
-        <UserIcon image={image} />
+        <UserAvatar imageURL={image} />
         <span className=" font-semibold ">{name}</span>
         <div>{expanded ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</div>
       </div>

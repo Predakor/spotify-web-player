@@ -14,7 +14,7 @@ const ProgressBar = () => {
 
   const visible = !playbackData ? 'invisible' : '';
   return (
-    <div className="flex gap-4 w-5/6 ">
+    <div className="flex w-5/6 gap-4 ">
       <ProgresBarInput
         track={{
           progress: progress,

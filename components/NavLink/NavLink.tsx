@@ -1,6 +1,5 @@
-import Link from 'next/link';
-
 import { ReactNode } from 'react';
+import Link from 'next/link';
 
 export interface NavLinkProps {
   href: string;
@@ -15,7 +14,7 @@ function NavLink({ href, active, text, children }: NavLinkProps) {
   return (
     <Link href={href}>
       <a
-        className={`flex items-center gap-4 ${activeStyle} hover:text-primary-600 transition-colors `}
+        className={`flex items-center gap-4 ${activeStyle} transition-colors hover:text-primary-600 `}
       >
         {children}
         {text && <p>{text}</p>}

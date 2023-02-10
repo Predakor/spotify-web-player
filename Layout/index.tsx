@@ -10,14 +10,13 @@ interface LayoutProps {
   children?: ReactNode;
   extendHeader?: ReactNode;
   header?: ReactNode;
-  main?: ReactNode;
 }
 
-function Layout({ children, extendHeader, main }: LayoutProps) {
+function Layout({ children, extendHeader }: LayoutProps) {
   const session = useSession();
   if (session.status === 'loading')
     return (
-      <main className="flex h-full w-full items-center justify-center">
+      <main className="flex w-full items-center justify-center">
         <div className="text-3xl font-bold text-primary-700">
           <p className="animate-pulse">Loading</p>
         </div>
@@ -26,12 +25,13 @@ function Layout({ children, extendHeader, main }: LayoutProps) {
 
   const user = session.data?.user as SpotifyUser;
   return (
-    <>
-      <Aside className={'row-span-3'} />
+    <div className="grid min-h-screen w-screen max-w-full  lg:grid-cols-[auto,1fr] lg:grid-rows-[auto,1fr] ">
+      <span className="absolute -z-50 h-[70vh] w-full bg-gradient-to-b from-primary-900" />
+      <Aside />
       <Header user={user}>{extendHeader}</Header>
-      {main ?? <Main className="relative">{children}</Main>}
-      <Footer className={'sticky bottom-0 col-span-2'} />
-    </>
+      <Main>{children}</Main>
+      <Footer />
+    </div>
   );
 }
 export default Layout;

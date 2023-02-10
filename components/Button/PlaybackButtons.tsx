@@ -25,7 +25,7 @@ function PlaybackButton(props: ButtonProps & { isPlaying?: boolean }) {
   return (
     <Button
       {...props}
-      className={`${className} text-3xl text-secondary-900 rounded-full`}
+      className={`${className} rounded-full text-3xl text-secondary-900`}
       onClick={onClick}
       disabled={disabled}
       ariaLabel={'Play/Pause'}

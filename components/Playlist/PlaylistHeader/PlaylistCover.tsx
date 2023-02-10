@@ -5,7 +5,7 @@ export default function PlaylistCover({ images }: { images: SpotifyImage[] }) {
   const [image] = images;
 
   if (!image) {
-    return <div className="h-full aspect-square bg-black shadow-2xl" />;
+    return <div className="aspect-square h-full bg-black shadow-2xl" />;
   }
 
   return (

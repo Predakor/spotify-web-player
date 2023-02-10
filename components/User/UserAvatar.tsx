@@ -2,7 +2,7 @@ import { AccountIcons } from '@icons/index';
 import Image from 'next/image';
 
 interface UserIconProps {
-  imageURL?: string | null;
+  imageURL?: string | null | undefined;
   onClick?: VoidFunction;
 }
 

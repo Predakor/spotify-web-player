@@ -14,15 +14,17 @@ function User({ user }: { user: SpotifyUser }) {
   };
   return (
     <div
-      className="sticky ml-auto hidden  flex-col rounded-full bg-background sm:flex"
+      className="ml-auto flex-col rounded-full bg-background sm:flex"
       onClick={handleDropdownMenu}
     >
-      <div className="relative flex items-center gap-2 p-2">
+      <div className="relative flex items-center gap-2 p-1">
         <UserAvatar imageURL={image} />
-        <p className="font-semibold text-text-important">{name}</p>
-        <button>
-          {expanded ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
-        </button>
+        <span className="hidden md:inline-block">
+          <p className="font-semibold text-text-important">{name}</p>
+          <button>
+            {expanded ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+          </button>
+        </span>
       </div>
       <Dropdown expanded={expanded}>
         <UserDropdown />

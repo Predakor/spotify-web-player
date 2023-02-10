@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
 import NavLink from '@components/NavLink/NavLink';
 import useSpotifyControls from '@hooks/useSpotifyControls';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+
 type PlaylistType = SpotifyApi.PlaylistObjectSimplified;
 
 function UserPlaylists() {

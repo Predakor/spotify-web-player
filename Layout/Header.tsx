@@ -10,17 +10,17 @@ export interface HeaderProps {
 }
 function Header({ user, children }: HeaderProps) {
   const inView = useSelector(selectInView);
-  const viewStyle = inView ? 'bg-none' : 'bg-primary-400';
+  const bgStyle = inView ? 'bg-transparent' : 'bg-primary-700';
 
   return (
     <>
       <header
-        className={`sticky top-0 flex flex-wrap items-center bg-transparent ${viewStyle} z-10 p-4 transition-colors`}
+        className={`top-0 flex flex-wrap items-center ${bgStyle} sticky z-10 p-4 transition-colors lg:col-start-2 `}
       >
-        <div>
+        <nav>
           <button>{'<'}</button>
           <button>{'>'}</button>
-        </div>
+        </nav>
 
         {children}
         <User user={user} />

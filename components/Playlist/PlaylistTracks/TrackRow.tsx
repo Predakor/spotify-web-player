@@ -14,7 +14,7 @@ function TrackRow({ track, index }: TrackRowProps) {
 
   return (
     <Card className={`flex items-center justify-between`}>
-      <p className="justify-self-end font-bold text-xl">{index + 1}</p>
+      <p className="justify-self-end text-xl font-bold">{index + 1}</p>
       <Image
         src={album.images[0].url}
         alt="current song thumbnail"

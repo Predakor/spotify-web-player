@@ -6,15 +6,15 @@ import CurrentTrack from '@components/Track/CurrentTrack';
 
 function PlaybackPanel() {
   return (
-    <div className="flex items-center gap-4 py-2 px-4">
-      <div className="flex w-1/5 gap-4">
+    <div className="grid grid-cols-[auto,1fr,auto] p-2">
+      <div className="flex gap-4">
         <CurrentTrack />
       </div>
-      <div className="flex flex-1 flex-col items-center">
+      <div className="">
         <Controls />
         <ProgressBar />
       </div>
-      <div className="flex w-1/5 items-center justify-end">
+      <div className="">
         <Devices />
         <VolumeControl />
       </div>

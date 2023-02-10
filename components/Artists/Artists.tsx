@@ -7,7 +7,7 @@ function Artists({ artists }: ArtistProps) {
     <div className="flex">
       {artists.map((artist) => (
         <p
-          className="text-secondary-400 hover:text-opacity-80 hover:underline transition-opacity"
+          className="text-secondary-400 transition-opacity hover:text-opacity-80 hover:underline"
           key={artist.uri}
         >
           {artist.name}
