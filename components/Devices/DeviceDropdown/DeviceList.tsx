@@ -8,6 +8,8 @@ interface DeviceListProps {
 }
 
 function DeviceList({ devices, thisDeviceID, onClick }: DeviceListProps) {
+  if (!devices.length) return <p>No devices</p>;
+
   return (
     <>
       {devices.map((device) => {
