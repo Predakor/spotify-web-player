@@ -5,7 +5,7 @@ import { DeviceMenuProps } from './DeviceDropdown';
 
 function TopDevice({ activeDevice, thisDevice }: DeviceMenuProps) {
   const isPlaying = useSelector(selectIsPlaying);
-  if (!thisDevice) return;
+  if (!thisDevice) return null;
 
   const currentDeviceType = activeDevice?.type ?? thisDevice.type.toLowerCase();
   const thisDeviceIsActive = thisDevice.id === activeDevice?.id;
