@@ -12,7 +12,6 @@ export default function PlaylistCard({ data }: { data: Playlist }) {
   const router = useRouter();
 
   const [image] = images;
-
   const thisPlaylistIsPlaying = context?.uri === uri;
   const visible = thisPlaylistIsPlaying
     ? 'bottom-0'
@@ -22,7 +21,11 @@ export default function PlaylistCard({ data }: { data: Playlist }) {
   return (
     <Card className="group p-0 md:p-4" onClick={selectPlaylist}>
       <div className="relative aspect-square w-full ">
-        <Image src={image.url} alt="album cover picture" layout="fill" />
+        {image?.url ? (
+          <Image src={image.url} alt="album cover picture" layout="fill" />
+        ) : (
+          <div>Placeholder Image</div>
+        )}
 
         <PlaylistPlaybackButton
           uri={uri}

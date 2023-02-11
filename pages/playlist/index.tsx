@@ -9,8 +9,6 @@ const Playlist = () => {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   useEffect(() => {
-    if (!spotifyApi.getAccessToken()) return;
-
     spotifyApi.getUserPlaylists().then((data) => {
       try {
         setPlaylists(data.body.items);
