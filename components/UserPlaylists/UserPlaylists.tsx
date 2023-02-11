@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import NavLink from '@components/NavLink/NavLink';
 import useSpotifyControls from '@hooks/useSpotifyControls';
-import { useRouter } from 'next/router';
 
 type PlaylistType = SpotifyApi.PlaylistObjectSimplified;
 
-function UserPlaylists() {
-  const { asPath } = useRouter();
+function UserPlaylists({ activePath }: { activePath: string }) {
   const { getUserPlaylists } = useSpotifyControls();
   const [playlists, setPlaylists] = useState<PlaylistType[]>();
 
@@ -25,14 +23,11 @@ function UserPlaylists() {
   if (!playlists.length) return <p>your playlist will be here</p>;
 
   return (
-    <nav
-      className="flex flex-col gap-2 text-xl text-secondary-200"
-      aria-label="playlist"
-    >
+    <nav className="flex flex-col gap-2 text-text" aria-label="playlist">
       {playlists.map((playlist) => {
         const { id, name } = playlist;
         const href = `/playlist/${id}`;
-        const active = asPath === href;
+        const active = activePath === href;
 
         return <NavLink href={href} text={name} active={active} key={id} />;
       })}

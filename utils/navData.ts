@@ -1,7 +1,7 @@
 export type DataEntry = {
   href: string;
   text?: string;
-  icon?: string;
+  icon: 'HomeIcon' | 'LibraryIcon' | 'SearchIcon' | 'StatisticIcon';
 };
 
 const data: DataEntry[] = [

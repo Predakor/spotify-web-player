@@ -36,7 +36,7 @@ function DeviceMenu({ activeDevice, thisDevice }: DeviceMenuProps) {
   );
 
   return (
-    <div className="bg-background-800 absolute bottom-10 right-0 flex flex-col gap-4 whitespace-nowrap rounded p-4 text-3xl shadow-md">
+    <div className="absolute bottom-10 right-0 flex flex-col gap-4 whitespace-nowrap rounded bg-background-200 p-4 text-3xl shadow-md">
       <TopDevice activeDevice={activeDevice} thisDevice={thisDevice} />
       <h2 className="p-2 font-semibold">Select other devices</h2>
       <DeviceList

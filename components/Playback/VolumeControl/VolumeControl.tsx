@@ -35,7 +35,7 @@ const VolumeControl = () => {
   };
 
   return (
-    <div className="flex justify-self-end">
+    <div className="hidden lg:flex">
       <MuteVolumeButton volume={volume} onClick={muteHandler} />
       <input
         type="range"

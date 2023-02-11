@@ -12,9 +12,8 @@ const ProgressBar = () => {
   const progress = progress_ms || 0;
   const duration = item?.duration_ms || 0;
 
-  const visible = !playbackData ? 'invisible' : '';
   return (
-    <div className="flex w-5/6 gap-4 ">
+    <div className="col-span-full row-start-2 flex w-full gap-4 lg:col-start-2 lg:col-end-3 ">
       <ProgresBarInput
         track={{
           progress: progress,
@@ -24,7 +23,7 @@ const ProgressBar = () => {
         onChange={() => 1}
         disabled={false}
       />
-      <span className={visible}>{msToText(duration)}</span>
+      <span className={'hidden lg:block'}>{msToText(duration)}</span>
     </div>
   );
 };
@@ -54,7 +53,7 @@ function ProgresBarInput({ track, playing, onChange, disabled }: PropsType) {
 
   return (
     <>
-      <span>{msToText(progress)}</span>
+      <span className="hidden lg:block">{msToText(progress)}</span>
       <input
         className={`flex-1`}
         type="range"

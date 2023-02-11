@@ -19,7 +19,7 @@ function User({ user }: { user: SpotifyUser }) {
     >
       <div className="relative flex items-center gap-2 p-1">
         <UserAvatar imageURL={image} />
-        <span className="hidden md:inline-block">
+        <span className="hidden md:flex md:gap-2 md:pr-2">
           <p className="font-semibold text-text-important">{name}</p>
           <button>
             {expanded ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}

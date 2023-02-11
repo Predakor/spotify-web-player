@@ -4,9 +4,12 @@ import Button, { ButtonProps } from '.';
 export interface MuteButtonProps extends ButtonProps {
   volume: number;
 }
-function MuteVolumeButton({ onClick, volume }: MuteButtonProps) {
+function MuteVolumeButton(props: MuteButtonProps) {
+  const { onClick, volume } = props;
+
   return (
     <Button
+      {...props}
       onClick={onClick}
       aria-label="Mute/Unmute"
       ariaPressed={volume <= 0}

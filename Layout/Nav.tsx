@@ -6,27 +6,26 @@ import {
   StatisticIcon,
 } from '@icons/NavIcons';
 import navData from '@utils/navData';
-import { useRouter } from 'next/router';
 
-function IconComponent({ name, active }: { name: string; active: boolean }) {
-  const icons: any = {
+type iconNames = 'HomeIcon' | 'LibraryIcon' | 'SearchIcon' | 'StatisticIcon';
+function IconComponent({ name, active }: { name: iconNames; active: boolean }) {
+  const icons = {
     HomeIcon: <HomeIcon active={active} />,
     LibraryIcon: <LibraryIcon active={active} />,
     SearchIcon: <SearchIcon active={active} />,
     StatisticIcon: <StatisticIcon active={active} />,
   };
-  return icons[name] || null;
+  return icons[name];
 }
-function Nav() {
-  const { pathname } = useRouter();
+function Nav({ pathname }: { pathname: string }) {
   return (
-    <nav className="flex flex-col gap-2" aria-label="primary">
+    <nav className="flex flex-col gap-2 text-2xl" aria-label="primary">
       {navData.map((data) => {
         const { href, text, icon } = data;
         const active = pathname === href;
         return (
           <NavLink href={href} text={text} active={active} key={text}>
-            <IconComponent name={icon || ''} active={active} />
+            <IconComponent name={icon} active={active} />
           </NavLink>
         );
       })}
