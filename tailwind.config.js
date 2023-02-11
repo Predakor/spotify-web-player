@@ -2,6 +2,7 @@
 const colors = require('tailwindcss/colors');
 module.exports = {
   content: [
+    './app/**/*.{js,ts,jsx,tsx}',
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
     './icons/**/*.{js,ts,jsx,tsx}',
@@ -18,7 +19,7 @@ module.exports = {
           disabled: '#ffffff66',
         },
         background: {
-          300: '#',
+          300: '#3E2C41',
           200: '#3E2C41',
           100: '#121212 ',
           DEFAULT: '#000000',

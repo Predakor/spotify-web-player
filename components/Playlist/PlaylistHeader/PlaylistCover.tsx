@@ -1,20 +1,26 @@
-/* eslint-disable @next/next/no-img-element */
+import { lazy } from 'react';
 import { SpotifyImage } from 'next-auth/providers/spotify';
+
+const Image = lazy(() => import('next/image'));
 
 export default function PlaylistCover({ images }: { images: SpotifyImage[] }) {
   const [image] = images;
 
-  if (!image) {
-    return <div className="aspect-square h-full bg-black shadow-2xl" />;
+  if (!image?.url) {
+    return (
+      <div className="relative aspect-square h-full w-full bg-background-200">
+        Add image placeholder
+      </div>
+    );
   }
 
   return (
-    <div className="relative h-full shadow-2xl">
-      <img
-        className="h-full"
+    <div className="relative aspect-square h-full w-full ">
+      <Image
         src={image.url}
         alt="playlist cover"
-        loading={'lazy'}
+        layout="fill"
+        objectFit="cover"
       />
     </div>
   );

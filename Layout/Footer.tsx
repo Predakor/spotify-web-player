@@ -31,7 +31,7 @@ function Footer() {
   }, [getCurrentPlayback, getDevices]);
 
   return (
-    <footer className="lg: sticky bottom-0 col-span-full border-t border-secondary-800 bg-background-100">
+    <footer className="fixed bottom-0 col-span-full w-full border-t border-secondary-800 bg-background-100">
       <Playback />
       <ActiveDevice />
     </footer>

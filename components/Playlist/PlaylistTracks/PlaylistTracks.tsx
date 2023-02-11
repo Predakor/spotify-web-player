@@ -10,9 +10,8 @@ function PlaylistTracks({ tracks }: { tracks: Track[] }) {
   }
 
   return (
-    <div className="min-h-4/6 flex w-full flex-col gap-2 ">
+    <div className="flex flex-col gap-2 ">
       <TrackRowHeading />
-
       <TrackList fetchedTracks={tracks} />
     </div>
   );
