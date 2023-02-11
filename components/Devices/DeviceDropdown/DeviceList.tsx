@@ -19,7 +19,7 @@ function DeviceList({ devices, thisDeviceID, onClick }: DeviceListProps) {
           <button
             className={`hover:bg-background-600 flex items-center gap-4 p-4 transition-colors`}
             type="button"
-            onClick={() => onClick(id)}
+            onClick={() => onClick(id ?? '')}
             aria-label={`play music on ${type} ${name}`}
             key={id}
           >
