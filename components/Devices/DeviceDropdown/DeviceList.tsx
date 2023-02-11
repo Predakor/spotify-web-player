@@ -3,7 +3,7 @@ import DeviceIcons from '@icons/DeviceIcons';
 
 interface DeviceListProps {
   devices: SpotifyApi.UserDevice[];
-  thisDeviceID: string;
+  thisDeviceID?: string;
   onClick: (id: string) => void;
 }
 

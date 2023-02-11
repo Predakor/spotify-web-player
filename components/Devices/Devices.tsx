@@ -32,7 +32,7 @@ function Devices() {
 
       <Dropdown expanded={menuExpanded}>
         <Suspense fallback={'loading'}>
-          {thisDevice && (
+          {thisDevice?.id && (
             <DeviceMenu activeDevice={activeDevice} thisDevice={thisDevice} />
           )}
         </Suspense>

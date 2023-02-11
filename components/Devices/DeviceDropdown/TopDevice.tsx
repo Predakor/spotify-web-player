@@ -4,9 +4,11 @@ import { selectIsPlaying } from '@store/playbackSlice';
 import { DeviceMenuProps } from './DeviceDropdown';
 
 function TopDevice({ activeDevice, thisDevice }: DeviceMenuProps) {
+  const isPlaying = useSelector(selectIsPlaying);
+  if (!thisDevice) return;
+
   const currentDeviceType = activeDevice?.type ?? thisDevice.type.toLowerCase();
   const thisDeviceIsActive = thisDevice.id === activeDevice?.id;
-  const isPlaying = useSelector(selectIsPlaying);
   return (
     <div className={'flex items-center gap-4 p-4'}>
       {isPlaying ? (
