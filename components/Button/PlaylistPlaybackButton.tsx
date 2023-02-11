@@ -22,7 +22,7 @@ export default function PlaylistPlaybackButton(props: Props) {
   const playHandler = async () => {
     try {
       const target = activeDevice?.is_active ? activeDevice.id : thisDevice;
-      if (!target) console.error('error');
+      if (!target) return console.error('error');
       await playPlaylist(uri, target);
     } catch (error) {
       console.log(error);
