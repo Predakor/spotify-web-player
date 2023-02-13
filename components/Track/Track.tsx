@@ -1,14 +1,11 @@
 import Artists from '@components/Artists/Artists';
-import LikeButton from '@components/Button/LikedButton';
 import Image from 'next/image';
-import Link from 'next/link';
 
 const Song = ({ track }: { track: SpotifyApi.TrackObjectFull }) => {
-  const { id, name, album, artists } = track;
-  const [artist] = artists;
+  const { name, album, artists } = track;
 
   return (
-    <div className="flex gap-4 justify-self-start">
+    <div className="flex max-w-full gap-4">
       <Image
         src={album.images[0].url}
         alt="current song thumbnail"
@@ -16,17 +13,10 @@ const Song = ({ track }: { track: SpotifyApi.TrackObjectFull }) => {
         height={50}
       />
 
-      <div className="inline-block flex-1 truncate">
-        <Link href={'library/tracks/id'} prefetch={false}>
-          <a className="text-xl text-text-important" href={artist.href}>
-            {name}
-          </a>
-        </Link>
-
+      <div className="inline-block max-w-full flex-1 truncate">
+        <p className={'text-xl text-text-important'}>{name}</p>
         <Artists artists={artists} />
       </div>
-
-      <LikeButton songId={id} />
     </div>
   );
 };

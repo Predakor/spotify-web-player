@@ -3,16 +3,21 @@ import { selectInView } from '@store/scrollSlice';
 
 function TrackRowHeading() {
   const inView = useSelector(selectInView);
+  console.log(inView);
 
-  const background = inView ? 'pr-0' : 'bg-black mx-0 px-5';
+  const background = inView ? '' : 'bg-black';
   return (
     <div
-      className={`sticky top-20 z-10 mx-5 border-b border-secondary-500 text-secondary-400`}
+      className={`sticky top-0 hidden 
+      ${background} 
+      z-10 items-center gap-4 p-2 md:grid
+      md:grid-cols-[3ch,repeat(2,minmax(0,1fr)),repeat(3,5ch)] `}
     >
       <span className="justify-self-end text-xl font-bold">#</span>
       <span>Track</span>
       <span>Album</span>
-      <span className="justify-self-end">3:33</span>
+      <span></span>
+      <span className="justify-self-start">time</span>
     </div>
   );
 }

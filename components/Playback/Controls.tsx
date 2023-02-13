@@ -33,7 +33,7 @@ function Controls() {
   const disabled = is_playing === undefined;
 
   return (
-    <div className="flex content-center gap-4">
+    <div className="hidden content-center gap-4 lg:flex">
       <ShuffleButton
         onClick={shuffleHandler}
         shuffleState={shuffle_state}

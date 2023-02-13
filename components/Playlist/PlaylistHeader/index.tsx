@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import useObserver from '@hooks/useObserver';
 import { changeInView } from '@store/scrollSlice';
+import PlaylistCover from './PlaylistCover';
 import PlaylistDescription from './PlaylistDetails';
 
 export type PlaylistType = { playlist: SpotifyApi.SinglePlaylistResponse };
@@ -22,7 +23,10 @@ function PlaylistHeader({ playlist }: PlaylistType) {
   }, [observer]);
 
   return (
-    <header className="md:max-h-[40vh] md:flex-row" ref={targetRef}>
+    <header className="flex flex-col gap-4 md:flex-row md:p-4" ref={targetRef}>
+      <picture className="shadow-2xl shadow-black md:h-[30vh]">
+        <PlaylistCover images={playlist.images} />
+      </picture>
       <PlaylistDescription playlist={playlist} />
     </header>
   );

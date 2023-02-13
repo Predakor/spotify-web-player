@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import LikeButton from '@components/Button/LikedButton';
 import { selectTrack } from '@store/playbackSlice';
 import Track from './Track';
 
@@ -7,6 +8,11 @@ function CurrentTrack() {
 
   if (!trackInfo) return null;
   if (trackInfo.type === 'episode') return <div className="h-14" />;
-  return <Track track={trackInfo} />;
+  return (
+    <div className="flex justify-items-stretch">
+      <Track track={trackInfo} />
+      <LikeButton songId={trackInfo.id} />
+    </div>
+  );
 }
 export default CurrentTrack;

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Track } from '@components/Playlist/PlaylistTracks/PlaylistTracks';
-import { selectTrack } from '@store/playbackSlice';
 import spotifyApi from '@utils/spotify';
 import { LikedTrack } from 'types/spotifyTypes';
 import useTrackControls from './useTrackControls';

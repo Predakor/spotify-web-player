@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import PlaylistHeader from '@components/Playlist/PlaylistHeader';
 import TrackList from '@components/Playlist/PlaylistTracks/PlaylistTracks';
 import useSpotifyControls from '@hooks/useSpotifyControls';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 type PlaylistType = SpotifyApi.SinglePlaylistResponse;
@@ -25,10 +26,16 @@ const Playlist = () => {
   if (!playlistData) return <h3>loading</h3>;
 
   return (
-    <section className="relative flex flex-col gap-10 py-5 ">
-      <PlaylistHeader playlist={playlistData} />
-      <TrackList tracks={playlistData.tracks.items} />
-    </section>
+    <>
+      <Head>
+        <title>{playlistData.name ?? 'Discofy'}</title>
+        <meta name="description" content="" />
+      </Head>
+      <section className="relative flex flex-col gap-10 py-5 ">
+        <PlaylistHeader playlist={playlistData} />
+        <TrackList tracks={playlistData.tracks.items} />
+      </section>
+    </>
   );
 };
 export default Playlist;

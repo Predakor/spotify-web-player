@@ -8,7 +8,7 @@ export default function PlaylistCover({ images }: { images: SpotifyImage[] }) {
 
   if (!image?.url) {
     return (
-      <div className="relative aspect-square h-full w-full bg-background-200">
+      <div className="aspect-square h-full w-full bg-background-200">
         Add image placeholder
       </div>
     );
@@ -20,7 +20,7 @@ export default function PlaylistCover({ images }: { images: SpotifyImage[] }) {
         src={image.url}
         alt="playlist cover"
         layout="fill"
-        objectFit="cover"
+        objectFit="contain"
       />
     </div>
   );

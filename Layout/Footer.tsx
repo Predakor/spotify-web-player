@@ -1,6 +1,5 @@
 import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useMediaQuery } from 'react-responsive';
 import Playback from '@components/Playback';
 import useDeviceControls from '@hooks/useDeviceControls';
 import useSpotifySDK from '@hooks/useSpotifySDK';
@@ -31,7 +30,7 @@ function Footer() {
   }, [getCurrentPlayback, getDevices]);
 
   return (
-    <footer className="fixed bottom-0 col-span-full w-full border-t border-secondary-800 bg-background-100">
+    <footer className="sticky bottom-0 col-span-full overflow-clip border-t border-secondary-800 bg-background-100">
       <Playback />
       <ActiveDevice />
     </footer>
