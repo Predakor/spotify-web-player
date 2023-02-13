@@ -4,15 +4,11 @@ import TrackRowHeading from './TrackRowHeading';
 export type Track = SpotifyApi.PlaylistTrackObject;
 
 const TrackList = dynamic(() => import('./TrackList'));
-function PlaylistTracks({ tracks }: { tracks: Track[] }) {
-  if (!tracks.length) {
-    return <div>Nothing yet add some tracks</div>;
-  }
-
+function PlaylistTracks({ tracks }: { tracks?: Track[] }) {
   return (
-    <div className="relative top-0 h-screen flex-col gap-2 ">
+    <div className="relative flex-col gap-2">
       <TrackRowHeading />
-      <TrackList fetchedTracks={tracks} />
+      {tracks && <TrackList fetchedTracks={tracks} />}
     </div>
   );
 }

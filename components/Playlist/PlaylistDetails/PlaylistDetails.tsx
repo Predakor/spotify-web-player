@@ -4,7 +4,7 @@ import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
 import UserAvatar from '@components/User/UserAvatar';
 import usePlaylistArtists from '@hooks/usePlaylistArtists';
 import useSpotify from '@hooks/useSpotify';
-import { msToText } from '@utils/time';
+import { msToStringValues, msToText } from '@utils/time';
 import { PlaylistType } from '.';
 
 function Author({ user }: { user: SpotifyApi.UserObjectPublic }) {
@@ -41,14 +41,21 @@ function PlaylistDescription({ playlist }: PlaylistType) {
   const playlistAcces = playlist.public ? 'Public' : 'Private';
   const playlistType = `${playlistAcces} ${type}`.toUpperCase();
 
-  const playlistDuration = tracks.items.reduce((prevSum, currentElement) => {
-    return (prevSum += currentElement.track?.duration_ms ?? 0);
-  }, 0);
+  const playlistDuration = () => {
+    const duration = tracks.items.reduce((prevSum, currentElement) => {
+      return (prevSum += currentElement.track?.duration_ms ?? 0);
+    }, 0);
+    const { hours, minutes } = msToStringValues(duration);
+    if (!hours && !minutes) return null;
+    const displayerHours = hours ? `${hours}hr` : '';
+    const displayerMinutes = minutes ? `${minutes}min` : '';
+    return `${displayerHours} ${displayerMinutes}`;
+  };
 
   return (
     <div className="flex flex-col gap-4 text-text-important">
       <span>
-        <h1 className="sticky text-3xl font-bold lg:text-5xl ">{name}</h1>
+        <h1 className="text-3xl font-bold lg:text-5xl ">{name}</h1>
         <p className="font-bold lg:text-2xl ">{playlistType}</p>
       </span>
 
@@ -64,7 +71,7 @@ function PlaylistDescription({ playlist }: PlaylistType) {
       <Author user={owner} />
 
       <span className="flex gap-2 text-text">
-        <p>{`${msToText(playlistDuration)} minutes`}</p>
+        <p>{playlistDuration()}</p>
         {followers.total > 0 && (
           <>
             <span className="text-text-important">●</span>
@@ -77,7 +84,7 @@ function PlaylistDescription({ playlist }: PlaylistType) {
         <PlaylistPlaybackButton
           uri={uri}
           ariaLabel={`Play/pause ${name} playlist`}
-          className={'w-fit'}
+          className={'w-fit text-6xl'}
         />
         playlist actions
       </span>

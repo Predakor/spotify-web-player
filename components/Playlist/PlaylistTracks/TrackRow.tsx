@@ -14,20 +14,23 @@ function TrackRow({ track, index }: TrackRowProps) {
   return (
     <Card
       className={`group grid grid-cols-[minmax(0,1fr),auto,auto] items-center gap-4 bg-transparent p-2 
-      md:grid-cols-[3ch,repeat(2,minmax(0,1fr)),repeat(3,5ch)] `}
+      md:grid-cols-[3ch,repeat(2,minmax(0,1fr)),repeat(3,5ch)]`}
     >
       <p className="hidden text-xl font-bold md:block md:justify-self-end">
         {index + 1}
       </p>
       <Track track={track} />
       <LikeButton
-        className="md:order-3"
+        className={`transition-opacity duration-100 group-hover:opacity-100 md:order-3
+        ${track.liked ? 'lg:opacity-100' : 'lg:opacity-0'}`}
         songId={track.id}
         isLiked={track.liked}
       />
-      <p className="hidden md:order-2  md:block">{album.name}</p>
+      <p className="hidden md:order-2 md:block">{album.name}</p>
       <p className="hidden md:order-4 md:block">{msToText(duration_ms)}</p>
-      <p className="order-last md:group-hover:visible lg:invisible">|</p>
+      <span className="order-last transition-opacity duration-100 lg:opacity-0 lg:group-hover:opacity-100">
+        |
+      </span>
     </Card>
   );
 }

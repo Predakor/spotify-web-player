@@ -19,19 +19,17 @@ const Search: NextPageWithLayout = () => {
   );
 };
 
-Search.getLayout = function (page: ReactElement) {
-  return (
-    <Layout
-      extendHeader={
-        <>
-          <SearchBar />
-          <SearchCategories />
-        </>
-      }
-    >
-      {page}
-    </Layout>
-  );
-};
+Search.getLayout = (page: ReactElement) => (
+  <Layout
+    extendHeader={
+      <>
+        <SearchBar />
+        <SearchCategories />
+      </>
+    }
+  >
+    {page}
+  </Layout>
+);
 
 export default Search;

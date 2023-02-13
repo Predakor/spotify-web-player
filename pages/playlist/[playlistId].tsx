@@ -1,41 +1,29 @@
-import { useEffect, useState } from 'react';
+import PlaylistDetails from '@components/Playlist/PlaylistDetails';
 import PlaylistHeader from '@components/Playlist/PlaylistHeader';
 import TrackList from '@components/Playlist/PlaylistTracks/PlaylistTracks';
-import useSpotifyControls from '@hooks/useSpotifyControls';
+import usePlaylistInfo from '@hooks/usePlaylistInfo';
+import Layout from 'Layout';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { NextPageWithLayout } from 'pages/_app';
 
-type PlaylistType = SpotifyApi.SinglePlaylistResponse;
-
-const Playlist = () => {
-  const router = useRouter();
-
-  const { playlistId } = router.query;
-  const { getPlaylistTracks } = useSpotifyControls();
-  const [playlistData, setPlaylistData] = useState<PlaylistType>();
-
-  useEffect(() => {
-    if (!playlistId) return;
-    const id = playlistId.toString();
-
-    getPlaylistTracks(id).then((response) => {
-      setPlaylistData(response);
-    });
-  }, [playlistId]);
-
+const Playlist: NextPageWithLayout = () => {
+  const playlistData = usePlaylistInfo();
   if (!playlistData) return <h3>loading</h3>;
 
   return (
     <>
       <Head>
         <title>{playlistData.name ?? 'Discofy'}</title>
-        <meta name="description" content="" />
       </Head>
       <section className="relative flex flex-col gap-10 py-5 ">
-        <PlaylistHeader playlist={playlistData} />
+        <PlaylistDetails playlist={playlistData} />
         <TrackList tracks={playlistData.tracks.items} />
       </section>
     </>
   );
 };
+
+Playlist.getLayout = (page) => (
+  <Layout extendHeader={<PlaylistHeader />}>{page}</Layout>
+);
 export default Playlist;

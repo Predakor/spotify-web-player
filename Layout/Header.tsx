@@ -13,19 +13,17 @@ function Header({ user, children }: HeaderProps) {
   const bgStyle = inView ? 'bg-transparent' : 'bg-primary-700';
 
   return (
-    <>
-      <header
-        className={`top-0 flex flex-wrap items-center ${bgStyle} sticky z-10 p-4 transition-colors lg:col-start-2 `}
-      >
-        <nav>
-          <button>{'<'}</button>
-          <button>{'>'}</button>
-        </nav>
+    <header
+      className={`top-0 flex flex-wrap items-center gap-2 ${bgStyle} sticky z-10 p-4 transition-colors lg:col-start-2 `}
+    >
+      <nav className="hidden md:block">
+        <button>{'<'}</button>
+        <button>{'>'}</button>
+      </nav>
 
-        {children}
-        <User user={user} />
-      </header>
-    </>
+      {children}
+      <User user={user} />
+    </header>
   );
 }
 export default Header;

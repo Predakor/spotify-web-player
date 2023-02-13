@@ -33,7 +33,7 @@ export default function PlaylistPlaybackButton(props: Props) {
     <PlaybackButton
       onClick={playHandler}
       isPlaying={playlistIsPlaying}
-      className={`${className} bg-primary-600 text-6xl`}
+      className={`bg-primary-600 ${className}`}
       ariaLabel={ariaLabel}
       ariaPressed={playlistIsPlaying}
     />

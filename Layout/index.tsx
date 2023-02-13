@@ -13,19 +13,18 @@ interface LayoutProps {
 }
 
 function Layout({ children, extendHeader }: LayoutProps) {
-  const session = useSession();
-  if (session.status === 'loading')
+  const { status, data } = useSession();
+  if (status === 'loading') {
     return (
-      <main className="flex w-full items-center justify-center">
-        <div className="text-3xl font-bold text-primary-700">
-          <p className="animate-pulse">Loading</p>
-        </div>
+      <main className="flex h-screen animate-pulse flex-col items-center justify-center">
+        <h1 className="text-6xl text-primary-700">Loading</h1>
       </main>
     );
+  }
 
-  const user = session.data?.user as SpotifyUser;
+  const user = data?.user as SpotifyUser;
   return (
-    <div className="grid grid-rows-[auto,1fr,auto] lg:grid-cols-[auto,1fr]">
+    <div className="grid min-h-screen grid-rows-[auto,1fr,auto] lg:grid-cols-[auto,1fr]">
       <span className="absolute -z-50 h-[70vh] w-full bg-gradient-to-b from-primary-900" />
       <Aside />
       <Header user={user}>{extendHeader}</Header>
@@ -34,5 +33,6 @@ function Layout({ children, extendHeader }: LayoutProps) {
     </div>
   );
 }
+
 export default Layout;
 export { Footer, Header };

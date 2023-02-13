@@ -5,6 +5,6 @@ interface MainProps {
 }
 
 function Main({ children }: MainProps) {
-  return <main className="min-h-screen overflow-auto px-4">{children}</main>;
+  return <main className="px-4">{children}</main>;
 }
 export default Main;
