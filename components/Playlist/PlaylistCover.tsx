@@ -1,7 +1,7 @@
-import { lazy } from 'react';
 import { SpotifyImage } from 'next-auth/providers/spotify';
+import dynamic from 'next/dynamic';
 
-const Image = lazy(() => import('next/image'));
+const Image = dynamic(() => import('next/image'));
 
 export default function PlaylistCover({ images }: { images: SpotifyImage[] }) {
   const [image] = images;
@@ -15,7 +15,7 @@ export default function PlaylistCover({ images }: { images: SpotifyImage[] }) {
   }
 
   return (
-    <div className="relative aspect-square h-full w-full ">
+    <div className="relative aspect-square h-full w-full shadow-2xl shadow-black ">
       <Image
         src={image.url}
         alt="playlist cover"

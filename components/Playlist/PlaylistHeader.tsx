@@ -21,7 +21,7 @@ function PlaylistHeader() {
         ariaLabel={`Play/pause ${name} playlist`}
         className={'text-4xl shadow-2xl shadow-black'}
       />
-      <p>{name}</p>
+      <h1>{name}</h1>
     </div>
   );
 }

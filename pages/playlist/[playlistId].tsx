@@ -1,5 +1,5 @@
-import PlaylistDetails from '@components/Playlist/PlaylistDetails';
 import PlaylistHeader from '@components/Playlist/PlaylistHeader';
+import PlaylistPanel from '@components/Playlist/PlaylistPanel';
 import TrackList from '@components/Playlist/PlaylistTracks/PlaylistTracks';
 import usePlaylistInfo from '@hooks/usePlaylistInfo';
 import Layout from 'Layout';
@@ -15,10 +15,8 @@ const Playlist: NextPageWithLayout = () => {
       <Head>
         <title>{playlistData.name ?? 'Discofy'}</title>
       </Head>
-      <section className="relative flex flex-col gap-10 py-5 ">
-        <PlaylistDetails playlist={playlistData} />
-        <TrackList tracks={playlistData.tracks.items} />
-      </section>
+      <PlaylistPanel playlist={playlistData} />
+      <TrackList tracks={playlistData.tracks.items} />
     </>
   );
 };
