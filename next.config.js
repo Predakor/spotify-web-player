@@ -1,10 +1,19 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
   swcMinify: true,
-  images: {
-    domains: ['i.scdn.co', 'mosaic.scdn.co'],
+  experimental: {
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: '**.scdn.co',
+        },
+        {
+          protocol: 'https',
+          hostname: '**.spotifycdn.com',
+        },
+      ],
+    },
   },
 };
-
-module.exports = nextConfig;

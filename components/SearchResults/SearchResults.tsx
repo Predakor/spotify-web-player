@@ -1,4 +1,7 @@
 import { useSelector } from 'react-redux';
+import PlaylistCard from '@components/Card/Cards/PlaylistCard';
+import ContentShelf from '@components/ContentShelf/ContentShelf';
+import TrackRow from '@components/Playlist/PlaylistTracks/TrackRow';
 import { selectSearch } from '@store/searchSlice';
 
 function SearchResults() {
@@ -10,24 +13,76 @@ function SearchResults() {
   const { albums, artists, episodes, playlists, shows, tracks } = data;
 
   return (
-    <section className="">
-      {albums && (
-        <div>
-          <h2>Albums</h2>
-          <>
-            {albums.items.map((album) => {
-              const { id, name, total_tracks } = album;
-              return (
-                <div key={id}>
-                  <h3>{name}</h3>
-                  <p>Tracks:{total_tracks}</p>
-                </div>
-              );
-            })}
-          </>
-        </div>
-      )}
+    <section className="flex flex-col gap-12">
+      <section>
+        <>
+          <h1>Songs</h1>
+          {tracks?.items.map((track) => (
+            <TrackRow track={track} index={0} key={track.id} />
+          ))}
+        </>
+      </section>
+      <ContentShelf title={'Albums'}>
+        <AlbumList albums={albums?.items} />
+      </ContentShelf>
+      <ContentShelf title={'Artists'}>
+        <ArtistList artists={artists?.items} />
+      </ContentShelf>
+      <ContentShelf title={'Playlists'}>
+        <PlaylistList playlists={playlists?.items} />
+      </ContentShelf>
+      <ContentShelf title={'Episodes'}>
+        <PlaylistList playlists={episodes?.items} />
+      </ContentShelf>
+      <ContentShelf title={'Shows'}>
+        <PlaylistList playlists={shows?.items} />
+      </ContentShelf>
     </section>
   );
 }
+
+interface PlaylistProps {
+  playlists?: SpotifyApi.PlaylistObjectSimplified[];
+}
+
+function PlaylistList({ playlists }: PlaylistProps) {
+  if (!playlists) return <div />;
+  return (
+    <>
+      {playlists.map((album) => {
+        const { id, name, total_tracks } = album;
+        return <PlaylistCard data={album} key={id} />;
+      })}
+    </>
+  );
+}
+
+type AlbumListProps = {
+  albums?: SpotifyApi.AlbumObjectSimplified[];
+};
+
+function AlbumList({ albums }: AlbumListProps) {
+  if (!albums) return <div />;
+  return (
+    <>
+      {albums.map((album) => {
+        const { id, name, total_tracks } = album;
+        return <PlaylistCard data={album} key={id} />;
+      })}
+    </>
+  );
+}
+
+function ArtistList({ artists }: { artists?: SpotifyApi.ArtistObjectFull[] }) {
+  if (!artists) return <div />;
+  return (
+    <>
+      {artists.map((artist) => {
+        const { id, name, total_tracks } = artist;
+        return <PlaylistCard data={artist} key={id} />;
+      })}
+    </>
+  );
+}
+
 export default SearchResults;

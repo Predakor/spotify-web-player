@@ -12,9 +12,8 @@ const Search: NextPageWithLayout = () => {
       <Head>
         <title>Discofy</title>
       </Head>
-      <div>
-        <SearchResults />
-      </div>
+
+      <SearchResults />
     </>
   );
 };

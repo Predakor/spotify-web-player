@@ -3,7 +3,7 @@ import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
 import { selectPlaybackData } from '@store/playbackSlice';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import Card from '../Card/index';
+import Card from '../index';
 
 type Playlist = SpotifyApi.PlaylistObjectSimplified;
 export default function PlaylistCard({ data }: { data: Playlist }) {
@@ -19,7 +19,7 @@ export default function PlaylistCard({ data }: { data: Playlist }) {
   const selectPlaylist = () => router.push(`/playlist/${id}`);
 
   return (
-    <Card className="group p-0 md:p-4" onClick={selectPlaylist}>
+    <Card className="group  p-0 md:p-8 " onClick={selectPlaylist}>
       <div className="relative aspect-square w-full ">
         {image?.url ? (
           <Image src={image.url} alt="album cover picture" layout="fill" />
