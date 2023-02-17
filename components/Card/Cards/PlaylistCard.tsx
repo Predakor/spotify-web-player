@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
+import CoverImage from '@components/CoverImage/CoverImage';
 import { selectPlaybackData } from '@store/playbackSlice';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -19,13 +20,9 @@ export default function PlaylistCard({ data }: { data: Playlist }) {
   const selectPlaylist = () => router.push(`/playlist/${id}`);
 
   return (
-    <Card className="group  p-0 md:p-8 " onClick={selectPlaylist}>
+    <Card className="group p-0 md:p-8 " onClick={selectPlaylist}>
       <div className="relative aspect-square w-full ">
-        {image?.url ? (
-          <Image src={image.url} alt="album cover picture" layout="fill" />
-        ) : (
-          <div>Placeholder Image</div>
-        )}
+        <CoverImage url={image?.url ?? ''} />
 
         <PlaylistPlaybackButton
           uri={uri}

@@ -15,7 +15,7 @@ function SearchCategories() {
   if (!query || !data) return <></>;
 
   return (
-    <div className="order-last mt-2 flex w-full  gap-4">
+    <div className="order-last flex w-full gap-4 overflow-x-auto">
       {searchCategories.map((category) => {
         return (
           <div

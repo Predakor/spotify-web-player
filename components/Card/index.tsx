@@ -6,10 +6,13 @@ export interface CardProps {
   onClick?: MouseEventHandler;
 }
 
-export default function Card({ children, className = '', onClick }: CardProps) {
+function Card({ children, className, onClick }: CardProps) {
+  className ??= '';
   return (
     <div className={`card ${className}`} onClick={onClick}>
       {children}
     </div>
   );
 }
+
+export default Card;

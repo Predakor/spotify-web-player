@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import PlaylistCard from '@components/Card/Cards/PlaylistCard';
 import ContentShelf from '@components/ContentShelf/ContentShelf';
-import TrackRow from '@components/Playlist/PlaylistTracks/TrackRow';
 import { selectSearch } from '@store/searchSlice';
 
 function SearchResults() {
@@ -13,36 +12,32 @@ function SearchResults() {
   const { albums, artists, episodes, playlists, shows, tracks } = data;
 
   return (
-    <section className="flex flex-col gap-12">
-      <section>
-        <>
-          <h1>Songs</h1>
-          {tracks?.items.map((track) => (
-            <TrackRow track={track} index={0} key={track.id} />
-          ))}
-        </>
-      </section>
+    <div className="flex flex-col gap-12 p-4">
+      <ContentShelf title={'Artists'}>
+        <AlbumList albums={artists?.items} />
+      </ContentShelf>
+
       <ContentShelf title={'Albums'}>
         <AlbumList albums={albums?.items} />
       </ContentShelf>
-      <ContentShelf title={'Artists'}>
-        <ArtistList artists={artists?.items} />
-      </ContentShelf>
+
       <ContentShelf title={'Playlists'}>
         <PlaylistList playlists={playlists?.items} />
       </ContentShelf>
+
       <ContentShelf title={'Episodes'}>
         <PlaylistList playlists={episodes?.items} />
       </ContentShelf>
+
       <ContentShelf title={'Shows'}>
         <PlaylistList playlists={shows?.items} />
       </ContentShelf>
-    </section>
+    </div>
   );
 }
 
 interface PlaylistProps {
-  playlists?: SpotifyApi.PlaylistObjectSimplified[];
+  playlists?: SpotifyApi.ContextObject[];
 }
 
 function PlaylistList({ playlists }: PlaylistProps) {
@@ -58,7 +53,7 @@ function PlaylistList({ playlists }: PlaylistProps) {
 }
 
 type AlbumListProps = {
-  albums?: SpotifyApi.AlbumObjectSimplified[];
+  albums?: SpotifyApi.ContextObject[];
 };
 
 function AlbumList({ albums }: AlbumListProps) {

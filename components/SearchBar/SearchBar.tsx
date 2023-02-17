@@ -26,14 +26,14 @@ function SearchBar({ types }: SearchBarProps) {
 
   return (
     <form
-      className="flex items-center gap-2 rounded-full bg-primary-50 px-4 py-2 "
+      className="flex flex-1 items-center gap-2 rounded-full bg-primary-50 px-4 py-2 "
       onSubmit={(e) => submitHandler(e)}
     >
       <div className="text-2xl text-black">
         <SearchIcon active={false} />
       </div>
       <input
-        className="bg-inherit p-1 text-black outline-none"
+        className="w-full bg-none p-1 text-black outline-none"
         type="search"
         placeholder={'Search for songs'}
         onChange={(e) => changeHandler(e.target)}
