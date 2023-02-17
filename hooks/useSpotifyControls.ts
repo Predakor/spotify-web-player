@@ -86,7 +86,7 @@ const Controls = () => {
       }
     },
 
-    playPlaylist: async (uri: string, target: string) => {
+    playPlaylist: async (uri: string, target?: string) => {
       try {
         await spotifyApi.play({
           context_uri: uri,
@@ -94,6 +94,7 @@ const Controls = () => {
           position_ms: 1,
         });
       } catch (error) {
+        console.error(error + 'in spotify controls');
         throw error;
       }
     },
@@ -105,6 +106,7 @@ const Controls = () => {
           position_ms: 1,
         });
       } catch (error) {
+        console.error(error + 'in spotify controls');
         throw error;
       }
     },

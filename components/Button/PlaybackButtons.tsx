@@ -30,6 +30,7 @@ function PlaybackButton(props: ButtonProps & { isPlaying?: boolean }) {
       disabled={disabled}
       ariaLabel={'Play/Pause'}
       ariaPressed={isPlaying}
+      stopPrepagation={true}
     >
       <PlaybackIcon isPlaying={isPlaying ?? false} />
     </Button>

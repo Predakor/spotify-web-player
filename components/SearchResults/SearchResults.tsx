@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import ArtistCard from '@components/Card/Cards/ArtistCard';
 import PlaylistCard from '@components/Card/Cards/PlaylistCard';
 import ContentShelf from '@components/ContentShelf/ContentShelf';
 import { selectSearch } from '@store/searchSlice';
@@ -14,7 +15,7 @@ function SearchResults() {
   return (
     <div className="flex flex-col gap-12 p-4">
       <ContentShelf title={'Artists'}>
-        <AlbumList albums={artists?.items} />
+        <ArtistList artists={artists?.items} />
       </ContentShelf>
 
       <ContentShelf title={'Albums'}>
@@ -74,7 +75,7 @@ function ArtistList({ artists }: { artists?: SpotifyApi.ArtistObjectFull[] }) {
     <>
       {artists.map((artist) => {
         const { id, name, total_tracks } = artist;
-        return <PlaylistCard data={artist} key={id} />;
+        return <ArtistCard data={artist} key={id} />;
       })}
     </>
   );

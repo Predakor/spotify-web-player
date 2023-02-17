@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 
 export interface ButtonProps {
   onClick: VoidFunction;
@@ -9,6 +9,7 @@ export interface ButtonProps {
   ariaPressed?: boolean | 'mixed';
   ariaExpanded?: boolean;
   children?: ReactNode;
+  stopPrepagation?: boolean;
 }
 
 function Button({
@@ -20,12 +21,18 @@ function Button({
   ariaLabel,
   ariaPressed,
   ariaExpanded,
+  stopPrepagation,
 }: ButtonProps) {
   const visible = hide ? 'invisible' : '';
+
+  const clickHandler = (e: MouseEvent) => {
+    if (stopPrepagation) e.stopPropagation();
+    onClick();
+  };
   return (
     <button
       type="button"
-      onClick={onClick}
+      onClick={(e) => clickHandler(e)}
       className={`button ${className} ${visible}`}
       disabled={disabled}
       aria-label={ariaLabel}
