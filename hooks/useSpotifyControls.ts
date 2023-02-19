@@ -131,6 +131,14 @@ const Controls = () => {
         throw error;
       }
     },
+    getArtistTopTracks: async (id: string) => {
+      try {
+        const response = await spotifyApi.getArtistTopTracks(id, 'US');
+        return response.body;
+      } catch (error) {
+        console.error(error + ' in spotify controls');
+      }
+    },
   });
 
   return controlsRef.current;
