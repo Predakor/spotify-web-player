@@ -1,11 +1,9 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DeviceButton from '@components/Button/DeviceButton';
-import Dropdown from '@components/Dropdown/Dropdown';
 import useDeviceControls from '@hooks/useDeviceControls';
 import { selectActiveDevice, selectThisDevice } from '@store/devicesSlice';
-
-const DeviceMenu = lazy(() => import('./DeviceDropdown/DeviceDropdown'));
+import DeviceMenu from './DeviceDropdown/DeviceDropdown';
 
 function Devices() {
   const thisDevice = useSelector(selectThisDevice);
@@ -22,7 +20,7 @@ function Devices() {
   const isActiveDevice = id === thisDevice?.id;
 
   return (
-    <div className="relative">
+    <div className="dropdown dropdown-end dropdown-top">
       <DeviceButton
         onClick={() => setMenuExpanded((prevState) => !prevState)}
         className={!isActiveDevice ? 'text-primary-500' : ''}
@@ -30,13 +28,9 @@ function Devices() {
         deviceType={type}
       />
 
-      <Dropdown expanded={menuExpanded}>
-        <Suspense fallback={'loading'}>
-          {thisDevice?.id && (
-            <DeviceMenu activeDevice={activeDevice} thisDevice={thisDevice} />
-          )}
-        </Suspense>
-      </Dropdown>
+      {thisDevice?.id && (
+        <DeviceMenu activeDevice={activeDevice} thisDevice={thisDevice} />
+      )}
     </div>
   );
 }

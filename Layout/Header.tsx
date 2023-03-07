@@ -17,7 +17,7 @@ function Header({ user, children }: HeaderProps) {
 
   return (
     <header
-      className={`top-0 flex flex-wrap gap-2 ${bgStyle} sticky z-10 p-4 transition-colors lg:col-start-2 `}
+      className={`top-0 flex flex-wrap items-center gap-2 ${bgStyle} sticky z-10 p-4 transition-colors lg:col-start-2 `}
     >
       <nav className="hidden md:block">
         <Button onClick={back}>{'<'}</Button>

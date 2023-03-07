@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
-import Dropdown from '@components/Dropdown/Dropdown';
+import DropdownButton from '@components/Button/DropdownButton';
 import { SpotifyUser } from 'types/spotifyUser';
 import UserAvatar from './UserAvatar';
 import UserDropdown from './UserDropdown';
@@ -9,26 +8,20 @@ function User({ user }: { user: SpotifyUser }) {
   const { name, image } = user;
   const [expanded, setExpanded] = useState(false);
 
-  const handleDropdownMenu = () => {
-    setExpanded((prevState) => !prevState);
-  };
+  const toogleDropdown = () => setExpanded((prevState) => !prevState);
+
   return (
     <div
-      className="ml-auto flex-col rounded-full bg-background sm:flex"
-      onClick={handleDropdownMenu}
+      className={
+        'dropdown dropdown-end dropdown-bottom ml-auto hidden md:block'
+      }
     >
-      <div className="relative flex items-center gap-2 p-1">
+      <div className="flex items-center gap-2 rounded-full bg-background-200 py-1 px-2 text-xl">
         <UserAvatar imageURL={image} />
-        <span className="hidden md:flex md:gap-2 md:pr-2">
-          <p className="font-semibold text-text-important">{name}</p>
-          <button>
-            {expanded ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
-          </button>
-        </span>
-      </div>
-      <Dropdown expanded={expanded}>
+        <p className="font-semibold text-text-important">{name}</p>
+        <DropdownButton onClick={toogleDropdown} expanded={expanded} />
         <UserDropdown />
-      </Dropdown>
+      </div>
     </div>
   );
 }

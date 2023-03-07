@@ -12,7 +12,7 @@ function PlaybackPanel() {
       </div>
       <Controls />
       <ProgressBar />
-      <div className="lg:row-span-2">
+      <div className="flex lg:row-span-2">
         <Devices />
         <VolumeControl />
       </div>

@@ -1,22 +1,33 @@
+import { MouseEvent } from 'react';
 import DeviceIcons from '@icons/DeviceIcons';
-import Button, { ButtonProps } from '.';
 
-export interface DeviceButtonProps extends ButtonProps {
+export interface DeviceButtonProps {
+  onClick: () => void;
+  className?: string;
   deviceType: string | undefined;
   menuExpanded: boolean;
 }
 
 function DeviceButton(props: DeviceButtonProps) {
   const { onClick, className, deviceType, menuExpanded } = props;
+
+  const clickHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    if (menuExpanded && document.activeElement === e.currentTarget) {
+      e.currentTarget.blur();
+    }
+    onClick();
+  };
+
   return (
-    <Button
-      onClick={onClick}
-      className={className}
+    <button
+      onClick={(e) => clickHandler(e)}
+      className={`button ${className}`}
       aria-label="Connected devices"
-      ariaExpanded={menuExpanded}
+      aria-expanded={menuExpanded}
+      role="button"
     >
       <DeviceIcons device={deviceType} />
-    </Button>
+    </button>
   );
 }
 export default DeviceButton;

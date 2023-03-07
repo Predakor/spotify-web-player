@@ -27,16 +27,17 @@ function DeviceMenu({ activeDevice, thisDevice }: DeviceMenuProps) {
     }
   };
 
-  if (!connectedDevices?.length)
+  if (!connectedDevices?.length) {
     return <div className="animate-ping">loading</div>;
+  }
 
-  const excludeDevice = activeDevice ?? thisDevice;
+  const excludeDeviced = activeDevice ?? thisDevice;
   const otherDevices = connectedDevices.filter(
-    (device) => device.id !== excludeDevice?.id
+    (device) => device.id !== excludeDeviced?.id
   );
 
   return (
-    <div className="absolute bottom-10 right-0 flex flex-col gap-4 whitespace-nowrap rounded bg-background-200 p-4 text-3xl shadow-md">
+    <div className="dropdown-content menu rounded bg-background-200 ">
       <TopDevice activeDevice={activeDevice} thisDevice={thisDevice} />
       <h2 className="p-2 font-semibold">Select other devices</h2>
       {thisDevice?.id && (
