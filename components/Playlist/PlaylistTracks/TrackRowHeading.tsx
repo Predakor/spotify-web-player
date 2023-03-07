@@ -8,6 +8,7 @@ function TrackRowHeading() {
   return (
     <header
       className={`sticky hidden ${background} top-20 z-10 cursor-default md:block`}
+      aria-hidden={true}
     >
       <span
         className={`grid grid-cols-[3ch,repeat(2,minmax(0,1fr)),repeat(3,5ch)] items-center gap-4 p-2`}

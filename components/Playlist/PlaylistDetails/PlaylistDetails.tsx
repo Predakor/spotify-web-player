@@ -1,5 +1,4 @@
 import Artists from '@components/Artists/Artists';
-import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
 import TotalPlayTime from '@components/TotalPlayTime/TotalPlayTime';
 import usePlaylistArtists from '@hooks/usePlaylistArtists';
 import { PlaylistType } from '../PlaylistPanel';
@@ -27,18 +26,21 @@ function PlaylistDescription({ playlist }: PlaylistType) {
   );
 
   return (
-    <section className="flex flex-col items-stretch gap-4 text-text-important">
-      <p className="font-bold lg:text-2xl ">{playlistType}</p>
+    <section
+      className="bg flex flex-col items-stretch gap-4 text-base-content"
+      aria-label="Playlist details"
+    >
+      <p className="font-bold lg:text-2xl">{playlistType}</p>
       <h1 className="font-bold md:text-4xl lg:text-6xl 2xl:text-8xl">{name}</h1>
 
-      <p className="text-text">{description}</p>
+      <p>{description}</p>
 
       <Artists
         className="text-text-important"
         artists={artists.map((artist) => artist.artist)}
       />
 
-      <span className="flex items-center gap-2 text-text">
+      <span className="flex items-center gap-2 ">
         <Author user={owner} />
         <span className="text-text-important">●</span>
 

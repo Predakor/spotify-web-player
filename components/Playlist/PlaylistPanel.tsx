@@ -25,7 +25,7 @@ function PlaylistHeader({ playlist }: PlaylistType) {
 
   return (
     <header className="grid gap-8 p-4 md:grid-cols-[auto,1fr]" ref={targetRef}>
-      <picture className=" md:h-[30vh]">
+      <picture className="md:h-[30vh]">
         <PlaylistCover images={playlist.images} />
       </picture>
       <PlaylistDescription playlist={playlist} />

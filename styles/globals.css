@@ -20,8 +20,20 @@
   }
 }
 
+@layer utilities {
+  .tracksGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+}
 @media (prefers-color-scheme: light) {
   html {
     color-scheme: light;
+  }
+}
+
+@media (min-width: 768px) {
+  .tracksGrid {
+    grid-template-columns: 3ch repeat(2, minmax(0, 1fr)) repeat(3, 5ch);
   }
 }

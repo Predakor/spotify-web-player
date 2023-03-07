@@ -1,5 +1,4 @@
-import LikeButton, { LikeTrackButton } from '@components/Button/LikedButton';
-import Card from '@components/Card';
+import { LikeTrackButton } from '@components/Button/LikedButton';
 import Track from '@components/Track/Track';
 import { msToText } from '@utils/time';
 import { LikedTrack } from 'types/spotifyTypes';
@@ -12,11 +11,14 @@ function TrackRow({ track, index }: TrackRowProps) {
   const { duration_ms, album } = track;
 
   return (
-    <Card
-      className={`group grid grid-cols-[minmax(0,1fr),auto,auto] items-center gap-4 bg-transparent p-2 
-      md:grid-cols-[3ch,repeat(2,minmax(0,1fr)),repeat(3,5ch)]`}
+    <article
+      className={`tracksGrid group card  items-center gap-4 rounded p-2`}
+      aria-label={track.name}
     >
-      <p className="hidden text-xl font-bold md:block md:justify-self-end">
+      <p
+        className="hidden text-xl font-bold md:block md:justify-self-end"
+        aria-hidden="true"
+      >
         {index + 1}
       </p>
       <Track track={track} />
@@ -27,12 +29,17 @@ function TrackRow({ track, index }: TrackRowProps) {
         isLiked={track.liked}
         ariaLabel={'Follow/Unfollow track'}
       />
-      <p className="hidden md:order-2 md:block">{album.name}</p>
-      <p className="hidden md:order-4 md:block">{msToText(duration_ms)}</p>
-      <span className="order-last transition-opacity duration-100 lg:opacity-0 lg:group-hover:opacity-100">
-        |
-      </span>
-    </Card>
+      <p className="hidden md:order-2 md:block" aria-label="Album name">
+        {album.name}
+      </p>
+      <p className="hidden md:order-4 md:block" aria-label="Song duration">
+        {msToText(duration_ms)}
+      </p>
+      <button
+        className="order-last transition-opacity duration-100 lg:opacity-0 lg:group-hover:opacity-100"
+        aria-label="More actions"
+      ></button>
+    </article>
   );
 }
 

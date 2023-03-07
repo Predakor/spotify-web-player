@@ -12,7 +12,7 @@ function UserAvatar({ imageURL, onClick }: UserIconProps) {
 
   return (
     <Image
-      className="rounded-full"
+      className="avatar rounded-full"
       src={imageURL}
       width={40}
       height={40}
