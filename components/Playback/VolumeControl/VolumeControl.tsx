@@ -35,10 +35,11 @@ const VolumeControl = () => {
   };
 
   return (
-    <div className="hidden lg:flex">
+    <div className="hidden items-center lg:flex">
       <MuteVolumeButton volume={volume} onClick={muteHandler} />
       <input
         type="range"
+        className="range range-primary range-xs"
         value={volume}
         onChange={(e) => setVolume(e.target.valueAsNumber)}
         min={0}

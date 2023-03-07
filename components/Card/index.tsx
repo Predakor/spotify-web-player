@@ -6,10 +6,12 @@ export interface CardProps {
   onClick?: MouseEventHandler;
 }
 
-function Card({ children, className, onClick }: CardProps) {
-  className ??= '';
+function Card({ children, className = '', onClick }: CardProps) {
   return (
-    <div className={`card ${className}`} onClick={onClick}>
+    <div
+      className={`card bg-base-100 focus-within:bg-opacity-80 ${className}`}
+      onClick={onClick}
+    >
       {children}
     </div>
   );

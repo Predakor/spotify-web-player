@@ -33,7 +33,7 @@ function Button({
     <button
       type="button"
       onClick={(e) => clickHandler(e)}
-      className={`button ${className} ${visible}`}
+      className={`button text-2xl ${className} ${visible}`}
       disabled={disabled}
       aria-label={ariaLabel}
       aria-pressed={ariaPressed}

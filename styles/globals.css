@@ -3,21 +3,17 @@
 @tailwind utilities;
 
 @layer components {
+  :root {
+    @apply bg-base-300 font-sans text-base-content;
+  }
   * {
     @apply m-0 box-border p-0;
-  }
-  body {
-    @apply bg-background font-sans text-text;
   }
   a {
     @apply text-inherit no-underline;
   }
   .button {
     @apply p-2 text-2xl text-text-important;
-  }
-  .card {
-    @apply rounded bg-background-100 p-4;
-    @apply transition-opacity duration-500;
   }
   .card:hover {
     @apply hover:cursor-pointer hover:bg-background-200 hover:bg-opacity-70;
@@ -27,9 +23,5 @@
 @media (prefers-color-scheme: light) {
   html {
     color-scheme: light;
-  }
-  body {
-    color: black;
-    background: white;
   }
 }

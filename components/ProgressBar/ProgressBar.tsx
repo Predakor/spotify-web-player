@@ -13,7 +13,7 @@ const ProgressBar = () => {
   const duration = item?.duration_ms || 0;
 
   return (
-    <div className="col-span-full row-start-2 flex w-full gap-4 lg:col-start-2 lg:col-end-3 ">
+    <div className="col-span-full row-start-2 flex w-full items-center gap-4 lg:col-start-2 lg:col-end-3 ">
       <ProgresBarInput
         track={{
           progress: progress,
@@ -55,7 +55,7 @@ function ProgresBarInput({ track, playing, onChange, disabled }: PropsType) {
     <>
       <span className="hidden lg:block">{msToText(progress)}</span>
       <input
-        className={`flex-1`}
+        className={'range range-primary range-xs'}
         type="range"
         min={0}
         max={track.duration}

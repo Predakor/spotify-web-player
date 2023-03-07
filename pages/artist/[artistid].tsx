@@ -36,7 +36,7 @@ function Artistid() {
 
   const { name, popularity, followers, genres, images } = artist;
   const [image] = images;
-  console.log(images);
+  console.log(topTracks);
 
   return (
     <section className="flex flex-col gap-12">
@@ -54,7 +54,7 @@ function Artistid() {
         <p>{genres}</p>
       </div>
       <section>
-        <h2 className="text-6xl text-text-important">{name} top tracks</h2>
+        <h2 className="text-6xl text-text-important">Popular</h2>
         {topTracks && (
           <>
             {topTracks.tracks.map((track, i) => (

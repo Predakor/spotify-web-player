@@ -23,7 +23,7 @@ function UserPlaylists({ activePath }: { activePath: string }) {
   if (!playlists.length) return <p>your playlist will be here</p>;
 
   return (
-    <nav className="flex flex-col gap-2 text-text" aria-label="playlist">
+    <nav className="menu gap-1" aria-label="playlist">
       {playlists.map((playlist) => {
         const { id, name } = playlist;
         const href = `/playlist/${id}`;

@@ -19,7 +19,7 @@ function IconComponent({ name, active }: { name: iconNames; active: boolean }) {
 }
 function Nav({ pathname }: { pathname: string }) {
   return (
-    <nav className="flex flex-col gap-2 text-2xl" aria-label="primary">
+    <nav className="menu text-2xl" aria-label="primary">
       {navData.map((data) => {
         const { href, text, icon } = data;
         const active = pathname === href;
