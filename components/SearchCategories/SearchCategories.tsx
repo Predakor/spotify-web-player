@@ -1,29 +1,35 @@
 import { useSelector } from 'react-redux';
+import { useSearchOptions } from '@hooks/useSearch';
 import { selectSearch } from '@store/searchSlice';
+import { allSearchTypes } from '@utils/commons';
 
-const searchCategories = [
-  'album',
-  'artist',
-  'playlist',
-  'track',
-  'show',
-  'episode',
-];
 function SearchCategories() {
-  const { data, query } = useSelector(selectSearch);
+  const { data, query, types } = useSelector(selectSearch);
+  const visible = !query && data ? 'invisible' : '';
 
-  if (!query || !data) return <></>;
+  const { setCategories } = useSearchOptions();
 
   return (
-    <div className="order-last flex w-full gap-4 overflow-x-auto">
-      {searchCategories.map((category) => {
+    <div className={`carousel order-last w-full gap-2 ${visible}`}>
+      <button
+        className={`btn btn-outline ${!types ? 'btn-active' : ''}`}
+        onClick={() => setCategories()}
+        type={'button'}
+      >
+        all
+      </button>
+
+      {allSearchTypes.map((category) => {
+        const active = types === category ? 'btn-active' : '';
         return (
-          <div
-            className="rounded-full bg-secondary-800 p-2 px-4"
+          <button
+            className={`btn btn-outline ${active}`}
+            onClick={() => setCategories(category)}
+            type={'button'}
             key={category}
           >
-            <p>{category}</p>
-          </div>
+            {`${category}s`}
+          </button>
         );
       })}
     </div>

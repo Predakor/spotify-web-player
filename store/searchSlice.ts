@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppState } from 'store';
 
-type searchType =
+export type searchType =
   | 'album'
   | 'artist'
   | 'playlist'
@@ -11,7 +11,7 @@ type searchType =
 
 type SearchSliceType = {
   query: string | '';
-  types: searchType[] | undefined;
+  types: searchType | undefined;
   data: SpotifyApi.SearchResponse | undefined;
   status: 'pending' | 'completed' | undefined;
 };
@@ -30,7 +30,7 @@ export const searchSlice = createSlice({
     setQuery: (state, action: { payload: string }) => {
       state.query = action.payload;
     },
-    setTypes: (state, action: { payload: searchType[] }) => {
+    setTypes: (state, action: { payload: searchType | undefined }) => {
       state.types = action.payload;
     },
     setData: (state, action: { payload: SpotifyApi.SearchResponse }) => {

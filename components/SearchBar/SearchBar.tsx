@@ -1,42 +1,29 @@
-import { FormEvent, useEffect, useState } from 'react';
-import useSearch from '@hooks/useSearch';
+import { useEffect, useState } from 'react';
+import { useSearchOptions } from '@hooks/useSearch';
 import { SearchIcon } from '@icons/NavIcons';
-import { searchType } from 'types/spotifyTypes';
 
-export interface SearchBarProps {
-  types?: searchType[];
-}
-
-function SearchBar({ types }: SearchBarProps) {
+function SearchBar() {
   const [inputValue, setInputValue] = useState('');
-  const searchFor = useSearch();
-
-  const changeHandler = (e: HTMLInputElement) => setInputValue(e.value);
-  const searchHandler = () => searchFor(inputValue, types);
-
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    searchHandler();
-  };
+  const { setQuery } = useSearchOptions();
 
   useEffect(() => {
-    const timeoutID = setTimeout(searchHandler, 300);
+    const timeoutID = setTimeout(() => setQuery(inputValue), 300);
     return () => clearTimeout(timeoutID);
   }, [inputValue]);
 
   return (
     <form
-      className="flex flex-1 items-center gap-2 rounded-full bg-primary-50 px-4 py-2 "
-      onSubmit={(e) => submitHandler(e)}
+      className="flex flex-1 items-center gap-2 rounded bg-white text-2xl md:flex-grow-0 md:rounded-full"
+      onSubmit={(e) => e.preventDefault()}
     >
-      <div className="text-2xl text-black">
+      <div className="pl-4 text-2xl text-black">
         <SearchIcon active={false} />
       </div>
       <input
-        className="w-full bg-none p-1 text-black outline-none"
+        className="flex-1 bg-transparent py-2 text-black outline-none"
         type="search"
         placeholder={'Search for songs'}
-        onChange={(e) => changeHandler(e.target)}
+        onChange={(e) => setInputValue(e.target.value)}
       />
     </form>
   );

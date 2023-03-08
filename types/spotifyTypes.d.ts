@@ -1,10 +1,20 @@
-export type searchType =
+export type SearchResult = SpotifyApi.SearchResponse;
+
+export type SearchType =
+  | 'playlist'
   | 'album'
   | 'artist'
-  | 'playlist'
   | 'track'
   | 'show'
   | 'episode';
+
+export type SearchCategories =
+  | 'playlists'
+  | 'albums'
+  | 'artists'
+  | 'tracks'
+  | 'shows'
+  | 'episodes';
 
 export type RepeatState = 'off' | 'context' | 'track';
 

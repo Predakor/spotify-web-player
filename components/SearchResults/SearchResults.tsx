@@ -1,38 +1,62 @@
-import { useSelector } from 'react-redux';
 import ArtistCard from '@components/Card/Cards/ArtistCard';
 import PlaylistCard from '@components/Card/Cards/PlaylistCard';
 import ContentShelf from '@components/ContentShelf/ContentShelf';
-import { selectSearch } from '@store/searchSlice';
+import { SearchCategories, SearchResult } from 'types/spotifyTypes';
 
-function SearchResults() {
-  const { query, types, data, status } = useSelector(selectSearch);
+function SearchResults({ searchResult }: { searchResult?: SearchResult }) {
+  if (!searchResult) return <h2>Nothing found</h2>;
 
-  if (!data || !query) return <></>;
-  if (status === 'pending') return <p>please wait</p>;
+  const { albums, artists, episodes, playlists, shows, tracks } = searchResult;
 
-  const { albums, artists, episodes, playlists, shows, tracks } = data;
+  const categories = Object.keys(searchResult) as SearchCategories[];
 
   return (
     <div className="flex flex-col gap-12 p-4">
-      <ContentShelf title={'Artists'}>
-        <ArtistList artists={artists?.items} />
-      </ContentShelf>
+      {categories.map((category) => {
+        const content = searchResult[category];
 
-      <ContentShelf title={'Albums'}>
-        <AlbumList albums={albums?.items} />
-      </ContentShelf>
+        return (
+          <ContentShelf title={category} key={category}>
+            {category === 'playlists' && (
+              <PlaylistList playlists={playlists?.items} />
+            )}
+            {category === 'albums' && <AlbumList albums={albums?.items} />}
+            {category === 'artists' && <ArtistList artists={artists?.items} />}
+            {category === 'tracks' && <div></div>}
+            {category === 'shows' && <AlbumList />}
+            {category === 'episodes' && <AlbumList />}
+          </ContentShelf>
+        );
+      })}
+      {/* {artists && (
+        <ContentShelf title={'Artists'}>
+          <ArtistList artists={artists?.items} />
+        </ContentShelf>
+      )}
 
-      <ContentShelf title={'Playlists'}>
-        <PlaylistList playlists={playlists?.items} />
-      </ContentShelf>
+      {albums && (
+        <ContentShelf title={'Albums'}>
+          <AlbumList albums={albums?.items} />
+        </ContentShelf>
+      )}
 
-      <ContentShelf title={'Episodes'}>
-        <PlaylistList playlists={episodes?.items} />
-      </ContentShelf>
+      {playlists && (
+        <ContentShelf title={'Playlists'}>
+          <PlaylistList playlists={playlists?.items} />
+        </ContentShelf>
+      )}
 
-      <ContentShelf title={'Shows'}>
-        <PlaylistList playlists={shows?.items} />
-      </ContentShelf>
+      {episodes && (
+        <ContentShelf title={'Episodes'}>
+          <PlaylistList playlists={episodes?.items} />
+        </ContentShelf>
+      )}
+
+      {shows && (
+        <ContentShelf title={'Shows'}>
+          <PlaylistList playlists={shows?.items} />
+        </ContentShelf>
+      )} */}
     </div>
   );
 }
