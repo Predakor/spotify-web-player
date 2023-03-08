@@ -3,7 +3,7 @@ import SearchBar from '@components/SearchBar/SearchBar';
 import SearchCategories from '@components/SearchCategories/SearchCategories';
 import SearchResults from '@components/SearchResults/SearchResults';
 import useSearch from '@hooks/spotify/useSearch';
-import Layout from 'Layout';
+import Layout from 'layout';
 import { NextPageWithLayout } from './_app';
 
 const Search: NextPageWithLayout = () => {
