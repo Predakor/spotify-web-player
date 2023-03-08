@@ -1,6 +1,6 @@
 import Artists from '@components/Artists/Artists';
 import TotalPlayTime from '@components/TotalPlayTime/TotalPlayTime';
-import usePlaylistArtists from '@hooks/usePlaylistArtists';
+import usePlaylistArtists from '@hooks/spotify/usePlaylistArtists';
 import { PlaylistType } from '../PlaylistPanel';
 import Author from './PlaylistAuthor';
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DeviceButton from '@components/Button/DeviceButton';
-import useDeviceControls from '@hooks/useDeviceControls';
+import useDeviceControls from '@hooks/spotify/controls/useDeviceControls';
 import { selectActiveDevice, selectThisDevice } from '@store/devicesSlice';
 import DeviceMenu from './DeviceDropdown/DeviceDropdown';
 

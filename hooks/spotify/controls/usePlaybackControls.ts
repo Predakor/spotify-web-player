@@ -1,21 +1,17 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  setShuffleState,
   setIsPlaying,
-  setRepeatState,
   setPlaybackData,
+  setRepeatState,
+  setShuffleState,
 } from '@store/playbackSlice';
 import { RepeatState } from 'types/spotifyTypes';
-import useSpotify from './useSpotify';
+import useSpotify from '../useSpotify';
 
-const Controls = () => {
+function PlaybackControls() {
   const spotifyApi = useSpotify();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    controlsRef.current = controlsRef.current;
-  }, [dispatch, spotifyApi]);
 
   const controlsRef = useRef({
     pause: () => spotifyApi.pause(),
@@ -131,19 +127,11 @@ const Controls = () => {
         throw error;
       }
     },
-    getArtistTopTracks: async (id: string) => {
-      try {
-        const response = await spotifyApi.getArtistTopTracks(id, 'US');
-        return response.body;
-      } catch (error) {
-        console.error(error + ' in spotify controls');
-      }
-    },
   });
 
   return controlsRef.current;
-};
-export default Controls;
+}
+export default PlaybackControls;
 
 const getNextRepeatState = (state: RepeatState) => {
   if (state === 'off') return 'context';

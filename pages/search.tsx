@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import SearchBar from '@components/SearchBar/SearchBar';
 import SearchCategories from '@components/SearchCategories/SearchCategories';
 import SearchResults from '@components/SearchResults/SearchResults';
-import useSearch from '@hooks/useSearch';
+import useSearch from '@hooks/spotify/useSearch';
 import Layout from 'Layout';
 import { NextPageWithLayout } from './_app';
 

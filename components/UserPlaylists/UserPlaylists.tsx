@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import NavLink from '@components/NavLink/NavLink';
-import useSpotifyControls from '@hooks/useSpotifyControls';
+import useSpotifyControls from '@hooks/spotify/controls/usePlaybackControls';
 
 type PlaylistType = SpotifyApi.PlaylistObjectSimplified;
 

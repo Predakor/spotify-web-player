@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import useDeviceControls from '@hooks/useDeviceControls';
+import useDeviceControls from '@hooks/spotify/controls/useDeviceControls';
 import { selectDevices } from '@store/devicesSlice';
 import DeviceList from './DeviceList';
 import TopDevice from './TopDevice';

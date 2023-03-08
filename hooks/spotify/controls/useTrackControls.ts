@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import useSpotify from './useSpotify';
+import useSpotify from '../useSpotify';
 
 function useTrackControls() {
   const spotifyApi = useSpotify();

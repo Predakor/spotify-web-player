@@ -1,5 +1,3 @@
-export type SearchResult = SpotifyApi.SearchResponse;
-
 export type SearchType =
   | 'playlist'
   | 'album'
@@ -18,4 +16,9 @@ export type SearchCategories =
 
 export type RepeatState = 'off' | 'context' | 'track';
 
+export type SearchResult = SpotifyApi.SearchResponse;
+
+export type Track = SpotifyApi.TrackObjectFull;
 export type LikedTrack = SpotifyApi.TrackObjectFull & { liked: boolean };
+
+export type TopTracks = SpotifyApi.ArtistsTopTracksResponse;

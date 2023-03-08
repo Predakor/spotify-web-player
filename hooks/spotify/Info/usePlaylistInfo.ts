@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import useSpotifyControls from './useSpotifyControls';
+import useSpotifyControls from '../controls/usePlaybackControls';
 
 type PlaylistType = SpotifyApi.SinglePlaylistResponse;
 

@@ -1,42 +1,54 @@
 import { useEffect, useState } from 'react';
 import CoverImage from '@components/CoverImage/CoverImage';
 import TrackList from '@components/Playlist/PlaylistTracks/TrackList';
-import TrackRow from '@components/Playlist/PlaylistTracks/TrackRow';
-import useArtistInfo from '@hooks/useArtistInfo';
-import useSpotifyControls from '@hooks/useSpotifyControls';
+import { useArtistInfo } from '@hooks/spotify/Info';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { TopTracks } from 'types/spotifyTypes';
+
+type ArtistType = {
+  artist?: SpotifyApi.ArtistObjectFull;
+  loading: boolean;
+};
 
 function Artistid() {
-  const { getArtistTopTracks } = useSpotifyControls();
+  const { fetchArtistInfo, getArtistTopTracks } = useArtistInfo();
   const { artistid } = useRouter().query;
   const id = artistid?.toString() ?? '';
 
-  const artist = useArtistInfo(id);
-  const [topTracks, setTopTracks] =
-    useState<SpotifyApi.ArtistsTopTracksResponse>();
+  const [artist, setArtist] = useState<ArtistType>({
+    artist: undefined,
+    loading: true,
+  });
+
+  const [topTracks, setTopTracks] = useState<TopTracks>();
 
   useEffect(() => {
     if (!id) return;
 
+    const fetchArtist = async () => {
+      const artist = await fetchArtistInfo(id);
+      if (artist) setArtist({ artist, loading: false });
+    };
     const fetchTopTracks = async () => {
       const result = await getArtistTopTracks(id);
       if (result) setTopTracks(result);
     };
+
     fetchTopTracks();
-  }, [getArtistTopTracks, id]);
+    fetchArtist();
+  }, [fetchArtistInfo, getArtistTopTracks, id]);
 
-  if (artist === undefined) {
-    return <div>loading</div>;
+  if (artist.loading) {
+    return <button className="btn loading "></button>;
   }
 
-  if (artist === null) {
-    return <div>{"This artist doesn't exist"}</div>;
+  if (!artist.artist) {
+    return <h2>Artist now found</h2>;
   }
 
-  const { name, popularity, followers, genres, images } = artist;
+  const { name, popularity, followers, genres, images } = artist.artist;
   const [image] = images;
-  console.log(topTracks);
 
   return (
     <section className="flex flex-col gap-12">
@@ -55,13 +67,7 @@ function Artistid() {
       </div>
       <section>
         <h2 className="text-6xl text-text-important">Popular</h2>
-        {topTracks && (
-          <>
-            {topTracks.tracks.map((track, i) => (
-              <TrackRow key={track.id} track={track} index={i} />
-            ))}
-          </>
-        )}
+        {topTracks && <TrackList fetchedTracks={topTracks.tracks} />}
       </section>
     </section>
   );

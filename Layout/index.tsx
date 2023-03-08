@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Background from 'Layout/Background';
 import { useSession } from 'next-auth/react';
 import { SpotifyUser } from 'types/spotifyUser';
 import Aside from './Aside';
@@ -25,7 +26,7 @@ function Layout({ children, extendHeader }: LayoutProps) {
   const user = data?.user as SpotifyUser;
   return (
     <div className="grid min-h-screen grid-cols-1 grid-rows-[auto,1fr,auto] lg:grid-cols-[auto,1fr]">
-      <span className="absolute -z-50 h-[70vh] w-full bg-gradient-to-b from-primary-900" />
+      <Background />
       <Aside />
       <Header user={user}>{extendHeader}</Header>
       <Main>{children}</Main>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import UserAvatar from '@components/User/UserAvatar';
-import useSpotify from '@hooks/useSpotify';
+import useSpotify from '@hooks/spotify/useSpotify';
 
 function Author({ user }: { user: SpotifyApi.UserObjectPublic }) {
   const [pictureURL, setPictureURL] = useState('');

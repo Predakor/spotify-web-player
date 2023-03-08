@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { setActiveDevice, setDevices } from '@store/devicesSlice';
-import useSpotify from './useSpotify';
+import useSpotify from '../useSpotify';
 
 const useDeviceControls = () => {
   const spotifyApi = useSpotify();

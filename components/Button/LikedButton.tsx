@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import useSpotify from '@hooks/useSpotify';
-import useTrackControls from '@hooks/useTrackControls';
+import useTrackControls from '@hooks/spotify/controls/useTrackControls';
+import useSpotify from '@hooks/spotify/useSpotify';
 import LikeIcon from '@icons/LikeIcon';
 
 interface LikeButtonProps {

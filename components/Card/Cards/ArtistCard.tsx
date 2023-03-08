@@ -1,7 +1,5 @@
-import { PlaybackButton } from '@components/Button/PlaybackButtons';
 import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
 import CoverImage from '@components/CoverImage/CoverImage';
-import useSpotifyControls from '@hooks/useSpotifyControls';
 import { useRouter } from 'next/router';
 import Card from '../index';
 

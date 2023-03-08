@@ -1,11 +1,11 @@
 import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Playback from '@components/Playback';
-import useDeviceControls from '@hooks/useDeviceControls';
-import useSpotifySDK from '@hooks/useSpotifySDK';
+import useDeviceControls from '@hooks/spotify/controls/useDeviceControls';
+import useSpotifyControls from '@hooks/spotify/controls/usePlaybackControls';
+import useSpotifySDK from '@hooks/spotify/useSpotifySDK';
 import { selectActiveDevice, selectThisDevice } from '@store/devicesSlice';
 import spotifyApi from '@utils/spotify';
-import useSpotifyControls from 'hooks/useSpotifyControls';
 
 function Footer() {
   const player = useSpotifySDK({

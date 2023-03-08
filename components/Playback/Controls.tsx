@@ -6,7 +6,7 @@ import {
   ShuffleButton,
   SkipButton,
 } from '@components/Button/PlaybackButtons';
-import useSpotifyControls from '@hooks/useSpotifyControls';
+import useSpotifyControls from '@hooks/spotify/controls/usePlaybackControls';
 import { selectPlaybackData } from '@store/playbackSlice';
 
 function Controls() {

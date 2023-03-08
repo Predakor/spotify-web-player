@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchOptions } from '@hooks/useSearch';
+import { useSearchOptions } from '@hooks/spotify/useSearch';
 import { SearchIcon } from '@icons/NavIcons';
 
 function SearchBar() {

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import MuteVolumeButton from '@components/Button/MuteVolumeButton';
+import useSpotify from '@hooks/spotify/useSpotify';
 import { selectActiveDevice } from '@store/devicesSlice';
-import useSpotify from 'hooks/useSpotify';
 
 const VolumeControl = () => {
   const spotifyApi = useSpotify();

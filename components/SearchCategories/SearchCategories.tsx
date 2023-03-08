@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useSearchOptions } from '@hooks/useSearch';
+import { useSearchOptions } from '@hooks/spotify/useSearch';
 import { selectSearch } from '@store/searchSlice';
 import { allSearchTypes } from '@utils/commons';
 
