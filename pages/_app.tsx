@@ -1,9 +1,9 @@
 import { ReactElement, ReactNode } from 'react';
-import Layout from 'layout';
 import { NextPage } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import { wrapper } from 'store';
+import Layout from '../layout';
 import '../styles/globals.css';
 
 type anyObject = Record<string, unknown>;
