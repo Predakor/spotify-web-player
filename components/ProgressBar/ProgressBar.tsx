@@ -13,7 +13,7 @@ const ProgressBar = () => {
   const duration = item?.duration_ms || 0;
 
   return (
-    <div className="col-span-full row-start-2 flex w-full items-center gap-4 lg:col-start-2 lg:col-end-3 ">
+    <div className="flex w-full gap-4">
       <ProgresBarInput
         track={{
           progress: progress,
@@ -23,7 +23,7 @@ const ProgressBar = () => {
         onChange={() => 1}
         disabled={false}
       />
-      <span className={'hidden lg:block'}>{msToText(duration)}</span>
+      <span>{msToText(duration)}</span>
     </div>
   );
 };
@@ -53,16 +53,26 @@ function ProgresBarInput({ track, playing, onChange, disabled }: PropsType) {
 
   return (
     <>
-      <span className="hidden lg:block">{msToText(progress)}</span>
-      <input
-        className={'range range-primary range-xs'}
-        type="range"
-        min={0}
-        max={track.duration}
-        value={progress}
-        onChange={onChange}
-        disabled={disabled}
-      />
+      <span className="block">{msToText(progress)}</span>
+
+      <label className="group relative w-full">
+        <progress
+          className="progress progress-primary bg-base-content"
+          value={progress}
+          max={track.duration}
+        />
+        <input
+          className={
+            'range range-primary range-xs absolute inset-0 m-auto opacity-0 transition-opacity group-hover:opacity-100'
+          }
+          type="range"
+          min={0}
+          max={track.duration}
+          value={progress}
+          onChange={(e) => setProgress(e.currentTarget.valueAsNumber)}
+          disabled={disabled}
+        />
+      </label>
     </>
   );
 }

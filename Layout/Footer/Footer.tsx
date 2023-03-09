@@ -12,7 +12,10 @@ function Footer() {
         <section className="justify-self-start" aria-label="Currently playing">
           <CurrentTrack />
         </section>
-        <section aria-label="Playback controls">
+        <section
+          className="flex w-full flex-col items-center"
+          aria-label="Playback controls"
+        >
           <Controls />
           <ProgressBar />
         </section>
