@@ -4,8 +4,8 @@ import { PlaybackButton } from '@components/Button/PlaybackButtons';
 import Devices from '@components/Devices/Devices';
 import Track from '@components/Track/Track';
 import { usePlaybackControls } from '@hooks/spotify/controls';
-import { MobileNav } from '@layout/Nav';
 import { selectPlaybackData, selectTrack } from '@store/playbackSlice';
+import { MobileNav } from 'Layout/Nav';
 import { useRouter } from 'next/router';
 import { Track as TrackType } from 'types/spotifyTypes';
 

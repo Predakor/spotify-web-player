@@ -3,7 +3,7 @@ import SearchBar from '@components/SearchBar/SearchBar';
 import SearchCategories from '@components/SearchCategories/SearchCategories';
 import SearchResults from '@components/SearchResults/SearchResults';
 import useSearch from '@hooks/spotify/useSearch';
-import Layout from 'layout/Layout';
+import Layout from 'Layout/Layout';
 import { NextPageWithLayout } from './_app';
 
 const Search: NextPageWithLayout = () => {
@@ -16,7 +16,7 @@ const Search: NextPageWithLayout = () => {
   if (status === 'pending') {
     return (
       <div className="flex h-full items-center justify-center">
-        <span className="btn loading btn-ghost btn-square btn-xl scale-150" />
+        <span className="btn-xl loading btn-ghost btn-square btn scale-150" />
       </div>
     );
   }
