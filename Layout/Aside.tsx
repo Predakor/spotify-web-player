@@ -1,13 +1,18 @@
+import { useMediaQuery } from 'react-responsive';
 import UserPlaylists from '@components/UserPlaylists/UserPlaylists';
 import useTheme from '@hooks/useTheme';
 import { useRouter } from 'next/router';
-import Nav from './Nav';
+import { Nav } from './Nav';
 
 function Aside() {
   const { asPath } = useRouter();
   const theme = useTheme;
+  const isMobile = useMediaQuery({ maxWidth: '1024px' });
+
+  if (isMobile) return null;
+
   return (
-    <aside className="hidden bg-black lg:row-start-1 lg:row-end-3 lg:block">
+    <aside className="row-start-1 row-end-3 block bg-black">
       <button className="btn" onClick={theme}>
         theme
       </button>

@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { SpotifyUser } from 'types/spotifyUser';
 import Aside from './Aside';
 import Background from './Background';
-import Footer from './Footer';
+import FoterWraper from './Footer';
 import Header from './Header';
 import Main from './Main';
 
@@ -30,10 +30,10 @@ function Layout({ children, extendHeader }: LayoutProps) {
       <Aside />
       <Header user={user}>{extendHeader}</Header>
       <Main>{children}</Main>
-      <Footer />
+      <FoterWraper />
     </div>
   );
 }
 
 export default Layout;
-export { Footer, Header };
+export { FoterWraper, Header };

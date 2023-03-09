@@ -1,13 +1,13 @@
-export type DataEntry = {
+import { HomeIcon, LibraryIcon, SearchIcon } from '@icons/NavIcons';
+
+export type NavItemData = {
   href: string;
   text?: string;
-  icon: 'HomeIcon' | 'LibraryIcon' | 'SearchIcon' | 'StatisticIcon';
+  Icon: ({ active }: { active: boolean }) => JSX.Element;
 };
 
-const data: DataEntry[] = [
-  { href: '/', text: 'Home', icon: 'HomeIcon' },
-  { href: '/library', text: 'Library', icon: 'LibraryIcon' },
-  { href: '/statistics', text: 'Statistics', icon: 'StatisticIcon' },
-  { href: '/search', text: 'Search', icon: 'SearchIcon' },
+export const navItemData: NavItemData[] = [
+  { href: '/', text: 'Home', Icon: HomeIcon },
+  { href: '/library', text: 'Library', Icon: LibraryIcon },
+  { href: '/search', text: 'Search', Icon: SearchIcon },
 ];
-export default data;

@@ -9,12 +9,13 @@ export interface NavLinkProps {
 }
 
 function NavLink({ href, active, text, children }: NavLinkProps) {
-  const activeStyle = active ? 'text-primary-50' : '';
+  const activeStyle = active ? 'active font-bold' : '';
 
   return (
     <Link href={href}>
       <a
-        className={`flex items-center gap-4 ${activeStyle} transition-colors hover:text-primary-focus`}
+        className={`lg:flex lg:items-center lg:gap-2 ${activeStyle} transition-colors hover:text-primary-focus`}
+        aria-label={`go to ${text} page`}
       >
         {children}
         {text && <p>{text}</p>}
