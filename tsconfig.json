@@ -22,7 +22,8 @@
       "@services/*": ["services/*"],
       "@hooks/*": ["hooks/*"],
       "@store/*": ["store/*"],
-      "@icons/*": ["icons/*"]
+      "@icons/*": ["icons/*"],
+      "@layout/*": ["layout/*"]
     },
     "incremental": true
   },

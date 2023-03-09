@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import { wrapper } from 'store';
-import Layout from '../layout';
+import Layout from '../layout/index';
 import '../styles/globals.css';
 
 type anyObject = Record<string, unknown>;
