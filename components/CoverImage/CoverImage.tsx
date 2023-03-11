@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 interface Props {
-  url?: string;
+  url: string | undefined;
   alt?: string;
   className?: string;
 }

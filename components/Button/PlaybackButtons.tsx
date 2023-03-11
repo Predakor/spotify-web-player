@@ -21,14 +21,12 @@ function BackButton({ onClick, disabled }: ButtonProps) {
   );
 }
 function PlaybackButton(props: ButtonProps & { isPlaying?: boolean }) {
-  const { onClick, isPlaying, className = '', disabled } = props;
+  const { isPlaying, className = '', ariaLabel } = props;
   return (
     <Button
       {...props}
-      className={`${className} rounded-full text-3xl text-secondary-900`}
-      onClick={onClick}
-      disabled={disabled}
-      ariaLabel={'Play/Pause'}
+      className={`btn-primary btn-circle btn text-3xl text-neutral ${className}`}
+      ariaLabel={`Play/Pause ${ariaLabel}`}
       ariaPressed={isPlaying}
       stopPrepagation={true}
     >
