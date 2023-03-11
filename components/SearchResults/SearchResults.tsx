@@ -1,4 +1,5 @@
-import Card from '@components/Card';
+import { ReactNode } from 'react';
+import AlbumCard from '@components/Album/AlbumCard';
 import ArtistCard from '@components/Card/Cards/ArtistCard';
 import PlaylistCard from '@components/Card/Cards/PlaylistCard';
 import ContentShelf from '@components/ContentShelf/ContentShelf';
@@ -12,52 +13,25 @@ function SearchResults({ searchResult }: { searchResult?: SearchResult }) {
   const categories = Object.keys(searchResult) as SearchCategories[];
 
   return (
-    <div className="flex flex-col gap-12 p-4">
-      {categories.map((category) => {
-        const content = searchResult[category];
-
-        return (
-          <ContentShelf title={category} key={category}>
-            {category === 'playlists' && (
-              <PlaylistList playlists={playlists?.items} />
-            )}
-            {category === 'albums' && <AlbumList albums={albums?.items} />}
-            {category === 'artists' && <ArtistList artists={artists?.items} />}
-            {category === 'tracks' && <div></div>}
-            {category === 'shows' && <AlbumList />}
-            {category === 'episodes' && <AlbumList />}
-          </ContentShelf>
-        );
-      })}
-      {/* {artists && (
-        <ContentShelf title={'Artists'}>
-          <ArtistList artists={artists?.items} />
-        </ContentShelf>
+    <div className="">
+      {playlists?.items && (
+        <Shelf title="playlists">
+          <PlaylistList playlists={playlists.items} />
+        </Shelf>
       )}
-
-      {albums && (
-        <ContentShelf title={'Albums'}>
-          <AlbumList albums={albums?.items} />
-        </ContentShelf>
+      {albums?.items && (
+        <Shelf title="albums">
+          <AlbumList albums={albums.items} />
+        </Shelf>
       )}
-
-      {playlists && (
-        <ContentShelf title={'Playlists'}>
-          <PlaylistList playlists={playlists?.items} />
-        </ContentShelf>
+      {artists?.items && (
+        <Shelf title="artists">
+          <ArtistList artists={artists.items} />
+        </Shelf>
       )}
-
-      {episodes && (
-        <ContentShelf title={'Episodes'}>
-          <PlaylistList playlists={episodes?.items} />
-        </ContentShelf>
-      )}
-
-      {shows && (
-        <ContentShelf title={'Shows'}>
-          <PlaylistList playlists={shows?.items} />
-        </ContentShelf>
-      )} */}
+      {tracks?.items && <MockShelf />}
+      {episodes?.items && <MockShelf />}
+      {shows?.items && <MockShelf />}
     </div>
   );
 }
@@ -86,7 +60,7 @@ function AlbumList({ albums }: AlbumListProps) {
   return (
     <>
       {albums.map((album) => {
-        return <Card key={album.id} />;
+        return <AlbumCard data={album} key={album.id} />;
       })}
     </>
   );
@@ -100,6 +74,27 @@ function ArtistList({ artists }: { artists?: SpotifyApi.ArtistObjectFull[] }) {
         return <ArtistCard data={artist} key={artist.id} />;
       })}
     </>
+  );
+}
+
+function Shelf({ children, title }: { children: ReactNode; title: string }) {
+  return (
+    <section className="" aria-label={title}>
+      <h2 className="py-4 text-3xl font-semibold">{title}</h2>
+      <div className="grid grid-cols-2 gap-12 lg:w-auto lg:grid-cols-4">
+        {children}
+      </div>
+    </section>
+  );
+}
+function MockShelf() {
+  return (
+    <Shelf title={'mock'}>
+      <div className="bg-orange-400 " />
+      <div className="bg-orange-400 " />
+      <div className="bg-orange-400 " />
+      <div className="bg-orange-400 " />
+    </Shelf>
   );
 }
 

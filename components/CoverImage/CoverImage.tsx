@@ -1,18 +1,17 @@
 import Image from 'next/image';
 
-function CoverImage({ url, alt }: { url: string; alt?: string }) {
+interface Props {
+  url?: string;
+  alt?: string;
+  className?: string;
+}
+
+function CoverImage({ url, alt = '', className = '' }: Props) {
   if (!url) return <p>No url provided</p>;
 
   return (
-    <figure className="relative h-full w-full ">
-      <Image
-        src={url}
-        layout={'fill'}
-        objectFit={'cover'}
-        placeholder={'blur'}
-        blurDataURL={'/public/logo.png'}
-        alt={alt ?? ''}
-      />
+    <figure className={`relative h-full w-full ${className}`}>
+      <Image src={url} layout={'fill'} objectFit={'cover'} alt={alt} />
     </figure>
   );
 }

@@ -12,9 +12,7 @@ function Artists({ artists, className = '' }: ArtistProps) {
     <span className="flex gap-2 truncate text-text">
       {displayedArtists.map((artist) => (
         <Link href={`/artist/${artist.id}`} prefetch={false} key={artist.uri}>
-          <a
-            className={`${className} transition-opacity hover:text-opacity-80 hover:underline`}
-          >
+          <a className={`link no-underline hover:underline ${className}`}>
             {artist.name}
           </a>
         </Link>

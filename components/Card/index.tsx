@@ -9,7 +9,7 @@ export interface CardProps {
 function Card({ children, className = '', onClick }: CardProps) {
   return (
     <div
-      className={`card bg-base-100 focus-within:bg-opacity-80 ${className}`}
+      className={`group card bg-base-100 focus-within:bg-opacity-80 ${className}`}
       onClick={onClick}
     >
       {children}

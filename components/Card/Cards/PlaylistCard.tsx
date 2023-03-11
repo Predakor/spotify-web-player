@@ -20,20 +20,22 @@ export default function PlaylistCard({ data }: { data: Playlist }) {
   const selectPlaylist = () => router.push(`/playlist/${id}`);
 
   return (
-    <Card className="group p-0 md:p-8 " onClick={selectPlaylist}>
-      <div className="relative aspect-square w-full ">
-        <CoverImage url={image?.url ?? ''} />
+    <Card onClick={selectPlaylist}>
+      <div className="card-body">
+        <div className="relative aspect-square w-full ">
+          <CoverImage url={image?.url ?? ''} />
 
-        <PlaylistPlaybackButton
-          uri={uri}
-          className={`absolute right-0 ${visible} transition-all duration-300 `}
-          ariaLabel={`Play/pause ${name} playlist`}
-        />
-      </div>
+          <PlaylistPlaybackButton
+            uri={uri}
+            className={`absolute right-0 ${visible} transition-all duration-300 `}
+            ariaLabel={`Play/pause ${name} playlist`}
+          />
+        </div>
 
-      <div className="hidden overflow-clip text-ellipsis md:block">
-        <p className="py-5 text-xl font-semibold text-text-important">{name}</p>
-        <p>{description}</p>
+        <h2 className="card-title">{name}</h2>
+        <div className="flex-1 overflow-ellipsis ">
+          <p className="">{description}</p>
+        </div>
       </div>
     </Card>
   );
