@@ -1,8 +1,7 @@
-import { ReactNode } from 'react';
 import AlbumCard from '@components/Album/AlbumCard';
-import ArtistCard from '@components/Card/Cards/ArtistCard';
-import PlaylistCard from '@components/Card/Cards/PlaylistCard';
-import ContentShelf from '@components/ContentShelf/ContentShelf';
+import ArtistCard from '@components/Card/ArtistCard';
+import PlaylistCard from '@components/Card/PlaylistCard';
+import Shelf from '@components/Shelf/Shelf';
 import { SearchCategories, SearchResult } from 'types/spotifyTypes';
 
 function SearchResults({ searchResult }: { searchResult?: SearchResult }) {
@@ -13,7 +12,7 @@ function SearchResults({ searchResult }: { searchResult?: SearchResult }) {
   const categories = Object.keys(searchResult) as SearchCategories[];
 
   return (
-    <div className="">
+    <div className="grid auto-rows-fr">
       {playlists?.items && (
         <Shelf title="playlists">
           <PlaylistList playlists={playlists.items} />
@@ -77,16 +76,6 @@ function ArtistList({ artists }: { artists?: SpotifyApi.ArtistObjectFull[] }) {
   );
 }
 
-function Shelf({ children, title }: { children: ReactNode; title: string }) {
-  return (
-    <section className="" aria-label={title}>
-      <h2 className="py-4 text-3xl font-semibold">{title}</h2>
-      <div className="grid grid-cols-2 gap-12 lg:w-auto lg:grid-cols-4">
-        {children}
-      </div>
-    </section>
-  );
-}
 function MockShelf() {
   return (
     <Shelf title={'mock'}>

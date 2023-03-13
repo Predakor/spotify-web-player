@@ -8,7 +8,7 @@ interface Props {
 }
 function GoCard({ title, content, children, onClick }: Props) {
   return (
-    <article className="card card-compact bg-base-100" onClick={onClick}>
+    <article className="card-compact card bg-base-100" onClick={onClick}>
       <div className="group card-body">
         {children}
         <h2 className="card-title truncate">{title}</h2>

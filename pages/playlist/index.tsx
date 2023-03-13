@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import PlaylistCard from '@components/Card/Cards/PlaylistCard';
+import PlaylistCard from '@components/Card/PlaylistCard';
 import useSpotify from '@hooks/spotify/useSpotify';
 
 type Playlist = SpotifyApi.PlaylistObjectSimplified;

@@ -1,7 +1,7 @@
 import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
 import CoverImage from '@components/CoverImage/CoverImage';
 import { useRouter } from 'next/router';
-import GoCard from '../GoCard';
+import GoCard from './GoCard';
 
 type Playlist = SpotifyApi.PlaylistObjectSimplified;
 export default function PlaylistCard({ data }: { data: Playlist }) {
