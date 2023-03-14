@@ -1,38 +1,53 @@
-import { useSelector } from 'react-redux';
-import { useSearchOptions } from '@hooks/spotify/useSearch';
-import { selectSearch } from '@store/searchSlice';
-import { allSearchTypes } from '@utils/commons';
+import { allSearchTypes, searchParams } from '@utils/commons';
+import { useRouter } from 'next/router';
+import { SearchType } from 'types/spotifyTypes';
 
-function SearchCategories() {
-  const { data, query, types } = useSelector(selectSearch);
-  const visible = !query && data ? 'invisible' : '';
+interface Props {
+  active: boolean;
+  children: string;
+  onClick: VoidFunction;
+}
 
-  const { setCategories } = useSearchOptions();
-
+function CategoryButton({ active, children, onClick }: Props) {
   return (
-    <div className={`carousel order-last w-full gap-2 ${visible}`}>
-      <button
-        className={`btn btn-outline ${!types ? 'btn-active' : ''}`}
-        onClick={() => setCategories()}
-        type={'button'}
-      >
-        all
-      </button>
-
-      {allSearchTypes.map((category) => {
-        const active = types === category ? 'btn-active' : '';
-        return (
-          <button
-            className={`btn btn-outline ${active}`}
-            onClick={() => setCategories(category)}
-            type={'button'}
-            key={category}
-          >
-            {`${category}s`}
-          </button>
-        );
-      })}
-    </div>
+    <button
+      className={`btn-outline btn ${active ? 'btn-active' : ''}`}
+      onClick={onClick}
+      type={'button'}
+    >
+      {children}
+    </button>
   );
 }
+
+function SearchCategories() {
+  const { push, query } = useRouter();
+  const { searchquery, type } = query as searchParams;
+
+  const setCategory = (category?: SearchType) => {
+    push({ query: { searchquery, type: category } });
+  };
+
+  return (
+    <section
+      className={`carousel order-last w-full gap-2`}
+      aria-label={'Search filters'}
+    >
+      <CategoryButton active={!type} onClick={() => setCategory()}>
+        All
+      </CategoryButton>
+
+      {allSearchTypes.map((category) => (
+        <CategoryButton
+          onClick={() => setCategory(category)}
+          key={category}
+          active={type === category}
+        >
+          {`${category}s`}
+        </CategoryButton>
+      ))}
+    </section>
+  );
+}
+
 export default SearchCategories;

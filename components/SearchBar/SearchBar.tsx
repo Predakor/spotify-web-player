@@ -1,24 +1,30 @@
 import { useEffect, useState } from 'react';
-import { useSearchOptions } from '@hooks/spotify/useSearch';
 import { SearchIcon } from '@icons/NavIcons';
+import { useRouter } from 'next/router';
 
 function SearchBar() {
+  const { push } = useRouter();
   const [inputValue, setInputValue] = useState('');
-  const { setQuery } = useSearchOptions();
+
+  const pushQuery = () => push(`/search/${inputValue}`);
 
   useEffect(() => {
-    const timeoutID = setTimeout(() => setQuery(inputValue), 300);
+    const timeoutID = setTimeout(pushQuery, 500);
     return () => clearTimeout(timeoutID);
   }, [inputValue]);
 
   return (
     <form
       className="flex flex-1 items-center gap-2 rounded bg-white text-2xl md:flex-grow-0 md:rounded-full"
-      onSubmit={(e) => e.preventDefault()}
+      aria-label="Searchbar"
+      onSubmit={(e) => {
+        e.preventDefault();
+        pushQuery();
+      }}
     >
-      <div className="pl-4 text-2xl text-black">
+      <span className="pl-4 text-2xl text-black" aria-hidden>
         <SearchIcon active={false} />
-      </div>
+      </span>
       <input
         className="flex-1 bg-transparent py-2 text-black outline-none"
         type="search"

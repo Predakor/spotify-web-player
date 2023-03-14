@@ -16,3 +16,5 @@ export const allCategories: SearchCategories[] = [
   'shows',
   'episodes',
 ];
+
+export type searchParams = { searchquery: string; type?: SearchType };

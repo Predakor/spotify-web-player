@@ -1,63 +1,30 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  endSearch,
-  selectSearch,
-  setQuery as changeQuery,
-  setTypes,
-  startSearch,
-} from '@store/searchSlice';
-import { allSearchTypes } from '@utils/commons';
-import { SearchType } from 'types/spotifyTypes';
+import useFetchedValue from '@hooks/useFetchedValue';
+import { allSearchTypes, searchParams } from '@utils/commons';
+import { useRouter } from 'next/router';
 import useSpotify from './useSpotify';
 
-export interface SearchOptions {
-  types?: SearchType;
-  limit?: number;
-}
-
-const useSearchOptions = () => {
-  const dispatch = useDispatch();
-  const { query, types } = useSelector(selectSearch);
-
-  return {
-    setCategories: (newCategory?: SearchType) => {
-      if (newCategory !== types) dispatch(setTypes(newCategory));
-    },
-    setQuery: (newQuery: string) => {
-      if (newQuery !== query) dispatch(changeQuery(newQuery));
-    },
-  };
-};
-
 const useSearchResult = () => {
+  const [fetchedValue, actions] = useFetchedValue<SpotifyApi.SearchResponse>();
+  const { searchquery, type } = useRouter().query as searchParams;
   const spotifyApi = useSpotify();
-  const dispatch = useDispatch();
-
-  const searchResult = useSelector(selectSearch);
-  const { query, types } = searchResult;
 
   useEffect(() => {
-    const searchFor = async (query: string, options: SearchOptions) => {
-      if (!query) return dispatch(changeQuery(''));
+    if (!searchquery) return actions.fetchFail('no query');
 
-      const limit = options.types ? 20 : options?.limit ?? 4;
-      const types = options.types ? [options.types] : allSearchTypes;
-
+    const searchFor = async () => {
+      const types = type ? [type] : allSearchTypes;
       try {
-        dispatch(startSearch({ query, types: options?.types }));
-        const response = spotifyApi.search(query, types, { limit });
-        const result = (await response).body;
-        dispatch(endSearch(result));
+        const result = (await spotifyApi.search(searchquery, types)).body;
+        actions.fetchSucces(result);
       } catch (error) {
-        console.error(error);
+        actions.fetchFail('Not found');
       }
     };
-    searchFor(query, { types });
-  }, [dispatch, query, spotifyApi, types]);
+    searchFor();
+  }, [searchquery, type]);
 
-  return searchResult;
+  return fetchedValue;
 };
 
 export default useSearchResult;
-export { useSearchOptions };
