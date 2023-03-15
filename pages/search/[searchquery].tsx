@@ -12,6 +12,7 @@ const Search: NextPageWithLayout = () => {
 
   if (loading) return <LoadingButton />;
   if (error) return <h2>Something went wrong</h2>;
+  if (!value) return <h2>Nothing found</h2>;
 
   return <SearchResults searchResult={value} />;
 };

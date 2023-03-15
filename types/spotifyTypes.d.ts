@@ -17,6 +17,13 @@ export type SearchCategories =
 export type RepeatState = 'off' | 'context' | 'track';
 
 export type SearchResult = SpotifyApi.SearchResponse;
+export type SearchResponses =
+  | SpotifyApi.ShowObjectSimplified
+  | SpotifyApi.AlbumObjectSimplified
+  | SpotifyApi.TrackObjectSimplified
+  | SpotifyApi.ArtistObjectSimplified
+  | SpotifyApi.EpisodeObjectSimplified
+  | SpotifyApi.PlaylistObjectSimplified;
 
 export type Track = SpotifyApi.TrackObjectFull;
 export type LikedTrack = SpotifyApi.TrackObjectFull & { liked: boolean };

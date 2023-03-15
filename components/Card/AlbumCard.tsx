@@ -1,14 +1,14 @@
 import Artists from '@components/Artists/Artists';
 import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
-import GoCard from '@components/Card/GoCard';
+import GoCard from '@components/Card/GoToCard/GoCard';
 import CoverImage from '@components/CoverImage/CoverImage';
-import { useRouter } from 'next/router';
+import { GoCardProps } from './GoToCard';
 
 type Album = SpotifyApi.AlbumObjectSimplified;
-export default function PlaylistCard({ data }: { data: Album }) {
-  const { id, name, uri, images, artists, release_date } = data;
+
+export default function PlaylistCard({ data, onClick }: GoCardProps<Album>) {
+  const { name, uri, images, artists, release_date } = data;
   const [image] = images;
-  const { push } = useRouter();
 
   return (
     <GoCard
@@ -20,7 +20,7 @@ export default function PlaylistCard({ data }: { data: Album }) {
           <Artists artists={artists} />
         </p>
       }
-      onClick={() => push(`album/${id}`)}
+      onClick={onClick}
     >
       <div className="relative">
         <CoverImage url={image.url} className="aspect-square h-auto w-full" />
