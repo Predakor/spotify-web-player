@@ -1,5 +1,5 @@
 import Artists from '@components/Artists/Artists';
-import LikeButton from '@components/Button/LikedButton';
+import LikeButton from '@components/Button/ToogleButtons/LikedButton';
 import CoverImage from '@components/CoverImage/CoverImage';
 import TrackList from '@components/Playlist/PlaylistTracks/TrackList';
 import TrackRow from '@components/Playlist/PlaylistTracks/TrackRow';

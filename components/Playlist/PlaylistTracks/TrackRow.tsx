@@ -1,4 +1,4 @@
-import { LikeTrackButton } from '@components/Button/LikedButton';
+import { LikeTrackButton } from '@components/Button/ToogleButtons/LikedButton';
 import Track from '@components/Track/Track';
 import { msToText } from '@utils/time';
 import { LikedTrack } from 'types/spotifyTypes';

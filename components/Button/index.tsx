@@ -1,46 +1,16 @@
-import { MouseEvent, ReactNode } from 'react';
+import Button from './Button';
+import LoadingButton from './LoadingButton';
+import LoginButton from './LoginButton';
+import PlaylistPlaybackButton from './PlaylistPlaybackButton';
+import LikeButton from './ToogleButtons/LikedButton';
+import MuteVolumeButton from './ToogleButtons/MuteVolumeButton';
 
-export interface ButtonProps {
-  onClick: VoidFunction;
-  className?: string;
-  disabled?: boolean;
-  hide?: boolean;
-  ariaLabel?: string;
-  ariaPressed?: boolean | 'mixed';
-  ariaExpanded?: boolean;
-  children?: ReactNode;
-  stopPrepagation?: boolean;
-}
+export {
+  LikeButton,
+  LoadingButton,
+  LoginButton,
+  MuteVolumeButton,
+  PlaylistPlaybackButton,
+};
 
-function Button({
-  onClick,
-  className,
-  disabled,
-  hide = false,
-  children,
-  ariaLabel,
-  ariaPressed,
-  ariaExpanded,
-  stopPrepagation,
-}: ButtonProps) {
-  const visible = hide ? 'invisible' : '';
-
-  const clickHandler = (e: MouseEvent) => {
-    if (stopPrepagation) e.stopPropagation();
-    onClick();
-  };
-  return (
-    <button
-      type="button"
-      onClick={(e) => clickHandler(e)}
-      className={`button text-2xl ${className} ${visible}`}
-      disabled={disabled}
-      aria-label={ariaLabel}
-      aria-pressed={ariaPressed}
-      aria-expanded={ariaExpanded}
-    >
-      {children}
-    </button>
-  );
-}
 export default Button;

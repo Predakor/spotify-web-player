@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import MuteVolumeButton from '@components/Button/MuteVolumeButton';
+import MuteVolumeButton from '@components/Button/ToogleButtons/MuteVolumeButton';
 import useSpotify from '@hooks/spotify/useSpotify';
 import { selectActiveDevice } from '@store/devicesSlice';
 
@@ -36,7 +36,11 @@ const VolumeControl = () => {
 
   return (
     <div className="hidden items-center lg:flex">
-      <MuteVolumeButton volume={volume} onClick={muteHandler} />
+      <MuteVolumeButton
+        volume={volume}
+        onClick={muteHandler}
+        disabled={false}
+      />
       <input
         type="range"
         className="range range-primary range-xs"

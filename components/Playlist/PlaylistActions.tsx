@@ -1,6 +1,8 @@
 import Button from '@components/Button';
-import LikeButton, { LikePlaylistButton } from '@components/Button/LikedButton';
 import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
+import LikeButton, {
+  LikePlaylistButton,
+} from '@components/Button/ToogleButtons/LikedButton';
 
 interface Props {
   id: string;

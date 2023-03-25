@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import DropdownButton from '@components/Button/DropdownButton';
+import DropdownButton from '@components/Button/DropdownButtons/DropdownButton';
 import { SpotifyUser } from 'types/spotifyUser';
 import UserAvatar from './UserAvatar';
 import UserDropdown from './UserDropdown';
@@ -13,7 +13,7 @@ function User({ user }: { user: SpotifyUser }) {
   return (
     <div
       className={
-        'dropdown dropdown-end dropdown-bottom ml-auto hidden md:block'
+        'dropdown dropdown-bottom dropdown-end ml-auto hidden md:block'
       }
     >
       <div className="flex items-center gap-2 rounded-full bg-background-200 py-1 px-2 text-xl">

@@ -1,18 +1,19 @@
 import VolumeIcon from '@icons/VolumeIcon';
-import Button, { ButtonProps } from '.';
+import Button from '..';
 
-export interface MuteButtonProps extends ButtonProps {
+interface MuteButtonProps {
+  onClick: VoidFunction;
   volume: number;
+  disabled: boolean;
 }
-function MuteVolumeButton(props: MuteButtonProps) {
-  const { onClick, volume } = props;
 
+function MuteVolumeButton({ onClick, volume, disabled }: MuteButtonProps) {
   return (
     <Button
-      {...props}
       onClick={onClick}
+      disabled={disabled}
       aria-label="Mute/Unmute"
-      ariaPressed={volume <= 0}
+      aria-pressed={volume <= 0}
     >
       <VolumeIcon volume={volume} />
     </Button>

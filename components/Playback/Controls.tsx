@@ -1,10 +1,9 @@
 import { useSelector } from 'react-redux';
-import {
-  BackButton,
-  PlaybackButton,
-  RepeatButton,
+import PlaybackButton, {
   ShuffleButton,
+  PreviousButton,
   SkipButton,
+  RepeatButton,
 } from '@components/Button/PlaybackButtons';
 import useSpotifyControls from '@hooks/spotify/controls/usePlaybackControls';
 import { selectPlaybackData } from '@store/playbackSlice';
@@ -39,13 +38,17 @@ function Controls() {
         shuffleState={shuffle_state}
         disabled={disabled}
       />
-      <BackButton onClick={backHandler} disabled={disabled} />
+
+      <PreviousButton onClick={backHandler} disabled={disabled} />
+
       <PlaybackButton
         onClick={playHandler}
         isPlaying={!is_playing}
         className={'bg-primary-50'}
       />
+
       <SkipButton onClick={skipHandler} disabled={disabled} />
+
       <RepeatButton
         onClick={repeatHandler}
         repeatState={repeat_state}

@@ -2,15 +2,15 @@ import { useSelector } from 'react-redux';
 import useSpotifyControls from '@hooks/spotify/controls/usePlaybackControls';
 import { selectDevices, selectActiveDevice } from '@store/devicesSlice';
 import { selectPlaybackData } from '@store/playbackSlice';
-import { PlaybackButton } from './PlaybackButtons';
+import PlaybackButton from './PlaybackButtons';
 
 interface Props {
   uri: string;
   ariaLabel: string;
   className?: string;
 }
-export default function PlaylistPlaybackButton(props: Props) {
-  const { uri, className = '', ariaLabel } = props;
+function PlaylistPlaybackButton(props: Props) {
+  const { uri, className, ariaLabel } = props;
 
   const { playPlaylist } = useSpotifyControls();
   const { thisDevice } = useSelector(selectDevices);
@@ -34,8 +34,10 @@ export default function PlaylistPlaybackButton(props: Props) {
       onClick={playHandler}
       isPlaying={playlistIsPlaying}
       className={className}
-      ariaLabel={ariaLabel}
-      ariaPressed={playlistIsPlaying}
+      aria-label={ariaLabel}
+      aria-pressed={playlistIsPlaying}
     />
   );
 }
+
+export default PlaylistPlaybackButton;
