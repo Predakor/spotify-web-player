@@ -10,6 +10,7 @@ interface MuteButtonProps {
 function MuteVolumeButton({ onClick, volume, disabled }: MuteButtonProps) {
   return (
     <Button
+      className={disabled ? 'text-text-disabled' : ''}
       onClick={onClick}
       disabled={disabled}
       aria-label="Mute/Unmute"

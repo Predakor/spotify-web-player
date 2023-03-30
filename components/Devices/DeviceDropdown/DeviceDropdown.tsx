@@ -21,14 +21,14 @@ function DeviceMenu({ activeDevice, thisDevice }: DeviceMenuProps) {
       setTransferPending(true);
       await transferPlayback(id);
     } catch (error) {
-      console.error('error in DeviceMenu'); //add error handling;
+      console.error('playback transfer failed'); //add error handling;
     } finally {
       setTransferPending(false);
     }
   };
 
   if (!connectedDevices?.length) {
-    return <div className="animate-ping">loading</div>;
+    return <div className="animate-ping">loading devices</div>;
   }
 
   const excludeDeviced = activeDevice ?? thisDevice;

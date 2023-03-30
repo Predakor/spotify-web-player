@@ -20,7 +20,7 @@ function Devices() {
   const isActiveDevice = id === thisDevice?.id;
 
   return (
-    <div className="dropdown dropdown-end dropdown-top">
+    <div className="dropdown-end dropdown-top dropdown">
       <DeviceButton
         onClick={() => setMenuExpanded((prevState) => !prevState)}
         className={!isActiveDevice ? 'text-primary-500' : ''}

@@ -52,6 +52,7 @@ const useSpotifySDK = ({ volume, getToken }: options) => {
     playerRef.current.on('ready', ({ device_id }) => {
       dispatch(setThisDevice(device_id));
     });
+    playerRef.current.connect();
   }, [dispatch, isReady]);
 
   return playerRef.current;
