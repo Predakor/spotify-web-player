@@ -7,9 +7,9 @@ function PlaylistHeader() {
   const playlistData = usePlaylistInfo();
   const coverTracks = useSelector(selectInView);
 
-  if (!playlistData) return null;
+  if (!playlistData.value) return null;
 
-  const { name, uri } = playlistData;
+  const { name, uri } = playlistData.value;
   return (
     <div
       className={`flex items-center gap-4 text-2xl ${

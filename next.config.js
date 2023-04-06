@@ -16,4 +16,7 @@ module.exports = {
       ],
     },
   },
+  images: {
+    minimumCacheTTL: 86400,
+  },
 };

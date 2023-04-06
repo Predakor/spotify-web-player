@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 
-type Callback = (entry: IntersectionObserverEntry) => void;
-const createObserver = (callback: Callback) => {
+type ObserverCallback = (entry: IntersectionObserverEntry) => void;
+const createObserver = (callback: ObserverCallback) => {
   return new IntersectionObserver(([entry]) => callback(entry));
 };
 
-const useObserver = (callback: Callback) => {
+const useObserver = (callback: ObserverCallback) => {
   const observerRef = useRef(createObserver(callback));
 
   useEffect(() => {

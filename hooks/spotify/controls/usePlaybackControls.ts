@@ -121,7 +121,6 @@ function PlaybackControls() {
     getPlaylistTracks: async (id: string) => {
       try {
         const data = await spotifyApi.getPlaylist(id);
-        //do some dispatch
         return data.body;
       } catch (error) {
         throw error;

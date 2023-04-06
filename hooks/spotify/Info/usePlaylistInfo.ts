@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import useFetchedValue from '@hooks/useFetchedValue';
 import { useRouter } from 'next/router';
 import useSpotifyControls from '../controls/usePlaybackControls';
 
@@ -8,7 +9,7 @@ function usePlaylistInfo() {
   const router = useRouter();
   const { playlistId } = router.query;
 
-  const [playlistData, setPlaylistData] = useState<PlaylistType | null>();
+  const [playlistData, actions] = useFetchedValue<PlaylistType | null>();
   const { getPlaylistTracks } = useSpotifyControls();
 
   useEffect(() => {
@@ -18,13 +19,13 @@ function usePlaylistInfo() {
     const getPlaylist = async () => {
       try {
         const data = await getPlaylistTracks(id);
-        if (data) return setPlaylistData(data);
+        actions.fetchSucces(data);
       } catch (error) {
-        return setPlaylistData(null);
+        actions.fetchFail('There was an error while getting data');
       }
     };
     getPlaylist();
-  }, [getPlaylistTracks, playlistId]);
+  }, [actions, getPlaylistTracks, playlistId]);
   return playlistData;
 }
 export default usePlaylistInfo;

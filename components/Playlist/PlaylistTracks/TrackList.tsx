@@ -5,7 +5,7 @@ import TrackRow from './TrackRow';
 function TrackList({ fetchedTracks }: { fetchedTracks: Track[] }) {
   const { ready, tracks } = useMergeSavedTracks(fetchedTracks);
 
-  if (!ready) {
+  if (!ready && !tracks) {
     return (
       <div className="rounde flex animate-pulse flex-col gap-2 opacity-80">
         <div className="h-16 bg-background-300" />
