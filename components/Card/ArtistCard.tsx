@@ -1,11 +1,11 @@
 import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
 import CoverImage from '@components/CoverImage/CoverImage';
-import { GoCardProps } from './GoToCard';
+import { CardProps } from './ContentCard';
 import GoCard from './GoToCard/GoCard';
 
-type Playlist = SpotifyApi.ArtistObjectFull;
+type Artist = SpotifyApi.ArtistObjectFull;
 
-export default function PlaylistCard({ data, onClick }: GoCardProps<Playlist>) {
+function ArtistCard({ data, onClick }: CardProps<Artist>) {
   const { name, uri, images } = data;
   const [image] = images;
 
@@ -27,3 +27,5 @@ export default function PlaylistCard({ data, onClick }: GoCardProps<Playlist>) {
     </GoCard>
   );
 }
+
+export default ArtistCard;

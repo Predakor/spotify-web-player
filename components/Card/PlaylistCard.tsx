@@ -1,11 +1,11 @@
 import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
 import CoverImage from '@components/CoverImage/CoverImage';
-import { GoCardProps } from './GoToCard';
+import { CardProps } from './ContentCard';
 import GoCard from './GoToCard/GoCard';
 
 type Playlist = SpotifyApi.PlaylistObjectSimplified;
 
-function PlaylistCard({ data, onClick }: GoCardProps<Playlist>) {
+function PlaylistCard({ data, onClick }: CardProps<Playlist>) {
   const { name, description, uri, images } = data;
   const [image] = images;
 

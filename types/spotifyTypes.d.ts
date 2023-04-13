@@ -17,7 +17,7 @@ export type SearchCategories =
 export type RepeatState = 'off' | 'context' | 'track';
 
 export type SearchResult = SpotifyApi.SearchResponse;
-export type SearchResponses =
+export type SearchResponse =
   | SpotifyApi.ShowObjectSimplified
   | SpotifyApi.AlbumObjectSimplified
   | SpotifyApi.TrackObjectSimplified
