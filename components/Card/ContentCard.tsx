@@ -3,6 +3,7 @@ import { SearchResponse as CardData } from 'types/spotifyTypes';
 import AlbumCard from './AlbumCard';
 import ArtistCard from './ArtistCard';
 import PlaylistCard from './PlaylistCard';
+import TrackCard from './TrackCard';
 
 export type CardProps<T> = { data: T; onClick: VoidFunction };
 
@@ -13,7 +14,7 @@ const cards = {
   artist: ArtistCard,
   playlist: PlaylistCard,
   show: MockShelf,
-  track: MockShelf,
+  track: TrackCard,
   episode: MockShelf,
 };
 
