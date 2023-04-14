@@ -5,14 +5,14 @@ import { allCategories } from '@utils/commons';
 import { useRouter } from 'next/router';
 import {
   SearchCategories,
-  SearchResponses,
+  SearchResponse,
   SearchResult,
 } from 'types/spotifyTypes';
 
 interface args {
   id: string;
   category: SearchCategories;
-  item: SearchResponses;
+  item: SearchResponse;
 }
 
 function SearchResults({ searchResult }: { searchResult: SearchResult }) {

@@ -5,12 +5,8 @@ interface FetchedValue<T> {
   loading: boolean;
   error?: string;
 }
-type returnType<T> = [
-  FetchedValue<T>,
-  { fetchSucces: (value: T) => void; fetchFail: (error: string) => void }
-];
 
-function useFetchedValue<T>(initialValue?: T): returnType<T> {
+function useFetchedValue<T>(initialValue?: T) {
   const [fetchedValue, setFetchedValue] = useState<FetchedValue<T>>({
     value: initialValue,
     loading: true,
@@ -31,6 +27,6 @@ function useFetchedValue<T>(initialValue?: T): returnType<T> {
     },
   });
 
-  return [fetchedValue, actions.current];
+  return [fetchedValue, actions.current] as const;
 }
 export default useFetchedValue;

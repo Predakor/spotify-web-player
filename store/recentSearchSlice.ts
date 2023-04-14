@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppState } from 'store';
-import { SearchResponses } from 'types/spotifyTypes';
+import { SearchResponse } from 'types/spotifyTypes';
 import { saveState } from './localStorage';
 
 export const recentSearchSlice = createSlice({
   name: 'recentSearches',
-  initialState: [] as SearchResponses[],
+  initialState: [] as SearchResponse[],
   reducers: {
-    addSearch: (state, action: { payload: SearchResponses }) => {
+    addSearch: (state, action: { payload: SearchResponse }) => {
       state.unshift(action.payload);
       saveState({ search: state });
     },

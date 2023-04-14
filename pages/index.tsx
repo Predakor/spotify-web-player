@@ -1,46 +1,58 @@
-import { useEffect, useState } from 'react';
-import PlaylistCard from '@components/Card/PlaylistCard';
-import useSpotify from '@hooks/spotify/useSpotify';
+import { ContentCard } from '@components/Card';
+import Card from '@components/Card/ContentCard';
+import Shelf from '@components/Shelf/Shelf';
+import { useFeaturedPlaylists } from '@hooks/spotify/Info';
+import useNewReleases from '@hooks/spotify/Info/useNewReleases';
+import useTopArtists from '@hooks/spotify/Info/useTopArtists';
+import useTopItems from '@hooks/spotify/Info/useTopItems';
+import Loading from 'Layout/Loading';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { NextPageWithLayout } from './_app';
 
 const Home: NextPageWithLayout = () => {
-  const spotifyApi = useSpotify();
-  const [featuredPlaylists, setFeaturedPlaylists] = useState<
-    SpotifyApi.PlaylistObjectSimplified[]
-  >([]);
   const { push } = useRouter();
+  const { value, loading, error } = useFeaturedPlaylists();
+  const { value: releases } = useNewReleases();
+  const { value: items } = useTopItems();
+  const { value: artists } = useTopArtists();
 
-  useEffect(() => {
-    spotifyApi.getFeaturedPlaylists().then((response) => {
-      try {
-        setFeaturedPlaylists(response.body.playlists.items);
-      } catch (error) {
-        console.log(error);
-      }
-    });
-  }, [spotifyApi]);
+  if (loading) return <Loading />;
+  if (error) return <div>{error}</div>;
+  if (!value) return <div>{'Nothing Found'}</div>;
+
+  const { message, playlists } = value;
 
   return (
     <>
       <Head>
         <title>Discofy</title>
-        <meta
-          name="description"
-          content="Custom spotify web player build using react with next.js "
-          lang="en"
-        />
       </Head>
-      <section className="grid grid-cols-2 gap-10 p-3 md:grid-cols-3 lg:grid-cols-4 ">
-        {featuredPlaylists &&
-          featuredPlaylists.map((playlist) => (
-            <PlaylistCard
-              data={playlist}
-              key={playlist.id}
-              onClick={() => push(`/playlist/${playlist.id}`)}
-            />
+      <section className="flex flex-col gap-8">
+        <Shelf title={message ?? ''}>
+          {playlists.items.map((playlist) => (
+            <Card data={playlist} onClick={push} key={playlist.id} />
           ))}
+        </Shelf>
+
+        <Shelf title={releases?.message ?? 'New releases'}>
+          {releases?.albums.items.map((item) => (
+            <ContentCard data={item} onClick={push} key={item.id} />
+          ))}
+        </Shelf>
+
+        <Shelf title={'Your favourite '}>
+          {items &&
+            items.items.map((item) => (
+              <Card data={item} onClick={push} key={item.id} />
+            ))}
+        </Shelf>
+
+        <Shelf title={'Your favorite artists'}>
+          {artists?.items.map((item) => (
+            <Card data={item} onClick={push} key={item.id} />
+          ))}
+        </Shelf>
       </section>
     </>
   );

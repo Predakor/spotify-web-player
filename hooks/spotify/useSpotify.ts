@@ -13,7 +13,7 @@ export default function useSpotify() {
     if (session.error === 'RefreshAccesTokenError') signIn();
 
     spotifyApi.setAccessToken(session.user.accesToken);
-    spotifyApi.setRefreshToken(session.user.accesToken);
+    spotifyApi.setRefreshToken(session.user.refreshToken);
   }, [session]);
   return spotifyApi;
 }
