@@ -48,7 +48,7 @@ const useSpotifySDK = ({ volume, getToken }: options) => {
   }, []);
 
   useEffect(() => {
-    if (!playerRef.current || !isReady) return;
+    if (!playerRef.current) return;
     playerRef.current.on('ready', ({ device_id }) => {
       dispatch(setThisDevice(device_id));
     });

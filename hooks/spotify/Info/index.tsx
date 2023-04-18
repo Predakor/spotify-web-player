@@ -3,6 +3,7 @@ import useArtistInfo from './useArtistInfo';
 import useFeaturedPlaylists from './useFeaturedPlaylists';
 import usePlaylistInfo from './usePlaylistInfo';
 import useRecentTracks from './useRecentTracks';
+import useTopTracks from './useTopTracks';
 
 export {
   useAlbumInfo,
@@ -10,4 +11,5 @@ export {
   useFeaturedPlaylists,
   usePlaylistInfo,
   useRecentTracks,
+  useTopTracks,
 };

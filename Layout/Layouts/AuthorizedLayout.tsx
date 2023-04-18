@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 import useSpotifySDK from '@hooks/spotify/useSpotifySDK';
-import { getLocalVolume } from '@utils/getLocalValue';
 import spotifyApi from '@utils/spotify';
 import Aside from 'Layout/Aside';
 import Background from 'Layout/Background';
 import Main from 'Layout/Main';
+import Head from 'next/head';
 import { SpotifyUser } from 'types/spotifyUser';
-import { Header, FoterWraper } from './Layout';
+import { FoterWraper, Header } from './Layout';
 
 interface Props {
   user: SpotifyUser;

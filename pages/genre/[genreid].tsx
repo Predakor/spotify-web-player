@@ -1,14 +1,13 @@
+import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import useCategoryInfo from '@hooks/spotify/Info/useCategoryInfo';
-import Loading from 'Layout/Loading';
 
 function CategoryPage() {
-  const { value: category, loading, error } = useCategoryInfo();
+  const fetchingGenre = useCategoryInfo();
 
-  if (loading) return <Loading />;
-  if (error) return <h2>There was an error</h2>;
-  if (!category) return <h2>Nothing found</h2>;
-
-
-  return <div>{category.name}</div>;
+  return (
+    <FetchingComponent fetchValue={fetchingGenre}>
+      {(genre) => <h2>{genre.name}</h2>}
+    </FetchingComponent>
+  );
 }
 export default CategoryPage;

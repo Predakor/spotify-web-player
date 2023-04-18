@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useFetchedValue from '@hooks/useFetchedValue';
+import useFetchedValue from '@hooks/fetch/useFetchedValue';
 import { allSearchTypes, searchParams } from '@utils/commons';
 import { useRouter } from 'next/router';
 import useSpotify from './useSpotify';

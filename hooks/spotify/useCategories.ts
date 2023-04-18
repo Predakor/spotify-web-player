@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useFetchedValue from '@hooks/useFetchedValue';
+import useFetchedValue from '@hooks/fetch/useFetchedValue';
 import useSpotify from './useSpotify';
 
 type Categories = SpotifyApi.MultipleCategoriesResponse;

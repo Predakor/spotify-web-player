@@ -2,24 +2,24 @@ import { useEffect } from 'react';
 import useFetchedValue from '@hooks/fetch/useFetchedValue';
 import useSpotify from '../useSpotify';
 
-type TopTracks = SpotifyApi.UsersTopArtistsResponse;
-function useTopArtists() {
-  const [artists, actions] = useFetchedValue<TopTracks>();
+type ReleatedArtists = SpotifyApi.ArtistsRelatedArtistsResponse;
+function useReleatedArtists(id: string) {
+  const [artists, actions] = useFetchedValue<ReleatedArtists>();
   const spotifyApi = useSpotify();
 
   useEffect(() => {
     const fetch = async () => {
       try {
-        const request = await spotifyApi.getMyTopArtists({ limit: 10 });
+        const request = await spotifyApi.getArtistRelatedArtists(id);
         actions.fetchSucces(request.body);
       } catch (error) {
         actions.fetchFail(`${error}`);
       }
     };
     fetch();
-  }, [actions, spotifyApi]);
+  }, [actions, id, spotifyApi]);
 
   return artists;
 }
 
-export default useTopArtists;
+export default useReleatedArtists;

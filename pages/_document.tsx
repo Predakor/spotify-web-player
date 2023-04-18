@@ -5,6 +5,7 @@ export default function Document() {
     <Html className="bg-base-300" lang="en" data-theme="forest">
       <Head>
         <meta
+          title="Discofy"
           name="description"
           content="Custom spotify web player build using react with next.js "
           lang="en"

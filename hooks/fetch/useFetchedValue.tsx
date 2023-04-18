@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-interface FetchedValue<T> {
+export interface FetchedValue<T> {
   value?: T;
   loading: boolean;
   error?: string;

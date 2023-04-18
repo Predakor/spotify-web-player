@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useFetchedValue from '@hooks/useFetchedValue';
+import useFetchedValue from '@hooks/fetch/useFetchedValue';
 import { useRouter } from 'next/router';
 import useSpotify from '../useSpotify';
 
@@ -11,10 +11,9 @@ function useCategoryInfo(id?: string) {
   const [category, actions] = useFetchedValue<Category>();
 
   useEffect(() => {
-    const genreID = id || pageID;
-    if (!genreID) return;
-
     const fetchCategoryData = async () => {
+      const genreID = id || pageID;
+      if (!genreID) return;
       try {
         const request = await spotifyApi.getCategory(genreID.toString());
         actions.fetchSucces(request.body);
