@@ -1,36 +1,27 @@
-import { useEffect, useState } from 'react';
 import CategoryCard from '@components/Card/CategoryCard';
 import Shelf from '@components/Shelf/Shelf';
-import useSpotify from '@hooks/spotify/useSpotify';
-import { PagingCategories } from '../../pages/search/index';
+import useCategories from '@hooks/spotify/useCategories';
+import Loading from 'Layout/Loading';
+import { useRouter } from 'next/router';
 
-export function BrowseGenres() {
-  const spotifyApi = useSpotify();
-  const [pagingCategories, setPagingCategories] = useState<PagingCategories>();
+function BrowseGenres() {
+  const { push } = useRouter();
+  const { value: categories, loading, error } = useCategories();
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await spotifyApi.getCategories();
-        setPagingCategories(response.body);
-      } catch (error) {}
-    };
-    fetchCategories();
-  }, [spotifyApi]);
-
-  if (!pagingCategories?.categories) return null;
+  if (loading) return <Loading />;
+  if (error) return <h2>There was an error</h2>;
+  if (!categories) return <h2>Nothing found</h2>;
 
   return (
     <Shelf title="browse all">
-      {pagingCategories.categories.items.map((category) => (
+      {categories.categories.items.map((category) => (
         <CategoryCard
           category={category}
-          onClick={() => {
-            1;
-          }}
+          onClick={() => push(`/genre/${category.id}`)}
           key={category.id}
         />
       ))}
     </Shelf>
   );
 }
+export default BrowseGenres;
