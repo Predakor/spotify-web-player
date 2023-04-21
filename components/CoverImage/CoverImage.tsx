@@ -10,7 +10,7 @@ function CoverImage({ url, alt = '', className = '' }: Props) {
   if (!url) return <p>No url provided</p>;
 
   return (
-    <figure className={`relative h-full w-full ${className}`}>
+    <figure className={`relative w-full ${className}`}>
       <Image src={url} layout={'fill'} objectFit={'cover'} alt={alt} />
     </figure>
   );

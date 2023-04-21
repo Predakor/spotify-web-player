@@ -3,14 +3,14 @@ import { ReactNode } from 'react';
 interface Props {
   children: ReactNode;
   title: string;
+  vertical?: boolean;
 }
-function Shelf({ children, title }: Props) {
+function Shelf({ children, title, vertical }: Props) {
+  const orientation = vertical ? '' : ' auto-cols-fr grid-flow-col';
   return (
     <section aria-label={title}>
       <h2 className="py-4 text-3xl font-semibold">{title}</h2>
-      <div className="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
-        {children}
-      </div>
+      <div className={`grid gap-4 ${orientation}`}>{children}</div>
     </section>
   );
 }

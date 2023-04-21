@@ -1,6 +1,9 @@
 import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
+import PageActions from '@components/Page/PageActions';
+import PageContent from '@components/Page/PageContent';
+import PageHeader from '@components/Page/PageHeader';
+import PlaylistDescription from '@components/Playlist/PlaylistDetails/PlaylistDetails';
 import PlaylistHeader from '@components/Playlist/PlaylistHeader';
-import PlaylistPanel from '@components/Playlist/PlaylistPanel';
 import PlaylistTracks from '@components/Playlist/PlaylistTracks/PlaylistTracks';
 import { usePlaylistInfo } from '@hooks/spotify/Info';
 import Layout from 'Layout/Layouts/Layout';
@@ -17,8 +20,15 @@ const Playlist: NextPageWithLayout = () => {
           <Head>
             <title>{playlist.name}</title>
           </Head>
-          <PlaylistPanel playlist={playlist} />
-          <PlaylistTracks playlist={playlist} />
+          <PageHeader images={playlist.images}>
+            <PlaylistDescription playlist={playlist} />
+          </PageHeader>
+
+          <PageActions uri={playlist.uri} actions={'play'} moreActions={[]} />
+
+          <PageContent>
+            <PlaylistTracks playlist={playlist} />
+          </PageContent>
         </>
       )}
     </FetchingComponent>

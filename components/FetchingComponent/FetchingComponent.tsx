@@ -22,8 +22,6 @@ function FetchingComponent<T>({
 }: Props<T>) {
   const { loading, error, value } = fetchValue;
 
-  console.log(1);
-
   if (loading) return onLoading || <Loading />;
   if (error) return onError || <h2>something went wrong</h2>;
   if (!value) return onNull || <h2>Nothing found</h2>;

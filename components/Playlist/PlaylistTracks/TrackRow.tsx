@@ -1,3 +1,5 @@
+import Album from '@components/Album/Album';
+import MoreOptionsButton from '@components/Button/DropdownButtons/MoreOptionsButton';
 import { LikeTrackButton } from '@components/Button/ToogleButtons/LikedButton';
 import Track from '@components/Track/Track';
 import { msToText } from '@utils/time';
@@ -7,6 +9,7 @@ interface TrackRowProps {
   track: LikedTrack;
   index: number;
 }
+
 function TrackRow({ track, index }: TrackRowProps) {
   const { duration_ms, album } = track;
 
@@ -29,16 +32,14 @@ function TrackRow({ track, index }: TrackRowProps) {
         isLiked={track.liked}
         ariaLabel={'Follow/Unfollow track'}
       />
-      <p className="hidden md:order-2 md:block" aria-label="Album name">
-        {album.name}
-      </p>
+      <Album className="hidden hover:link md:order-2 md:block" album={album} />
       <p className="hidden md:order-4 md:block" aria-label="Song duration">
         {msToText(duration_ms)}
       </p>
-      <button
-        className="order-last transition-opacity duration-100 lg:opacity-0 lg:group-hover:opacity-100"
-        aria-label="More actions"
-      ></button>
+      <MoreOptionsButton
+        className="dropdown-left order-last transition-opacity duration-100 lg:opacity-0 lg:group-hover:opacity-100"
+        actions={<p></p>}
+      />
     </article>
   );
 }

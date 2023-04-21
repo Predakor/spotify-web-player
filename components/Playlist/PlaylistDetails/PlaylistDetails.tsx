@@ -1,10 +1,14 @@
 import Artists from '@components/Artists/Artists';
 import TotalPlayTime from '@components/TotalPlayTime/TotalPlayTime';
 import usePlaylistArtists from '@hooks/spotify/usePlaylistArtists';
-import { PlaylistType } from '../PlaylistPanel';
+import Playlist from 'pages/playlist';
 import Author from './PlaylistAuthor';
 
-function PlaylistDescription({ playlist }: PlaylistType) {
+interface Props {
+  playlist: SpotifyApi.PlaylistObjectFull;
+}
+
+function PlaylistDescription({ playlist }: Props) {
   const {
     name,
     type,
@@ -21,7 +25,7 @@ function PlaylistDescription({ playlist }: PlaylistType) {
   const playlistType = `${playlistAcces} ${type}`.toUpperCase();
 
   const playlistDuration = tracks.items.reduce(
-    (sum, { track }) => (sum += track?.duration_ms ?? 0),
+    (sum: number, { track }) => (sum += track?.duration_ms ?? 0),
     0
   );
 
