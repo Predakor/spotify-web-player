@@ -2,9 +2,8 @@ import { ReactNode } from 'react';
 import useSpotifySDK from '@hooks/spotify/useSpotifySDK';
 import spotifyApi from '@utils/spotify';
 import Aside from 'Layout/Aside';
-import Background from 'Layout/Background';
+import DynamicBackground from 'Layout/DynamicBackground';
 import Main from 'Layout/Main';
-import Head from 'next/head';
 import { SpotifyUser } from 'types/spotifyUser';
 import { FoterWraper, Header } from './Layout';
 
@@ -22,7 +21,7 @@ function AuthorizedLayout({ user, children, extendedHeader }: Props) {
 
   return (
     <div className="grid min-h-screen grid-cols-1 grid-rows-[auto,1fr,auto] lg:grid-cols-[auto,1fr]">
-      <Background />
+      <DynamicBackground />
       <Aside />
       <Header user={user}>{extendedHeader}</Header>
       <Main>{children}</Main>

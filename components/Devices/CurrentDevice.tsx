@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import PlaybackIndicator from '@components/PlaybackIndicator/PlaybackIndicator';
 import { Device } from '@hooks/spotify/useDevices';
 import DeviceIcons from '@icons/DeviceIcons';
 import { selectIsPlaying } from '@store/playbackSlice';
@@ -14,7 +15,7 @@ function CurrentDevice({ activeDevice, thisDevice }: Props) {
   if (!currentDevice) return null;
 
   const icon = isPlaying ? (
-    <div>PlaybackICOn</div>
+    <PlaybackIndicator />
   ) : (
     <DeviceIcons device={currentDevice.type} />
   );
