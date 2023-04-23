@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { AppState } from 'store';
+import { AppState } from '.';
 
 type Device = SpotifyApi.UserDevice;
 export type deviceState = {

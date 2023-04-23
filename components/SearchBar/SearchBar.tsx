@@ -30,6 +30,7 @@ function SearchBar() {
         type="search"
         placeholder={'Search for songs'}
         onChange={(e) => setInputValue(e.target.value)}
+        value={inputValue}
       />
     </form>
   );

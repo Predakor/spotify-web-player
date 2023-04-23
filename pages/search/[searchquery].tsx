@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import LoadingButton from '@components/Button/LoadingButton';
+import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import SearchBar from '@components/SearchBar/SearchBar';
 import SearchCategories from '@components/SearchCategories/SearchCategories';
 import SearchResults from '@components/SearchResults/SearchResults';
@@ -8,13 +8,13 @@ import Layout from 'Layout/Layouts/Layout';
 import { NextPageWithLayout } from '../_app';
 
 const Search: NextPageWithLayout = () => {
-  const { value, loading, error } = useSearchResult();
+  const fetchingResults = useSearchResult();
 
-  if (loading) return <LoadingButton />;
-  if (error) return <h2>Something went wrong</h2>;
-  if (!value) return <h2>Nothing found</h2>;
-
-  return <SearchResults searchResult={value} />;
+  return (
+    <FetchingComponent fetchValue={fetchingResults}>
+      {(results) => <SearchResults searchResult={results} />}
+    </FetchingComponent>
+  );
 };
 
 Search.getLayout = (page: ReactElement) => (

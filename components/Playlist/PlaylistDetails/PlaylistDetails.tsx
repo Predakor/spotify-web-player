@@ -1,7 +1,6 @@
 import Artists from '@components/Artists/Artists';
 import TotalPlayTime from '@components/TotalPlayTime/TotalPlayTime';
 import usePlaylistArtists from '@hooks/spotify/usePlaylistArtists';
-import Playlist from 'pages/playlist';
 import Author from './PlaylistAuthor';
 
 interface Props {
@@ -31,7 +30,7 @@ function PlaylistDescription({ playlist }: Props) {
 
   return (
     <section
-      className="bg flex flex-col items-stretch gap-4 text-base-content"
+      className="flex flex-col items-stretch gap-4 text-base-content"
       aria-label="Playlist details"
     >
       <p className="font-bold lg:text-2xl">{playlistType}</p>

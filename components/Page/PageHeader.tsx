@@ -8,6 +8,7 @@ interface Props {
   children: ReactElement;
   images: SpotifyApi.ImageObject[];
 }
+
 function PageHeader({ children, images }: Props) {
   const targetRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
