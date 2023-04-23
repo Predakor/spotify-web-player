@@ -15,7 +15,7 @@ function SearchBar() {
 
   return (
     <form
-      className="flex flex-1 items-center gap-2 rounded bg-white text-2xl md:flex-grow-0 md:rounded-full"
+      className="flex flex-1 items-center gap-2 rounded bg-white text-2xl md:flex-none  md:rounded-full"
       aria-label="Searchbar"
       onSubmit={(e) => {
         e.preventDefault();
@@ -26,11 +26,13 @@ function SearchBar() {
         <SearchIcon active={false} />
       </span>
       <input
-        className="flex-1 bg-transparent py-2 text-black outline-none"
+        id="search"
         type="search"
-        placeholder={'Search for songs'}
+        className="w-full bg-transparent py-2 text-black outline-none"
         onChange={(e) => setInputValue(e.target.value)}
+        placeholder={'Search for songs'}
         value={inputValue}
+        autoFocus
       />
     </form>
   );
