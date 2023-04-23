@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import PlaybackButton from '@components/Button/PlaybackButtons';
 import { LikeTrackButton } from '@components/Button/ToogleButtons/LikedButton';
-import Devices from '@components/Devices/Devices';
+import Devices from '@components/Devices/DevicesDropdown';
 import Track from '@components/Track/Track';
 import { usePlaybackControls } from '@hooks/spotify/controls';
 import { selectPlaybackData, selectTrack } from '@store/playbackSlice';

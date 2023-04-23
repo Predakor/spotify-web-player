@@ -1,28 +1,22 @@
-import { useState } from 'react';
-import DropdownButton from '@components/Button/DropdownButtons/DropdownButton';
+import Dropdown from '@components/Dropdown/Dropdown';
 import { SpotifyUser } from 'types/spotifyUser';
 import UserAvatar from './UserAvatar';
-import UserDropdown from './UserDropdown';
 
 function User({ user }: { user: SpotifyUser }) {
   const { name, image } = user;
-  const [expanded, setExpanded] = useState(false);
-
-  const toogleDropdown = () => setExpanded((prevState) => !prevState);
 
   return (
-    <div
-      className={
-        'dropdown dropdown-bottom dropdown-end ml-auto hidden md:block'
-      }
-    >
-      <div className="flex items-center gap-2 rounded-full bg-background-200 py-1 px-2 text-xl">
-        <UserAvatar imageURL={image} />
-        <p className="font-semibold text-text-important">{name}</p>
-        <DropdownButton onClick={toogleDropdown} expanded={expanded} />
-        <UserDropdown />
-      </div>
-    </div>
+    <section className="dropdown-end dropdown dropdown-bottom ml-auto flex items-center gap-2 rounded-full bg-background-200 p-0.5 text-xl">
+      <UserAvatar imageURL={image} />
+      <p className="font-semibold text-text-important">{name}</p>
+      <Dropdown customParent>
+        <ul className="bg-background-200 p-2 ">
+          <li tabIndex={0}>Profile</li>
+          <li tabIndex={0}>Settings</li>
+          <li tabIndex={0}>Log out</li>
+        </ul>
+      </Dropdown>
+    </section>
   );
 }
 export default User;

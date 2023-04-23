@@ -1,27 +1,32 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, ReactElement } from 'react';
 import DropdownIcon from '@icons/DropdownIcon';
 
 interface Props {
-  onClick: () => void;
   expanded: boolean;
+  onClick?: () => void;
+  children?: ReactElement;
 }
-function DropdownButton({ onClick, expanded = false }: Props) {
+
+function DropdownButton({ expanded, onClick, children }: Props) {
   const clickHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    if (expanded && document.activeElement === e.currentTarget) {
+    const hasFocus = document.activeElement === e.currentTarget;
+    if (expanded && hasFocus) {
       e.currentTarget.blur();
     }
-    onClick();
+    onClick && onClick();
   };
 
   return (
     <button
+      className="button"
       onClick={(e) => clickHandler(e)}
       aria-label={'Open/close dropdown menu'}
       aria-pressed={expanded}
       role="button"
     >
-      <DropdownIcon expanded={expanded} />
+      {children ?? <DropdownIcon expanded={expanded} />}
     </button>
   );
 }
+
 export default DropdownButton;

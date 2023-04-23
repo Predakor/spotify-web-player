@@ -1,4 +1,4 @@
-import Devices from '@components/Devices/Devices';
+import Devices from '@components/Devices/DevicesDropdown';
 import Controls from '@components/Playback/Controls';
 import PlaybackProgress from '@components/Playback/PlaybackProgress';
 import CurrentTrack from '@components/Track/CurrentTrack';

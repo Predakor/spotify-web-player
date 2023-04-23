@@ -5,7 +5,7 @@ import {
   MdOutlineSpeaker,
 } from 'react-icons/md';
 
-export type DeviceType = 'computer' | 'smartphone' | 'speaker';
+type DeviceType = 'computer' | 'smartphone' | 'speaker';
 function DeviceIcons({ device }: { device?: DeviceType | string }) {
   if (!device) return <MdDevicesOther />;
   const devices = {

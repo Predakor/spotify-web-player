@@ -1,38 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import DeviceButton from '@components/Button/DeviceButton';
-import useDeviceControls from '@hooks/spotify/controls/useDeviceControls';
+import { useDeviceControls } from '@hooks/spotify/controls';
 import { selectActiveDevice, selectThisDevice } from '@store/devicesSlice';
-import DeviceMenu from './DeviceDropdown/DeviceDropdown';
+import DeviceMenu from './DeviceMenu';
 
-function Devices() {
+function DevicesDropdown() {
   const thisDevice = useSelector(selectThisDevice);
   const activeDevice = useSelector(selectActiveDevice);
-
-  const { getDevices } = useDeviceControls();
   const [menuExpanded, setMenuExpanded] = useState(false);
-
-  useEffect(() => {
-    if (menuExpanded) getDevices();
-  }, [getDevices, menuExpanded]);
+  const { getDevices } = useDeviceControls();
 
   const { id, type } = activeDevice ?? {};
   const isActiveDevice = id === thisDevice?.id;
 
+  const clickHandler = () => {
+    getDevices();
+    setMenuExpanded((prevState) => !prevState);
+  };
+
   return (
-    <div className="dropdown-end dropdown-top dropdown">
+    <div className="dropdown-top dropdown-end dropdown">
       <DeviceButton
-        onClick={() => setMenuExpanded((prevState) => !prevState)}
+        onClick={clickHandler}
         className={!isActiveDevice ? 'text-primary-500' : ''}
         menuExpanded={menuExpanded}
         deviceType={type}
       />
-
-      {thisDevice?.id && (
-        <DeviceMenu activeDevice={activeDevice} thisDevice={thisDevice} />
-      )}
+      <DeviceMenu thisDevice={thisDevice} />
     </div>
   );
 }
 
-export default Devices;
+export default DevicesDropdown;
