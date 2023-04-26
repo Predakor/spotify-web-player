@@ -106,18 +106,6 @@ function PlaybackControls() {
         throw error;
       }
     },
-    getUserPlaylists: async (
-      user?: string,
-      options?: { limit?: number; offset?: number }
-    ) => {
-      try {
-        if (!user) return spotifyApi.getUserPlaylists();
-        return spotifyApi.getUserPlaylists(user, options);
-      } catch (error) {
-        console.error('error in useSpotifyControls');
-        throw error;
-      }
-    },
     getPlaylistTracks: async (id: string) => {
       try {
         const data = await spotifyApi.getPlaylist(id);

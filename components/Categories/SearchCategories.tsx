@@ -1,24 +1,8 @@
 import { allSearchTypes, searchParams } from '@utils/commons';
 import { useRouter } from 'next/router';
 import { SearchType } from 'types/spotifyTypes';
-
-interface Props {
-  active: boolean;
-  children: string;
-  onClick: VoidFunction;
-}
-
-function CategoryButton({ active, children, onClick }: Props) {
-  return (
-    <button
-      className={`btn-outline btn ${active ? 'btn-active' : ''}`}
-      onClick={onClick}
-      type={'button'}
-    >
-      {children}
-    </button>
-  );
-}
+import CategoriesList from './CategoriesList';
+import CategoryButton from './CategoryButton';
 
 function SearchCategories() {
   const { push, query } = useRouter();
@@ -37,15 +21,11 @@ function SearchCategories() {
         All
       </CategoryButton>
 
-      {allSearchTypes.map((category) => (
-        <CategoryButton
-          onClick={() => setCategory(category)}
-          key={category}
-          active={type === category}
-        >
-          {`${category}s`}
-        </CategoryButton>
-      ))}
+      <CategoriesList
+        categories={allSearchTypes.map((category) => ({ name: category }))}
+        currentCategory={type}
+        onClick={(category) => setCategory(category as SearchType)}
+      />
     </section>
   );
 }

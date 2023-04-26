@@ -1,37 +1,24 @@
-import { useEffect, useState } from 'react';
+import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import NavLink from '@components/NavLink/NavLink';
-import useSpotifyControls from '@hooks/spotify/controls/usePlaybackControls';
-
-type PlaylistType = SpotifyApi.PlaylistObjectSimplified;
+import useUserPlaylists from '@hooks/spotify/Info/useUserPlaylists';
 
 function UserPlaylists({ activePath }: { activePath: string }) {
-  const { getUserPlaylists } = useSpotifyControls();
-  const [playlists, setPlaylists] = useState<PlaylistType[]>();
-
-  useEffect(() => {
-    getUserPlaylists()
-      .then((result) => {
-        const { items } = result.body;
-        setPlaylists(items);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
-
-  if (!playlists) return <p className="animate-pulse">loading</p>;
-  if (!playlists.length) return <p>your playlist will be here</p>;
+  const fetchingPLaylists = useUserPlaylists();
 
   return (
-    <nav className="menu gap-1" aria-label="playlist">
-      {playlists.map((playlist) => {
-        const { id, name } = playlist;
-        const href = `/playlist/${id}`;
-        const active = activePath === href;
+    <FetchingComponent fetchValue={fetchingPLaylists}>
+      {({ items }) => (
+        <nav className="menu gap-1" aria-label="List of playlists">
+          {items.map((playlist) => {
+            const { id, name } = playlist;
+            const href = `/playlist/${id}`;
+            const active = activePath === href;
 
-        return <NavLink href={href} text={name} active={active} key={id} />;
-      })}
-    </nav>
+            return <NavLink href={href} text={name} active={active} key={id} />;
+          })}
+        </nav>
+      )}
+    </FetchingComponent>
   );
 }
 export default UserPlaylists;
