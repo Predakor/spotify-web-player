@@ -1,9 +1,10 @@
+import { navItemData } from '@utils/navData';
 import NavItems from './NavItems';
 
 function Nav({ pathname }: { pathname: string }) {
   return (
     <nav className="menu text-2xl" aria-label="primary">
-      <NavItems activePage={pathname} />
+      <NavItems navData={navItemData} activePage={pathname} />
     </nav>
   );
 }

@@ -1,24 +1,22 @@
-import { ReactNode } from 'react';
 import Link from 'next/link';
 
 export interface NavLinkProps {
   href: string;
+  text: string;
   active: boolean;
-  text?: string;
-  children?: ReactNode;
+  activeStyles?: string;
 }
 
-function NavLink({ href, active, text, children }: NavLinkProps) {
-  const activeStyle = active ? 'active font-bold' : '';
+function NavLink({ href, text, active, activeStyles = '' }: NavLinkProps) {
+  const activeStyle = active ? `active font-bold ${activeStyles}` : '';
 
   return (
     <Link href={href}>
       <a
-        className={`lg:flex lg:items-center lg:gap-2 ${activeStyle} transition-colors hover:text-primary-focus`}
+        className={`${activeStyle} transition-colors hover:text-primary-focus`}
         aria-label={`go to ${text} page`}
       >
-        {children}
-        {text && <p>{text}</p>}
+        {text}
       </a>
     </Link>
   );

@@ -22,7 +22,7 @@ function FetchingComponent<T>({
 }: Props<T>) {
   const { loading, error, value } = fetchValue;
 
-  if (loading) return onLoading || <Loading />;
+  if (loading && !value) return onLoading || <Loading />;
   if (error) return onError || <h2>something went wrong</h2>;
   if (!value) return onNull || <h2>Nothing found</h2>;
   return children(value as unknown as NonNullable<T>);

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import LibraryCategories from '@components/Categories/LibraryCategories';
+import LibraryCategories from '@components/Categories/LibraryNav';
 import Layout from 'Layout/Layouts';
 
 const Albums = ({}) => {

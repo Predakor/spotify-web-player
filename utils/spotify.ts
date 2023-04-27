@@ -11,6 +11,9 @@ const scopes = [
   'user-read-playback-state',
   'user-modify-playback-state',
   'user-read-recently-played',
+  'playlist-read-collaborative',
+  'playlist-modify-private',
+  'playlist-read-private',
 ].join(',');
 const params = {
   scope: scopes,
