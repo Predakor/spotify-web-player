@@ -3,14 +3,17 @@ import { idToHsl } from '@utils/idToColor';
 import { useRouter } from 'next/router';
 
 interface options {
+  id?: string;
   saturation?: number;
   lightness?: number;
 }
 
-function usePageColor({ saturation = 70, lightness = 30 }: options = {}) {
+function usePageColor({ id, saturation = 70, lightness = 30 }: options = {}) {
   const [pageColor, setPageColor] = useState<string>();
   const { query, asPath } = useRouter();
-  const [id] = Object.values(query);
+  const [pageID] = Object.values(query);
+
+  id ??= pageID?.toString();
 
   useEffect(() => {
     const defindedColor = staticBackground[asPath];
