@@ -17,11 +17,5 @@ export function idToHsl(id: string) {
   const firstChar = _firstChar();
   const sum = firstNum * firstChar * 0.7;
 
-  console.log(firstNum, firstChar);
-
-  return [
-    clamp(sum, 0, 360),
-    clamp(firstNum, 60, 100),
-    clamp(firstChar, 25, 55),
-  ];
+  return Math.floor(clamp(sum, 0, 360));
 }

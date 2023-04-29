@@ -12,7 +12,7 @@ function Shelf({ children, title, vertical }: Props) {
   return (
     <section aria-label={title}>
       <h2 className="py-4 text-3xl font-semibold">{title}</h2>
-      <div className={`grid gap-4  overflow-clip ${orientation}`}>
+      <div className={`grid gap-4 overflow-clip ${orientation}`}>
         {children}
       </div>
     </section>

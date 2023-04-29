@@ -6,7 +6,7 @@ import { changeInView } from '@store/scrollSlice';
 
 interface Props {
   children: ReactElement;
-  images: SpotifyApi.ImageObject[];
+  images?: SpotifyApi.ImageObject[];
   className?: string;
   customImage?: ReactNode;
 }
@@ -26,14 +26,15 @@ function PageHeader({ children, images, className, customImage }: Props) {
     };
   }, [observer]);
 
+  const imageURL = images?.at(0)?.url;
+
   return (
     <header className="md:grid-cols-[auto,1fr] grid gap-8 p-4" ref={targetRef}>
-      {customImage ?? (
-        <CoverImage
-          url={images.at(0)?.url}
-          className="aspect-square h-[30vh]"
-        />
+      {imageURL && (
+        <CoverImage url={imageURL} className="aspect-square h-[30vh]" />
       )}
+      {customImage && customImage}
+
       <section className={className ?? ''} ref={targetRef}>
         {children}
       </section>

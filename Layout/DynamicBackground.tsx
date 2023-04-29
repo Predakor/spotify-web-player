@@ -1,32 +1,16 @@
-import { idToHsl } from '@utils/idToColor';
-import { useRouter } from 'next/router';
+import usePageColor from '@hooks/usePageColor';
 
 function DynamicBackground() {
-  const { query, asPath } = useRouter();
-  const [id] = Object.values(query);
-  const hasID = id && asPath;
-
-  let backgroundColor = 'black';
-
-  const defindedColor = staticBackground[asPath];
-  if (defindedColor) backgroundColor = `hsl(${defindedColor})`;
-
-  if (hasID) {
-    const [h, s, l] = idToHsl(id.toString());
-    const hsl = `${h},${70}%,${30}%`;
-    backgroundColor = `hsl(${hsl})`;
-  }
-
+  const color = usePageColor() ?? 'transparent';
   return (
     <span
-      className="absolute -z-50 h-[70vh] w-full bg-gradient-to-t from-background-100 transition-colors duration-300"
-      style={{ backgroundColor: backgroundColor }}
+      className="absolute -z-50 h-[70vh] w-full transition-colors duration-300"
+      style={{
+        background: `linear-gradient(to bottom,${color},transparent)`,
+      }}
+      aria-hidden
     />
   );
 }
 
-const staticBackground: Record<string, string | undefined> = {
-  '/library/tracks': '270,80%,40%',
-  '/search': '',
-};
 export default DynamicBackground;
