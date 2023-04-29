@@ -4,13 +4,16 @@ import { useRouter } from 'next/router';
 function DynamicBackground() {
   const { query, asPath } = useRouter();
   const [id] = Object.values(query);
-  const isValidPage = id && asPath !== '/search';
+  const hasID = id && asPath;
 
   let backgroundColor = 'black';
 
-  if (isValidPage) {
+  const defindedColor = staticBackground[asPath];
+  if (defindedColor) backgroundColor = `hsl(${defindedColor})`;
+
+  if (hasID) {
     const [h, s, l] = idToHsl(id.toString());
-    const hsl = `${h},${s}%,${l}%`;
+    const hsl = `${h},${70}%,${30}%`;
     backgroundColor = `hsl(${hsl})`;
   }
 
@@ -22,4 +25,8 @@ function DynamicBackground() {
   );
 }
 
+const staticBackground: Record<string, string | undefined> = {
+  '/library/tracks': '270,80%,40%',
+  '/search': '',
+};
 export default DynamicBackground;
