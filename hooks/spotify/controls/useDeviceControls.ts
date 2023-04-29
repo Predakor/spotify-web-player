@@ -16,11 +16,9 @@ const useDeviceControls = () => {
       }
     },
 
-    transferPlayback: async (deviceID: string, play?: boolean) => {
-      const options = { play: play ?? false };
+    transferPlayback: async (deviceID: string) => {
       try {
-        await spotifyApi.transferMyPlayback([deviceID], options);
-        await controls.current.getDevices();
+        await spotifyApi.transferMyPlayback([deviceID]);
         dispatch(setActiveDevice(deviceID));
       } catch (error) {
         throw error;
