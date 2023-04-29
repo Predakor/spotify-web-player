@@ -1,6 +1,5 @@
 import Dropdown from '@components/Dropdown/Dropdown';
 import { signOut } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import { SpotifyUser } from 'types/spotifyUser';
 import UserAvatar from './UserAvatar';
 

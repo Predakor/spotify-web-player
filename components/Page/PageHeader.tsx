@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef } from 'react';
+import { ReactElement, ReactNode, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import CoverImage from '@components/CoverImage/CoverImage';
 import useObserver from '@hooks/useObserver';
@@ -7,9 +7,11 @@ import { changeInView } from '@store/scrollSlice';
 interface Props {
   children: ReactElement;
   images: SpotifyApi.ImageObject[];
+  className?: string;
+  customImage?: ReactNode;
 }
 
-function PageHeader({ children, images }: Props) {
+function PageHeader({ children, images, className, customImage }: Props) {
   const targetRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const observer = useObserver((entry) => {
@@ -25,9 +27,16 @@ function PageHeader({ children, images }: Props) {
   }, [observer]);
 
   return (
-    <header className="grid gap-8 p-4 md:grid-cols-[auto,1fr]" ref={targetRef}>
-      <CoverImage url={images.at(0)?.url} className="aspect-square h-[30vh]" />
-      <section ref={targetRef}>{children}</section>
+    <header className="md:grid-cols-[auto,1fr] grid gap-8 p-4" ref={targetRef}>
+      {customImage ?? (
+        <CoverImage
+          url={images.at(0)?.url}
+          className="aspect-square h-[30vh]"
+        />
+      )}
+      <section className={className ?? ''} ref={targetRef}>
+        {children}
+      </section>
     </header>
   );
 }

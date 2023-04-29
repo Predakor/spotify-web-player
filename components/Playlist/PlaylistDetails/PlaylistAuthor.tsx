@@ -2,15 +2,19 @@ import { useState, useEffect } from 'react';
 import UserAvatar from '@components/User/UserAvatar';
 import useSpotify from '@hooks/spotify/useSpotify';
 
-function Author({ user }: { user: SpotifyApi.UserObjectPublic }) {
-  const [pictureURL, setPictureURL] = useState('');
+function Author({ user }: { user: SpotifyApi.UserObjectPublic | null }) {
+  const [pictureURL, setPictureURL] = useState<string>();
   const spotifyApi = useSpotify();
   useEffect(() => {
-    spotifyApi.getUser(user.id).then((response) => {
-      const images = response.body.images;
-      if (images?.length) setPictureURL(images[0].url ?? '');
-    });
-  }, [user.id]);
+    const fetchUser = async () => {
+      try {
+        const request = user ? spotifyApi.getUser(user.id) : spotifyApi.getMe();
+        const images = (await request).body.images;
+        setPictureURL(images?.at(0)?.url);
+      } catch (error) {}
+    };
+    fetchUser();
+  }, [user?.id]);
 
   return (
     <span className="flex items-center gap-2">
