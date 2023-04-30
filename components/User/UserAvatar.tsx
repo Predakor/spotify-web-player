@@ -17,6 +17,7 @@ function UserAvatar({ imageURL, onClick }: UserIconProps) {
       width={40}
       height={40}
       alt="user profile picture"
+      unoptimized
     />
   );
 }

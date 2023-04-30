@@ -11,6 +11,7 @@ const Song = ({ track }: { track: SpotifyApi.TrackObjectFull }) => {
         alt="current song thumbnail"
         width={50}
         height={50}
+        unoptimized
       />
 
       <div className="inline-block max-w-full flex-1 truncate">
