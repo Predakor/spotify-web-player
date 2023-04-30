@@ -1,63 +1,55 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-export interface Paging<T> extends SpotifyApi.PagingObject<T> {
-  fetching?: boolean;
-}
-
-type FetchFunction<T> = (
-  offset: number,
-  itemsCount: number
-) => Promise<SpotifyApi.PagingObject<T>>;
+export type PagingOptions = Partial<{ offset: number; limit: number }>;
+export type PagingObject<T> = SpotifyApi.PagingObject<T>;
+export type FetchFunction<T> = (
+  options: PagingOptions
+) => Promise<{ body: PagingObject<T> }>;
 
 let fetching = false;
 
-function usePagingTracks<T>(
-  initPaging: Paging<T>,
-  fetchMore: FetchFunction<T>
-): [Paging<T>, (amount?: number) => Promise<T[]>] {
-  const [paging, setPaging] = useState<Paging<T>>({
-    ...initPaging,
-    fetching: false,
-  });
+function usePaging<T>(
+  pagingObject: PagingObject<T>,
+  fetchFunction: FetchFunction<T>
+) {
+  const [paging, setPaging] = useState(pagingObject);
+  const [items, setItems] = useState(pagingObject.items);
 
-  useEffect(() => {
-    setPaging({
-      ...initPaging,
-      fetching: false,
-    });
-  }, [initPaging]);
-
-  const fetchMoreItems = async () => {
-    console.log(fetching);
-
-    if (fetching) return;
-    if (paging.items.length < paging.limit) return;
+  const fetchNext = useCallback(async () => {
+    const limit = paging.limit ?? 50;
+    const offset = limit + paging.offset;
+    if (fetching || offset >= paging.total) return;
 
     try {
       fetching = true;
-      const result = await fetchMore(paging.offset, paging.items.length);
-      const newItems = paging.items.concat(result.items);
-      update({ ...result, items: newItems, fetching: false });
-    } catch (error) {
+      const request = fetchFunction({ offset, limit });
+      const result = (await request).body;
+      setPaging(result);
+    } catch {
     } finally {
       fetching = false;
     }
-  };
+  }, [fetchFunction, paging]);
 
-  const getMoreItems = async (amount?: number) => {
-    const moreItemsToGet = paging.items.length + 20 < paging.total;
-    if (!moreItemsToGet) return [];
-    fetchMoreItems();
-    return paging.items;
-  };
-  const update = (object: Partial<Paging<T>>) => {
-    setPaging((prev) => ({ ...prev, ...object }));
-  };
-  const updateItems = (items: Array<T>) => {
-    update({ items, fetching: false });
-  };
+  const fetchAll = useCallback(async () => {
+    throw new Error('Not implemented function');
+  }, []);
 
-  return [paging, getMoreItems];
+  useEffect(() => {
+    const { offset, limit, total } = paging;
+
+    setItems((items) => {
+      if (items.length >= offset + limit || items.length >= total) return items;
+      return [...items, ...paging.items];
+    });
+  }, [paging]);
+
+  useEffect(() => {
+    setPaging(pagingObject);
+    setItems(pagingObject.items);
+  }, [pagingObject]);
+
+  return [items, fetchNext, fetchAll] as const;
 }
 
-export default usePagingTracks;
+export default usePaging;

@@ -11,7 +11,7 @@ import Head from 'next/head';
 import { NextPageWithLayout } from 'pages/_app';
 
 const Playlist: NextPageWithLayout = () => {
-  const fetchingPlaylist = usePlaylistInfo();
+  const [fetchingPlaylist] = usePlaylistInfo();
 
   return (
     <FetchingComponent fetchValue={fetchingPlaylist}>

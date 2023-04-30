@@ -4,7 +4,7 @@ import { usePlaylistInfo } from '@hooks/spotify/Info';
 import { selectInView } from '@store/scrollSlice';
 
 function PlaylistHeader() {
-  const playlistData = usePlaylistInfo();
+  const [playlistData] = usePlaylistInfo();
   const coverTracks = useSelector(selectInView);
 
   if (!playlistData.value) return null;

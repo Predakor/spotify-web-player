@@ -18,7 +18,12 @@ const cards = {
   episode: MockShelf,
 };
 
-function Card({ data, onClick }: { data: CardData; onClick: GoToFunction }) {
+interface Props {
+  data: CardData;
+  onClick: GoToFunction;
+}
+
+function Card({ data, onClick }: Props) {
   const TargetCard = cards[data.type];
   return (
     <TargetCard

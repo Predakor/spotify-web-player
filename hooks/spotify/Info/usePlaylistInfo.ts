@@ -26,6 +26,6 @@ function usePlaylistInfo() {
     };
     getPlaylist();
   }, [actions, getPlaylistTracks, playlistId]);
-  return playlistData;
+  return [playlistData, getPlaylistTracks] as const;
 }
 export default usePlaylistInfo;
