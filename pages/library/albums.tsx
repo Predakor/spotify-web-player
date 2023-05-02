@@ -1,9 +1,34 @@
 import { ReactElement } from 'react';
+import CardList from '@components/Card/CardList';
 import LibraryCategories from '@components/Categories/LibraryNav';
+import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
+import Grid from '@components/Grid/Grid';
+import PageContent from '@components/Page/PageContent';
+import useSavedAlbums from '@hooks/spotify/Info/useSavedAlbums';
 import Layout from 'Layout/Layouts';
+import { useRouter } from 'next/router';
 
-const Albums = ({}) => {
-  return <div>Albums</div>;
+const Albums = () => {
+  const savedAlbums = useSavedAlbums();
+  const { push } = useRouter();
+
+  return (
+    <PageContent>
+      <FetchingComponent
+        fetchValue={savedAlbums}
+        onNull={<h2>No albums yet add something</h2>}
+      >
+        {(albums) => (
+          <Grid title="Albums">
+            <CardList
+              data={albums.items.map(({ album }) => album)}
+              onClick={push}
+            />
+          </Grid>
+        )}
+      </FetchingComponent>
+    </PageContent>
+  );
 };
 
 Albums.getLayout = (page: ReactElement) => (

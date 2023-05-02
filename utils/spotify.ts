@@ -5,6 +5,7 @@ const scopes = [
   'streaming',
   'user-top-read',
   'user-read-email',
+  'user-follow-read',
   'user-read-private',
   'user-library-read',
   'user-library-modify',

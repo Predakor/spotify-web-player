@@ -1,9 +1,10 @@
 import { ReactElement } from 'react';
 import { PlaylistCard } from '@components/Card';
+import CardList from '@components/Card/CardList';
 import LibraryCategories from '@components/Categories/LibraryNav';
 import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
+import Grid from '@components/Grid/Grid';
 import PageContent from '@components/Page/PageContent';
-import Shelf from '@components/Shelf/Shelf';
 import SavedTracks from '@components/Track/SavedTracks';
 import useUserPlaylists from '@hooks/spotify/Info/useUserPlaylists';
 import useUserSavedTracks from '@hooks/spotify/Info/useUserSavedTracks';
@@ -22,19 +23,12 @@ const Playlists = () => {
         onNull={<h2>No playlists yet add something</h2>}
       >
         {({ items }) => (
-          <Shelf title="Playlists">
+          <Grid title="Playlists">
             <FetchingComponent fetchValue={fetchingSavedTracks}>
               {(savedTracks) => <SavedTracks tracks={savedTracks} />}
             </FetchingComponent>
-
-            {items.map((playlist) => (
-              <PlaylistCard
-                data={playlist}
-                onClick={() => push(`/playlist/${playlist.id}`)}
-                key={playlist.id}
-              />
-            ))}
-          </Shelf>
+            <CardList data={items} onClick={push} />
+          </Grid>
         )}
       </FetchingComponent>
     </PageContent>
