@@ -106,14 +106,6 @@ function PlaybackControls() {
         throw error;
       }
     },
-    getPlaylistTracks: async (id: string) => {
-      try {
-        const data = await spotifyApi.getPlaylist(id);
-        return data.body;
-      } catch (error) {
-        throw error;
-      }
-    },
   });
 
   return controlsRef.current;

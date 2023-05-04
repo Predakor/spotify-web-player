@@ -1,13 +1,9 @@
-import useSpotify from '@hooks/spotify/useSpotify';
 import { useEffect } from 'react';
 import useFetchedValue from './useFetchedValue';
 
-interface Props<T> {
-  fetchFunction: () => Promise<Awaited<{ body: T }>>;
-}
+type FetchFunction<T> = () => Promise<Awaited<{ body: T }>>;
 
-function useFetchingFunction<T>({ fetchFunction }: Props<T>) {
-    const spotify =useSpotify()
+function useFetch<T>(fetchFunction: FetchFunction<T>) {
   const [category, actions] = useFetchedValue<T>();
 
   useEffect(() => {
@@ -16,6 +12,7 @@ function useFetchingFunction<T>({ fetchFunction }: Props<T>) {
       .catch((err) => actions.fetchFail(err));
   }, [actions]);
 
-  return category;
+  return [category, fetchFunction] as const;
 }
-export default useFetchingFunction;
+
+export default useFetch;

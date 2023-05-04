@@ -1,11 +1,13 @@
-import SpotifyWebApi from 'spotify-web-api-node';
+import useFetchingFunction from '@hooks/fetch/useFetch';
 import useSpotify from '../useSpotify';
 
-function useInfo(infoType: SpotifyWebApi) {
-  const spotifyApi = useSpotify();
-  const infos = {
-    userSavedTracks: () => spotifyApi.getMySavedTracks,
-  };
-  return infos;
+function useInfo() {
+  const s = useSpotify();
+
+  const newReleases = useFetchingFunction(() => s.getNewReleases());
+  const userTopTracks = useFetchingFunction(() => s.getMyTopTracks());
+  const userTopArtists = useFetchingFunction(() => s.getMyTopArtists());
+  const featuredPlaylists = useFetchingFunction(() => s.getFeaturedPlaylists());
+  return { newReleases, userTopTracks, userTopArtists, featuredPlaylists };
 }
 export default useInfo;

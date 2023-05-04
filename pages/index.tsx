@@ -3,20 +3,19 @@ import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import PageContent from '@components/Page/PageContent';
 import PageHeader from '@components/Page/PageHeader';
 import PagingShelf from '@components/Shelf/PagingShelf';
-import { useFeaturedPlaylists } from '@hooks/spotify/Info';
-import useNewReleases from '@hooks/spotify/Info/useNewReleases';
-import useTopArtists from '@hooks/spotify/Info/useTopArtists';
-import useTopItems from '@hooks/spotify/Info/useTopItems';
+import useInfo from '@hooks/spotify/Info/useInfo';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { NextPageWithLayout } from './_app';
 
 const Home: NextPageWithLayout = () => {
   const { push } = useRouter();
-  const releases = useNewReleases();
-  const fetchedTopItems = useTopItems();
-  const fetchedTopArtists = useTopArtists();
-  const fetchedPlaylists = useFeaturedPlaylists();
+  const info = useInfo();
+
+  const [featuredPlaylists, getFeaturedPlaylists] = info.featuredPlaylists;
+  const [newReleases, getNewReleases] = info.newReleases;
+  const [userTopArtists, getUserTopArtists] = info.userTopArtists;
+  const [userTopTracks, getUserTopTracks] = info.userTopTracks;
 
   return (
     <>
@@ -29,33 +28,33 @@ const Home: NextPageWithLayout = () => {
       </PageHeader>
 
       <PageContent>
-        <FetchingComponent fetchValue={fetchedPlaylists}>
+        <FetchingComponent fetchValue={featuredPlaylists}>
           {({ playlists, message }) => (
             <PagingShelf
               title={message ?? 'New releases'}
               paging={playlists}
               //@ts-expect-error noo
-              pagingFunction={() => playlists}
+              pagingFunction={getFeaturedPlaylists}
             >
               {(dataItems) => <CardList data={dataItems} onClick={push} />}
             </PagingShelf>
           )}
         </FetchingComponent>
 
-        <FetchingComponent fetchValue={releases}>
+        <FetchingComponent fetchValue={newReleases}>
           {({ albums, message }) => (
             <PagingShelf
               title={message ?? 'New releases'}
               paging={albums}
               //@ts-expect-error noo
-              pagingFunction={() => 1}
+              pagingFunction={getNewReleases}
             >
               {(releases) => <CardList data={releases} onClick={push} />}
             </PagingShelf>
           )}
         </FetchingComponent>
 
-        <FetchingComponent fetchValue={fetchedTopItems}>
+        <FetchingComponent fetchValue={userTopTracks}>
           {(topItems) => (
             <PagingShelf
               title={'Your favourite'}
@@ -68,7 +67,7 @@ const Home: NextPageWithLayout = () => {
           )}
         </FetchingComponent>
 
-        <FetchingComponent fetchValue={fetchedTopArtists}>
+        <FetchingComponent fetchValue={userTopArtists}>
           {(topArtists) => (
             <PagingShelf
               title={'Your favourite artists'}

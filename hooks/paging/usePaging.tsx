@@ -6,6 +6,8 @@ export type FetchFunction<T> = (
   options: PagingOptions
 ) => Promise<{ body: PagingObject<T> }>;
 
+const MaxOffset = 50;
+
 let fetching = false;
 
 function usePaging<T>(
@@ -32,15 +34,15 @@ function usePaging<T>(
   }, [fetchFunction, paging]);
 
   const fetchAll = useCallback(async () => {
-    throw new Error('Not implemented function');
+    console.log(fetchFunction({}));
   }, []);
 
   useEffect(() => {
     const { offset, limit, total } = paging;
 
     setItems((items) => {
-      if (items.length >= offset + limit || items.length >= total) return items;
-      return [...items, ...paging.items];
+      const moreToFetch = items.length < offset + limit && items.length < total;
+      return moreToFetch ? [...items, ...paging.items] : items;
     });
   }, [paging]);
 

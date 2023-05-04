@@ -1,31 +1,30 @@
 import { useEffect } from 'react';
 import useFetchedValue from '@hooks/fetch/useFetchedValue';
 import { useRouter } from 'next/router';
-import useSpotifyControls from '../controls/usePlaybackControls';
+import useSpotify from '../useSpotify';
 
 type PlaylistType = SpotifyApi.SinglePlaylistResponse;
 
-function usePlaylistInfo() {
+function usePlaylistTracks(_id?: string) {
   const router = useRouter();
-  const { playlistId } = router.query;
+  const spotifyApi = useSpotify();
+  const [playlistData, actions] = useFetchedValue<PlaylistType>();
 
-  const [playlistData, actions] = useFetchedValue<PlaylistType | null>();
-  const { getPlaylistTracks } = useSpotifyControls();
+  const { playlistid } = router.query;
+  const id = _id ?? playlistid;
 
   useEffect(() => {
-    if (!playlistId) return;
-    const id = playlistId.toString();
-
-    const getPlaylist = async () => {
+    const fetchPlaylist = async () => {
       try {
-        const data = await getPlaylistTracks(id);
-        actions.fetchSucces(data);
+        const data = await spotifyApi.getPlaylist(id as string);
+        actions.fetchSucces(data.body);
       } catch (error) {
         actions.fetchFail('There was an error while getting data');
       }
     };
-    getPlaylist();
-  }, [actions, getPlaylistTracks, playlistId]);
-  return [playlistData, getPlaylistTracks] as const;
+    id && fetchPlaylist();
+  }, [actions, id, spotifyApi]);
+
+  return [playlistData, spotifyApi.getPlaylist] as const;
 }
-export default usePlaylistInfo;
+export default usePlaylistTracks;

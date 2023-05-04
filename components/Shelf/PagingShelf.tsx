@@ -13,14 +13,17 @@ interface Props<T> {
 }
 
 function PagingShelf<T>({ title, paging, pagingFunction, children }: Props<T>) {
-  const [items, , fetchALl] = usePaging(paging, pagingFunction);
+  const [items, , fetchAll] = usePaging(paging, pagingFunction);
   const shelfLimit = useWidthToCols();
 
   const displayedTracks = clampArray(items, 0, shelfLimit);
-  const showMoreButton =
-    items.length > shelfLimit ? (
-      <button className="btn-ghost btn">Show all</button>
-    ) : null;
+
+  const moreToShow = items.length > shelfLimit;
+  const showMoreButton = moreToShow ? (
+    <button className="btn-ghost btn" onClick={fetchAll}>
+      Show all
+    </button>
+  ) : null;
 
   if (items.length <= 0) return null;
   return (
