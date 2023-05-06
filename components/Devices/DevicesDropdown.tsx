@@ -23,7 +23,7 @@ function DevicesDropdown() {
     <div className="dropdown-top dropdown-end dropdown">
       <DeviceButton
         onClick={clickHandler}
-        className={!isActiveDevice ? 'text-primary-500' : ''}
+        className={!isActiveDevice ? 'text-primary-500' : 'text-base-content'}
         menuExpanded={menuExpanded}
         deviceType={type}
       />

@@ -11,46 +11,37 @@ import { selectPlaybackData } from '@store/playbackSlice';
 function Controls() {
   const { shuffle_state, is_playing, repeat_state } =
     useSelector(selectPlaybackData) || {};
-  const playbackControls = useSpotifyControls();
 
-  const playHandler = () => {
-    playbackControls.tooglePlayBack();
-  };
-  const skipHandler = () => {
-    playbackControls.nextSong();
-  };
-  const backHandler = () => {
-    playbackControls.prevSong();
-  };
-  const shuffleHandler = () => {
-    playbackControls.toggleShuffle();
-  };
-  const repeatHandler = () => {
-    playbackControls.toogleRepeatState();
-  };
+  const {
+    tooglePlayBack,
+    nextSong,
+    prevSong,
+    toogleRepeatState,
+    toggleShuffle,
+  } = useSpotifyControls();
 
   const disabled = is_playing === undefined;
 
   return (
-    <div className="hidden content-center gap-4 lg:flex">
+    <div className="flex content-center gap-2 p-1">
       <ShuffleButton
-        onClick={shuffleHandler}
+        onClick={toggleShuffle}
         shuffleState={shuffle_state}
         disabled={disabled}
       />
 
-      <PreviousButton onClick={backHandler} disabled={disabled} />
+      <PreviousButton onClick={prevSong} disabled={disabled} />
 
       <PlaybackButton
-        onClick={playHandler}
+        onClick={tooglePlayBack}
         isPlaying={!is_playing}
         className={'bg-primary-50'}
       />
 
-      <SkipButton onClick={skipHandler} disabled={disabled} />
+      <SkipButton onClick={nextSong} disabled={disabled} />
 
       <RepeatButton
-        onClick={repeatHandler}
+        onClick={toogleRepeatState}
         repeatState={repeat_state}
         disabled={disabled}
       />

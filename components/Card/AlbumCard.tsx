@@ -27,8 +27,7 @@ function AlbumCard({ data, onClick }: CardProps<Album>) {
         <PlaylistPlaybackButton
           uri={uri}
           ariaLabel={name}
-          className="absolute right-0 hidden opacity-0 
-          transition-all group-hover:-translate-y-full group-hover:scale-150 group-hover:opacity-100 lg:block "
+          className="absolute right-0 opacity-0 duration-300 hover:scale-125 group-hover:-translate-y-full group-hover:bg-primary-700 group-hover:opacity-100"
         />
       </div>
     </GoCard>

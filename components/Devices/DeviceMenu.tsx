@@ -23,7 +23,7 @@ function DeviceMenu({ thisDevice }: DeviceMenuProps) {
   );
 
   return (
-    <div className="dropdown-right dropdown-content min-w-[200px] rounded bg-background-200 p-4 ">
+    <div className="dropdown-content rounded bg-neutral p-4 text-neutral-content">
       <TopDevice activeDevice={activeDevice} thisDevice={thisDevice} />
       <h2 className="font-semibold md:text-xl">Select other devices</h2>
       <DeviceList

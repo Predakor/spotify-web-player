@@ -1,6 +1,6 @@
 import CategoryCard from '@components/Card/CategoryCard';
 import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
-import Shelf from '@components/Shelf/Shelf';
+import Grid from '@components/Grid/Grid';
 import useCategories from '@hooks/spotify/useCategories';
 import { useRouter } from 'next/router';
 
@@ -11,7 +11,7 @@ function BrowseGenres() {
   return (
     <FetchingComponent fetchValue={fetchingCategories}>
       {({ categories }) => (
-        <Shelf title="browse all">
+        <Grid title="browse all">
           {categories.items.map((category) => (
             <CategoryCard
               category={category}
@@ -19,7 +19,7 @@ function BrowseGenres() {
               key={category.id}
             />
           ))}
-        </Shelf>
+        </Grid>
       )}
     </FetchingComponent>
   );

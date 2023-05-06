@@ -1,23 +1,26 @@
 import { useSelector } from 'react-redux';
-import { ContentCard } from '@components/Card';
-import Shelf from '@components/Shelf/Shelf';
+import CardList from '@components/Card/CardList';
+import PagingShelf from '@components/Shelf/PagingShelf';
 import { selectRecentSearches } from '@store/recentSearchSlice';
 import { useRouter } from 'next/router';
+import { SearchResponse } from 'types/spotifyTypes';
 
 function RecentSearches() {
   const { push } = useRouter();
   const searches = useSelector(selectRecentSearches);
 
-  if (!searches.length) return null;
-
-  const recent = searches.length > 5 ? searches.slice(0, 5) : searches;
+  const pagedSearches = {
+    items: searches,
+    limit: 10,
+    offset: 0,
+    total: searches.length,
+  } as SpotifyApi.PagingObject<SearchResponse>;
 
   return (
-    <Shelf title="recent searches">
-      {recent.map((search) => (
-        <ContentCard data={search} onClick={push} key={search.id} />
-      ))}
-    </Shelf>
+    //@ts-expect-error not implemented fetching
+    <PagingShelf paging={pagedSearches} title="recent searches">
+      {(recent) => <CardList data={recent} onClick={push} />}
+    </PagingShelf>
   );
 }
 export default RecentSearches;

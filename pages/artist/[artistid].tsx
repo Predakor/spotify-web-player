@@ -13,34 +13,31 @@ function Artistid() {
 
   return (
     <FetchingComponent fetchValue={fetchingArtist}>
-      {(artist) => {
-        const { name, followers, images } = artist;
-        return (
-          <>
-            <Head>
-              <title>{name}</title>
-            </Head>
-            <PageHeader images={images}>
-              <>
-                <h2 className="text-6xl text-text-important">{name}</h2>
-                <p>{followers.total} followers</p>
-              </>
-            </PageHeader>
-            <PageActions uri={''} actions={'play'} moreActions={[]} />
-            <PageContent>
-              <>
-                <Shelf title="Popular" vertical>
-                  <TopTracks id={artist.id} />
-                </Shelf>
+      {({ id, name, followers, images, uri }) => (
+        <>
+          <Head>
+            <title>{name}</title>
+          </Head>
+          <PageHeader images={images}>
+            <>
+              <h2 className="text-6xl text-base-content">{name}</h2>
+              <p>{followers.total} followers</p>
+            </>
+          </PageHeader>
+          <PageActions uri={uri} actions={'play'} moreActions={[]} />
+          <PageContent>
+            <>
+              <Shelf title="Popular" vertical>
+                <TopTracks id={id} />
+              </Shelf>
 
-                <Shelf title="Releated artists">
-                  <RelatedArtists id={artist.id} />
-                </Shelf>
-              </>
-            </PageContent>
-          </>
-        );
-      }}
+              <Shelf title="Releated artists">
+                <RelatedArtists id={id} />
+              </Shelf>
+            </>
+          </PageContent>
+        </>
+      )}
     </FetchingComponent>
   );
 }

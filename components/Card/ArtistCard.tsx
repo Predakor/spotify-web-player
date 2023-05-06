@@ -19,7 +19,7 @@ function ArtistCard({ data, onClick }: CardProps<Artist>) {
         <PlaylistPlaybackButton
           uri={uri}
           className={
-            'absolute right-0 bottom-0 transform-gpu opacity-0 transition-all group-hover:scale-150 group-hover:opacity-100'
+            'absolute right-0 opacity-0 duration-300 hover:scale-125 group-hover:-translate-y-full group-hover:bg-primary-700 group-hover:opacity-100'
           }
           ariaLabel={`Play/pause ${name} artist`}
         />

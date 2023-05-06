@@ -16,7 +16,10 @@ function PageActions({ uri, actions, moreActions }: Props) {
       className="flex items-center gap-4 p-4"
       aria-label="Actions for this page"
     >
-      <PlaybackButton onClick={() => playPlaylist(uri)} />
+      <PlaybackButton
+        className="bg-primary-focus ease-in hover:scale-110"
+        onClick={() => playPlaylist(uri)}
+      />
       <LikeButton onClick={() => 1} isLiked={false} ariaLabel={''} />
       <MoreOptionsButton actions={<p>test</p>} />
     </section>

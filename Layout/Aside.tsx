@@ -1,7 +1,6 @@
 import { useMediaQuery } from 'react-responsive';
 import SavedTracksImage from '@components/CoverImage/SavedTracksImage';
 import IconLink from '@components/NavLink/IconLink';
-import NavLink from '@components/NavLink/NavLink';
 import UserPlaylists from '@components/UserPlaylists/UserPlaylists';
 import useTheme from '@hooks/useTheme';
 import { useRouter } from 'next/router';
@@ -9,17 +8,17 @@ import { Nav } from './Nav';
 
 function Aside() {
   const { asPath } = useRouter();
-  const theme = useTheme;
+  const toogleDarkMode = useTheme();
   const isMobile = useMediaQuery({ maxWidth: '1024px' });
 
   if (isMobile) return null;
 
   return (
-    <aside className="row-start-1 row-end-3 block bg-black">
-      <button className="btn" onClick={theme}>
+    <aside className="row-span-3 bg-base-100 p-4 py-2">
+      <button className="btn" onClick={toogleDarkMode}>
         theme
       </button>
-      <div className="menu sticky top-0 max-h-[90vh] gap-4 p-4">
+      <div className="menu sticky top-0 max-h-[90vh] gap-4">
         <Nav pathname={asPath} />
         <IconLink
           href={'/library/tracks'}

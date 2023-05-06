@@ -9,8 +9,8 @@ interface Props {
 function CardList({ data, onClick }: Props) {
   return (
     <>
-      {data.map((_data) => (
-        <ContentCard data={_data} onClick={onClick} key={_data.id} />
+      {data.map((entry) => (
+        <ContentCard data={entry} onClick={onClick} key={entry.id} />
       ))}
     </>
   );

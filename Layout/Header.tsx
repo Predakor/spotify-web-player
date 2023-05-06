@@ -20,7 +20,7 @@ function Header({ user, children }: HeaderProps) {
   return (
     <header
       className={`sticky top-0 z-10 flex flex-wrap items-center gap-2 p-4 transition-colors ${
-        backgroundColor ? '' : 'bg-black'
+        backgroundColor ? '' : 'bg-base-200'
       }`}
       style={{ backgroundColor }}
     >

@@ -16,12 +16,8 @@ function Dropdown(props: DropdownProps) {
   const targetRef = useRef<HTMLDivElement>(null);
   const [focus, setFocus] = useState(false);
 
-  const blurCapture = () => {
-    return focus && setFocus(false);
-  };
-  const focusHandler = () => {
-    return !focus && setFocus(true);
-  };
+  const blurCapture = () => focus && setFocus(false);
+  const focusHandler = () => !focus && setFocus(true);
 
   return (
     <div

@@ -14,8 +14,8 @@ const Song = ({ track }: { track: SpotifyApi.TrackObjectFull }) => {
         unoptimized
       />
 
-      <div className="inline-block max-w-full flex-1 truncate">
-        <p className={'text-xl text-text-important'}>{name}</p>
+      <div className="truncate">
+        <p className={'text-xl text-primary-content'}>{name}</p>
         <Artists artists={artists} />
       </div>
     </div>

@@ -6,7 +6,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 function Button(props: ButtonProps) {
-  const { stopPrepagation, className = '', children, onClick } = props;
+  const { stopPrepagation, className, onClick, ...restProps } = props;
 
   const clickHandler = (e: MouseEvent) => {
     if (stopPrepagation) e.stopPropagation();
@@ -15,13 +15,11 @@ function Button(props: ButtonProps) {
 
   return (
     <button
-      {...props}
+      {...restProps}
       type="button"
-      className={`button ${className}`}
+      className={`btn-ghost btn-circle btn text-xl lg:text-2xl ${className}`}
       onClick={(e) => clickHandler(e)}
-    >
-      {children}
-    </button>
+    />
   );
 }
 export default Button;
