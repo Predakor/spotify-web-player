@@ -11,7 +11,7 @@ function CurrentTrack() {
   return (
     <div className="flex justify-items-stretch">
       <Track track={trackInfo} />
-      <LikeButton isLiked={false} ariaLabel={''} />
+      <LikeButton isLiked={false} ariaLabel={trackInfo.name} />
     </div>
   );
 }

@@ -1,11 +1,9 @@
 import Artists from '@components/Artists/Artists';
 import LikeButton from '@components/Button/ToogleButtons/LikedButton';
-import CoverImage from '@components/CoverImage/CoverImage';
 import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import PageActions from '@components/Page/PageActions';
 import PageContent from '@components/Page/PageContent';
 import PageHeader from '@components/Page/PageHeader';
-import TrackList from '@components/Playlist/PlaylistTracks/TrackList';
 import useAlbumInfo from '@hooks/spotify/Info/useAlbumInfo';
 import { msToText } from '@utils/time';
 import { useRouter } from 'next/router';

@@ -16,14 +16,14 @@ function Dropdown(props: DropdownProps) {
   const targetRef = useRef<HTMLDivElement>(null);
   const [focus, setFocus] = useState(false);
 
-  const blurCapture = () => focus && setFocus(false);
+  const blurHandler = () => focus && setFocus(false);
   const focusHandler = () => !focus && setFocus(true);
 
   return (
     <div
       className={`${dropdownParent} ${className}`}
       onFocus={focusHandler}
-      onBlur={blurCapture}
+      onBlur={blurHandler}
       ref={targetRef}
     >
       <DropdownButton expanded={focus}>{icon && icon(focus)}</DropdownButton>

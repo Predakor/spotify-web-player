@@ -1,5 +1,5 @@
 import Artists from '@components/Artists/Artists';
-import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
+import { CardPlaybackButton } from '@components/Button/PlaybackButtons/PlaybackButton';
 import GoCard from '@components/Card/GoToCard/GoCard';
 import CoverImage from '@components/CoverImage/CoverImage';
 import { CardProps } from './ContentCard';
@@ -10,12 +10,14 @@ function AlbumCard({ data, onClick }: CardProps<Album>) {
   const { name, uri, images, artists, release_date } = data;
   const [image] = images;
 
+  const releaseDate = release_date.slice(0, 4);
+
   return (
     <GoCard
       title={name}
       content={
         <p className="flex gap-2">
-          <span>{release_date.slice(0, 4)}</span>
+          <span>{releaseDate}</span>
           ●
           <Artists artists={artists} />
         </p>
@@ -24,11 +26,7 @@ function AlbumCard({ data, onClick }: CardProps<Album>) {
     >
       <div className="relative">
         <CoverImage url={image.url} className="aspect-square h-auto w-full" />
-        <PlaylistPlaybackButton
-          uri={uri}
-          ariaLabel={name}
-          className="absolute right-0 opacity-0 duration-300 hover:scale-125 group-hover:-translate-y-full group-hover:bg-primary-700 group-hover:opacity-100"
-        />
+        <CardPlaybackButton label={`album: ${name}`} uri={uri} />
       </div>
     </GoCard>
   );

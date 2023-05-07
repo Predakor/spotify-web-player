@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from 'react';
+import { ReactNode } from 'react';
 import usePaging from '@hooks/paging';
 import { FetchFunction, PagingObject } from '@hooks/paging/usePaging';
 import useWidthToCols from '@hooks/useWidthToCols';

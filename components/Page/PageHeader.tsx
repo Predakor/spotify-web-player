@@ -29,9 +29,9 @@ function PageHeader({ children, images, className, customImage }: Props) {
   const imageURL = images?.at(0)?.url;
 
   return (
-    <header className="md:grid-cols-[auto,1fr] grid gap-8 p-4" ref={targetRef}>
+    <header className="grid gap-8 p-4 md:grid-cols-[auto,1fr]" ref={targetRef}>
       {imageURL && (
-        <CoverImage url={imageURL} className="aspect-square h-[30vh]" />
+        <CoverImage url={imageURL} className="aspect-square h-[25vh]" />
       )}
       {customImage && customImage}
 

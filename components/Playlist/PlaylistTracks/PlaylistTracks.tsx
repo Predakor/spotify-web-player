@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import PagingObserver from '@components/Paging/PagingObserver';
 import usePaging from '@hooks/paging';
 import useSpotify from '@hooks/spotify/useSpotify';

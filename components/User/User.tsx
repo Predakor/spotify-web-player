@@ -1,4 +1,5 @@
 import Dropdown from '@components/Dropdown/Dropdown';
+import Menu from '@components/Menu/Menu';
 import { signOut } from 'next-auth/react';
 import { SpotifyUser } from 'types/spotifyUser';
 import UserAvatar from './UserAvatar';
@@ -7,19 +8,21 @@ function User({ user }: { user: SpotifyUser }) {
   const { name, image } = user;
 
   return (
-    <section className="dropdown-bottom dropdown-end dropdown ml-auto hidden items-center gap-2 rounded-full bg-background-200 p-0.5 text-xl md:flex">
+    <article className="dropdown dropdown-bottom dropdown-end ml-auto hidden cursor-default items-center gap-2 rounded-full bg-neutral p-1 pr-3 text-lg md:flex">
       <UserAvatar imageURL={image} />
-      <p className="font-semibold text-text-important">{name}</p>
+      <p className="font-semibold text-neutral-content">{name}</p>
       <Dropdown customParent>
-        <ul className="bg-background-200 p-2 ">
-          <li tabIndex={0}>Profile</li>
-          <li tabIndex={0}>Settings</li>
-          <li onClick={() => signOut()} tabIndex={0}>
-            Log out
-          </li>
-        </ul>
+        <Menu
+          items={[
+            { item: 'Account' },
+            { item: 'Profile' },
+            { item: 'Settings' },
+            { item: '', title: true },
+            { item: 'Log out', onClick: signOut },
+          ]}
+        />
       </Dropdown>
-    </section>
+    </article>
   );
 }
 export default User;

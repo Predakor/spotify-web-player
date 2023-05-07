@@ -1,5 +1,5 @@
 import Album from '@components/Album/Album';
-import MoreOptionsButton from '@components/Button/DropdownButtons/MoreOptionsButton';
+import MoreOptionsButton from '@components/Button/DropdownButtons/MoreOptionsDropdown';
 import { LikeTrackButton } from '@components/Button/ToogleButtons/LikedButton';
 import Track from '@components/Track/Track';
 import { msToText } from '@utils/time';
@@ -15,7 +15,7 @@ function TrackRow({ track, index }: TrackRowProps) {
 
   return (
     <article
-      className={`tracksGrid group card  items-center gap-4 rounded p-2`}
+      className={`tracksGrid group flex items-center gap-4 rounded p-2 duration-300 hover:bg-base-100`}
       aria-label={track.name}
     >
       <p
@@ -24,20 +24,21 @@ function TrackRow({ track, index }: TrackRowProps) {
       >
         {index + 1}
       </p>
+
       <Track track={track} />
       <LikeTrackButton
-        className={`transition-opacity duration-100 group-hover:opacity-100 md:order-3
+        className={`transition-opacity duration-100 focus:opacity-100 group-hover:opacity-100 md:order-3
         ${track.liked ? 'lg:opacity-100' : 'lg:opacity-0'}`}
         songID={track.id}
         isLiked={track.liked}
-        ariaLabel={'Follow/Unfollow track'}
+        ariaLabel={`Follow/Unfollow ${track.name} by ${track.artists[0].name}`}
       />
       <Album className="hidden hover:link md:order-2 md:block" album={album} />
       <p className="hidden md:order-4 md:block" aria-label="Song duration">
         {msToText(duration_ms)}
       </p>
       <MoreOptionsButton
-        className="dropdown-left order-last transition-opacity duration-100 lg:opacity-0 lg:group-hover:opacity-100"
+        className="dropdown-top dropdown-left order-last transition-opacity duration-100 lg:opacity-0 lg:group-hover:opacity-100"
         actions={<p></p>}
       />
     </article>

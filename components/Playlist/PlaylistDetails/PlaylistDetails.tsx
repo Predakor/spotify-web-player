@@ -8,16 +8,7 @@ interface Props {
 }
 
 function PlaylistDescription({ playlist }: Props) {
-  const {
-    name,
-    type,
-    description,
-    uri,
-    followers,
-    owner,
-    tracks,
-    collaborative,
-  } = playlist;
+  const { name, type, description, followers, owner, tracks } = playlist;
 
   const artists = usePlaylistArtists(playlist);
   const playlistAcces = playlist.public ? 'Public' : 'Private';

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import PlaylistPlaybackButton from '@components/Button/PlaylistPlaybackButton';
+import PlaylistPlaybackButton from '@components/Button/PlaybackButtons/PlaylistPlaybackButton';
 import { usePlaylistInfo } from '@hooks/spotify/Info';
 import { selectInView } from '@store/scrollSlice';
 

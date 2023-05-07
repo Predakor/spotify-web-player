@@ -1,5 +1,5 @@
 import { LikeButton } from '@components/Button';
-import MoreOptionsButton from '@components/Button/DropdownButtons/MoreOptionsButton';
+import MoreOptionsButton from '@components/Button/DropdownButtons/MoreOptionsDropdown';
 import PlaybackButton from '@components/Button/PlaybackButtons';
 import { usePlaybackControls } from '@hooks/spotify/controls';
 
@@ -17,11 +17,19 @@ function PageActions({ uri, actions, moreActions }: Props) {
       aria-label="Actions for this page"
     >
       <PlaybackButton
-        className="bg-primary-focus ease-in hover:scale-110"
+        className="btn-primary btn-circle btn-lg ease-in hover:scale-110"
         onClick={() => playPlaylist(uri)}
       />
-      <LikeButton onClick={() => 1} isLiked={false} ariaLabel={''} />
-      <MoreOptionsButton actions={<p>test</p>} />
+      <LikeButton
+        className="text-2xl"
+        onClick={() => 1}
+        isLiked={false}
+        ariaLabel={''}
+      />
+      <MoreOptionsButton
+        className="dropdown-right dropdown-bottom"
+        actions={<p>test</p>}
+      />
     </section>
   );
 }

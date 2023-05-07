@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useTrackControls from '@hooks/spotify/controls/useTrackControls';
 import useSpotify from '@hooks/spotify/useSpotify';
 import LikeIcon from '@icons/LikeIcon';
+import Button from '../Button';
 
 interface LikeButtonProps {
   className?: string;
@@ -12,17 +13,16 @@ interface LikeButtonProps {
 
 function LikeButton(props: LikeButtonProps) {
   const { onClick, isLiked, className, ariaLabel } = props;
-  const active = isLiked ? 'text-primary-500' : 'text-text';
+
   return (
-    <button
-      type="button"
-      className={`button ${active} ${className}`}
+    <Button
+      className={`${isLiked ? 'text-primary' : ''} ${className}`}
       onClick={onClick}
       aria-label={ariaLabel}
       aria-pressed={isLiked}
     >
       <LikeIcon liked={isLiked} />
-    </button>
+    </Button>
   );
 }
 

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import useSpotifyControls from '@hooks/spotify/controls/usePlaybackControls';
 import { selectDevices, selectActiveDevice } from '@store/devicesSlice';
 import { selectPlaybackData } from '@store/playbackSlice';
-import PlaybackButton from './PlaybackButtons';
+import PlaybackButton from '.';
 
 interface Props {
   uri: string;

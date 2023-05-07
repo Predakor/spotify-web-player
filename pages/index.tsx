@@ -14,8 +14,8 @@ const Home: NextPageWithLayout = () => {
 
   const [featuredPlaylists, getFeaturedPlaylists] = info.featuredPlaylists;
   const [newReleases, getNewReleases] = info.newReleases;
-  const [userTopArtists, getUserTopArtists] = info.userTopArtists;
-  const [userTopTracks, getUserTopTracks] = info.userTopTracks;
+  const [userTopArtists] = info.userTopArtists;
+  const [userTopTracks] = info.userTopTracks;
 
   return (
     <>

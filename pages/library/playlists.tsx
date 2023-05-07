@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import { PlaylistCard } from '@components/Card';
 import CardList from '@components/Card/CardList';
 import LibraryCategories from '@components/Categories/LibraryNav';
 import FetchingComponent from '@components/FetchingComponent/FetchingComponent';

@@ -14,7 +14,7 @@ function Footer({ playback }: Props) {
   const { interrupting_playback } = actions.disallows;
 
   return (
-    <footer className="sticky bottom-0 col-span-full border-t border-secondary-800 bg-base-100 p-2">
+    <footer className="sticky bottom-0 col-span-full border-t border-base-300 bg-base-100 p-2">
       <div className="grid grid-cols-3 items-center justify-items-center">
         <section className="justify-self-start" aria-label="Currently playing">
           {item && <CurrentTrack />}
