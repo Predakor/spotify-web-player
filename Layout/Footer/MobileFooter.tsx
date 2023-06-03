@@ -21,30 +21,33 @@ function MobileFooter() {
 
   return (
     <footer className="sticky bottom-0 w-full">
-      <article
-        className="m-2 flex flex-1 items-center justify-between rounded-md p-2"
-        style={{ backgroundColor }}
-      >
-        <div className="truncate">
-          {currentTrack && <Track track={currentTrack as TrackType} />}
-        </div>
+      {item && (
+        <article
+          className="m-2 flex items-center rounded p-2"
+          style={{ backgroundColor }}
+        >
+          <div className="flex-1 truncate">
+            {currentTrack && <Track track={currentTrack as TrackType} />}
+          </div>
 
-        <div>
-          <Devices />
-          {item && (
+          <div className="inline-flex gap-4">
+            <Devices />
+
             <LikeTrackButton
+              className="w-fit p-0 text-3xl"
               songID={item.id}
               isLiked={false}
               ariaLabel={`Follow/Unfollow ${item.name}`}
             />
-          )}
-          <PlaybackButton
-            className="text-base-content"
-            onClick={tooglePlayBack}
-            isPlaying={!is_playing}
-          />
-        </div>
-      </article>
+
+            <PlaybackButton
+              className="w-fit bg-transparent "
+              onClick={tooglePlayBack}
+              isPlaying={!is_playing}
+            />
+          </div>
+        </article>
+      )}
       <MobileNav pathname={asPath} />
     </footer>
   );

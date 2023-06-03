@@ -4,6 +4,7 @@ import PlaylistPlaybackButton from './PlaylistPlaybackButton';
 
 function PlaybackButton(props: ButtonProps & { isPlaying?: boolean }) {
   const { isPlaying, className, ...restProps } = props;
+
   return (
     <Button
       {...restProps}

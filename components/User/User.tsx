@@ -8,11 +8,12 @@ function User({ user }: { user: SpotifyUser }) {
   const { name, image } = user;
 
   return (
-    <article className="dropdown dropdown-bottom dropdown-end ml-auto hidden cursor-default items-center gap-2 rounded-full bg-neutral p-1 pr-3 text-lg md:flex">
+    <article className="dropdown-bottom dropdown-end dropdown ml-auto hidden cursor-default items-center gap-2 rounded-full bg-neutral p-1 pr-3 text-lg md:flex">
       <UserAvatar imageURL={image} />
       <p className="font-semibold text-neutral-content">{name}</p>
       <Dropdown customParent>
         <Menu
+          className="my-2"
           items={[
             { item: 'Account' },
             { item: 'Profile' },

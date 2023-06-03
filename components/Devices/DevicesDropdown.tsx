@@ -19,11 +19,12 @@ function DevicesDropdown() {
     setMenuExpanded((prevState) => !prevState);
   };
 
+  const color = !isActiveDevice ? 'text-primary-500' : 'text-base-content';
   return (
     <div className="dropdown-top dropdown-end dropdown">
       <DeviceButton
         onClick={clickHandler}
-        className={!isActiveDevice ? 'text-primary-500' : 'text-base-content'}
+        className={`${color} p-0 md:px-4`}
         menuExpanded={menuExpanded}
         deviceType={type}
       />

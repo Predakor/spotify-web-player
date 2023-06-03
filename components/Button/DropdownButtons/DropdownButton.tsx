@@ -18,7 +18,7 @@ function DropdownButton({ expanded, onClick, children }: Props) {
 
   return (
     <button
-      className="button"
+      className="btn-ghost btn-square btn-sm btn text-xl"
       onClick={(e) => clickHandler(e)}
       aria-label={'Open/close dropdown menu'}
       aria-pressed={expanded}
