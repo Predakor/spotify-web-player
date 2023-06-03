@@ -10,5 +10,6 @@ module.exports = {
   plugins: [require('daisyui')],
   daisyui: {
     themes: ['emerald', 'forest'],
+    darkTheme: 'forest',
   },
 };
