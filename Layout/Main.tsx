@@ -5,6 +5,8 @@ interface MainProps {
 }
 
 function Main({ children }: MainProps) {
-  return <main className="flex flex-col gap-2 px-4">{children}</main>;
+  return (
+    <main className="flex min-h-screen flex-col gap-2 px-4">{children}</main>
+  );
 }
 export default Main;

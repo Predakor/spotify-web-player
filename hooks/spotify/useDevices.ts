@@ -5,22 +5,22 @@ import { useDeviceControls } from './controls';
 export type Device = SpotifyApi.UserDevice;
 function useDevices() {
   const { getDevices } = useDeviceControls();
-  const [fetchedDevices, actions] = useFetchedValue<Device[]>();
-
-  useEffect(() => {
-    fetchDevices();
-  }, []);
+  const [devices, actions] = useFetchedValue<Device[]>();
 
   const fetchDevices = useCallback(async () => {
     try {
       const request = await getDevices();
-      actions.fetchSucces(request);
+      actions.fetchSucces(request as Device[]);
     } catch (error) {
       actions.fetchFail(`${error}`);
     }
   }, []);
 
-  return [fetchedDevices, fetchDevices] as const;
+  useEffect(() => {
+    fetchDevices();
+  }, []);
+
+  return [devices, fetchDevices] as const;
 }
 
 export default useDevices;

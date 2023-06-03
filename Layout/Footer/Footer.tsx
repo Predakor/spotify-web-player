@@ -24,12 +24,6 @@ function Footer() {
     fetchData();
   }, []);
 
-  if (isMobile) {
-    return <MobileFooter />;
-  }
-  if (!playback) {
-    return null;
-  }
-  return <DesktopFooter playback={playback} />;
+  return isMobile ? <MobileFooter /> : <DesktopFooter playback={playback} />;
 }
 export default memo(Footer);

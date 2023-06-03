@@ -13,10 +13,10 @@ function PlaybackIndicator({ bars = 5, duration = 10 }: Props) {
   }
 
   return (
-    <div className="flex aspect-square h-full flex-1 items-end gap-2 overflow-clip ">
+    <div className="grid aspect-square h-full auto-cols-fr grid-flow-col gap-2">
       {renderedBars.map((bar, i) => (
         <div
-          className={`w-6 flex-shrink bg-green-600`}
+          className={` bg-green-600`}
           style={{
             height: `${bar}%`,
             animation: 'hop both infinite alternate',

@@ -21,14 +21,18 @@ function DevicesDropdown() {
 
   const color = !isActiveDevice ? 'text-primary-500' : 'text-base-content';
   return (
-    <div className="dropdown-top dropdown-end dropdown">
+    <div className="dropdown-top dropdown-end dropdown static ">
       <DeviceButton
         onClick={clickHandler}
         className={`${color} p-0 md:px-4`}
         menuExpanded={menuExpanded}
         deviceType={type}
       />
-      <DeviceMenu thisDevice={thisDevice} />
+      <div className="dropdown-content w-full lg:w-80">
+        <article className="mx-2 rounded-md bg-base-100 p-4 shadow-lg shadow-base-300 md:m-4 ">
+          <DeviceMenu thisDevice={thisDevice} />
+        </article>
+      </div>
     </div>
   );
 }

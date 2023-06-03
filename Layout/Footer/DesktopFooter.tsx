@@ -6,12 +6,13 @@ import Volume from '@components/Volume/Volume';
 import ActiveDevice from './ActiveDevice';
 
 interface Props {
-  playback: SpotifyApi.CurrentPlaybackResponse;
+  playback: SpotifyApi.CurrentPlaybackResponse | undefined | null;
 }
 
 function Footer({ playback }: Props) {
-  const { actions, item, device, progress_ms, is_playing } = playback;
-  const { interrupting_playback } = actions.disallows;
+  const { actions, item, device, progress_ms, is_playing } = playback || {};
+  const interrupting_playback =
+    actions?.disallows?.interrupting_playback ?? true;
 
   return (
     <footer className="sticky bottom-0 col-span-full border-t border-base-300 bg-base-100 p-2">
@@ -38,7 +39,7 @@ function Footer({ playback }: Props) {
           aria-label="Volume and device controls"
         >
           <Devices />
-          <Volume device={device} />
+          {device && <Volume device={device} />}
         </section>
       </div>
       <ActiveDevice />

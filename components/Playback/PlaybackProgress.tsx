@@ -9,30 +9,46 @@ interface Props {
   disabled: boolean;
   paused: boolean;
 }
+
 function PlaybackProgress({ start, end, disabled, paused }: Props) {
   const spotifyApi = useSpotify();
   const [progress, setProgress] = useState(start ?? 0);
   const intervalProgress = useProgressInterval(progress, end, paused);
 
   useEffect(() => {
-    const timeoutID = setTimeout(() => spotifyApi.seek(progress), 200);
+    const seekHandler = () => {
+      if (!disabled) {
+        spotifyApi.seek(progress);
+      }
+    };
+
+    const timeoutID = setTimeout(seekHandler, 200);
     return () => clearTimeout(timeoutID);
-  }, [progress, spotifyApi]);
+  }, [disabled, progress, spotifyApi]);
 
   return (
-    <div className="flex w-full flex-row items-center gap-2 px-2">
+    <div className="flex w-full items-center gap-2 px-2">
       <p>{msToText(intervalProgress)}</p>
-      <input
-        type="range"
-        className="range range-primary range-xs flex-1"
-        onChange={(e) => setProgress(e.currentTarget.valueAsNumber)}
-        min={0}
-        max={end}
-        value={intervalProgress}
-        disabled={disabled}
-      />
+      {disabled ? (
+        <progress
+          className="progress-bar progress"
+          value={intervalProgress}
+          max={end || 1}
+        />
+      ) : (
+        <input
+          type="range"
+          className={`flex-1' range range-primary range-xs`}
+          min={0}
+          max={end}
+          value={intervalProgress}
+          onChange={(e) => setProgress(e.currentTarget.valueAsNumber)}
+          disabled={disabled}
+        />
+      )}
       <p>{msToText(end)}</p>
     </div>
   );
 }
+
 export default PlaybackProgress;

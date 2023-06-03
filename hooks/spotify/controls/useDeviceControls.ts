@@ -20,9 +20,7 @@ const useDeviceControls = () => {
       try {
         await spotifyApi.transferMyPlayback([deviceID]);
         dispatch(setActiveDevice(deviceID));
-      } catch (error) {
-        throw error;
-      }
+      } catch {}
     },
 
     getDevices: async () => {
@@ -30,9 +28,7 @@ const useDeviceControls = () => {
         const { devices } = (await spotifyApi.getMyDevices()).body;
         dispatch(setDevices(devices));
         return devices;
-      } catch (error) {
-        throw error;
-      }
+      } catch {}
     },
   });
   return controls.current;
