@@ -31,17 +31,18 @@ function PlaybackProgress({ start, end, disabled, paused }: Props) {
       <p>{msToText(intervalProgress)}</p>
       {disabled ? (
         <progress
-          className="progress-bar progress"
+          className="progress-bar progress progress-primary"
           value={intervalProgress}
           max={end || 1}
         />
       ) : (
         <input
           type="range"
-          className={`flex-1' range range-primary range-xs`}
+          className={`range range-primary range-xs flex-1`}
           min={0}
           max={end}
           value={intervalProgress}
+          defaultValue={start || 0}
           onChange={(e) => setProgress(e.currentTarget.valueAsNumber)}
           disabled={disabled}
         />
