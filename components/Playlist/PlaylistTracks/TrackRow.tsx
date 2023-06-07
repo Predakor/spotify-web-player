@@ -1,6 +1,6 @@
 import Album from '@components/Album/Album';
-import MoreOptionsButton from '@components/Button/DropdownButtons/MoreOptionsDropdown';
-import { LikeTrackButton } from '@components/Button/ToogleButtons/LikedButton';
+import MoreOptionsButton from '@components/Buttons/DropdownButtons/MoreOptionsDropdown';
+import { LikeTrackButton } from '@components/Buttons/ToogleButtons/LikedButton';
 import Track from '@components/Track/Track';
 import { msToText } from '@utils/time';
 import { LikedTrack } from 'types/spotifyTypes';

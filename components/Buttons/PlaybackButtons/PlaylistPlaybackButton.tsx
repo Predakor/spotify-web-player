@@ -28,12 +28,12 @@ function PlaylistPlaybackButton(props: Props) {
       console.log(error);
     }
   };
-
+  const showButton = !playlistIsPlaying ? 'card-button-active' : '';
   return (
     <PlaybackButton
       onClick={playHandler}
       isPlaying={playlistIsPlaying}
-      className={className}
+      className={`${className} ${showButton}`}
       aria-label={ariaLabel}
       aria-pressed={playlistIsPlaying}
     />

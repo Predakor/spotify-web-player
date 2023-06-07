@@ -1,4 +1,4 @@
-import PlaybackButton from '@components/Button/PlaybackButtons';
+import PlaybackButton from '@components/Buttons/PlaybackButtons';
 import { useRouter } from 'next/router';
 
 interface Props {
@@ -30,7 +30,7 @@ function SavedTracks({ tracks }: Props) {
           <h3 className="text-2xl font-semibold">Liked Songs</h3>
           <p className="text-lg">{tracks.total} liked songs</p>
           <PlaybackButton
-            className="absolute right-0 opacity-0 duration-300 hover:scale-125 group-hover:-translate-y-full group-hover:bg-primary-700 group-hover:opacity-100"
+            className="group-hover:bg-primary-700 absolute right-0 opacity-0 duration-300 hover:scale-125 group-hover:-translate-y-full group-hover:opacity-100"
             onClick={goToSavedTracks}
           />
         </footer>

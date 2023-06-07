@@ -1,6 +1,6 @@
-import { LikeButton } from '@components/Button';
-import MoreOptionsButton from '@components/Button/DropdownButtons/MoreOptionsDropdown';
-import PlaybackButton from '@components/Button/PlaybackButtons';
+import { LikeButton } from '@components/Buttons';
+import MoreOptionsButton from '@components/Buttons/DropdownButtons/MoreOptionsDropdown';
+import PlaybackButton from '@components/Buttons/PlaybackButtons';
 import { usePlaybackControls } from '@hooks/spotify/controls';
 
 interface Props {
@@ -27,7 +27,7 @@ function PageActions({ uri, actions, moreActions }: Props) {
         ariaLabel={''}
       />
       <MoreOptionsButton
-        className="dropdown-right dropdown-bottom"
+        className="dropdown-bottom dropdown-right"
         actions={<p>test</p>}
       />
     </section>

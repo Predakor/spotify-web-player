@@ -18,7 +18,7 @@ function PlaylistTracks({ playlist }: Props) {
   return (
     <section
       className="relative flex-col gap-2"
-      aria-label="List of tracks on this playlist"
+      aria-label={`List of tracks on ${playlist.name}`}
     >
       <TrackRowHeading />
       {tracks.map(({ track }, i) => {

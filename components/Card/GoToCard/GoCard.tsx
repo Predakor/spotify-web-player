@@ -8,10 +8,10 @@ interface Props {
   onClick: VoidFunction;
 }
 
-function GoCard({ title, content, children, className, onClick }: Props) {
+function GoCard({ title, content, children, className = '', onClick }: Props) {
   return (
     <article
-      className={`card-compact card bg-base-100 ${className ?? ''}`}
+      className={`card-hover card-compact card cursor-pointer bg-base-100 duration-150 ${className}`}
       onClick={onClick}
       tabIndex={0}
     >

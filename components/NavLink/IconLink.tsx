@@ -16,7 +16,7 @@ function IconLink({ href, active, text, children, hideText }: Props) {
   return (
     <Link
       href={href}
-      className="${activeStyle} transition hover:text-primary-focus lg:flex lg:items-center lg:gap-2"
+      className={`${activeStyle} transition hover:text-primary-focus lg:flex lg:items-center lg:gap-2`}
       aria-label={`go to ${text} page`}
     >
       {children}

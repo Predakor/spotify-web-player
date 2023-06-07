@@ -1,4 +1,4 @@
-import { CardPlaybackButton } from '@components/Button/PlaybackButtons/PlaybackButton';
+import { CardPlaybackButton } from '@components/Buttons/PlaybackButtons/PlaybackButton';
 import CoverImage from '@components/CoverImage/CoverImage';
 import { CardProps } from './ContentCard';
 import GoCard from './GoToCard/GoCard';

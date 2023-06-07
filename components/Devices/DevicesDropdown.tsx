@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import DeviceButton from '@components/Button/DeviceButton';
+import DeviceButton from '@components/Buttons/DeviceButton';
 import { useDeviceControls } from '@hooks/spotify/controls';
 import { selectActiveDevice, selectThisDevice } from '@store/devicesSlice';
 import DeviceMenu from './DeviceMenu';
@@ -21,7 +21,7 @@ function DevicesDropdown() {
 
   const color = !isActiveDevice ? 'text-primary-500' : 'text-base-content';
   return (
-    <div className="dropdown-top dropdown-end dropdown static ">
+    <div className="dropdown-end dropdown-top dropdown static ">
       <DeviceButton
         onClick={clickHandler}
         className={`${color} p-0 md:px-4`}

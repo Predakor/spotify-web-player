@@ -1,5 +1,5 @@
 import Artists from '@components/Artists/Artists';
-import LikeButton from '@components/Button/ToogleButtons/LikedButton';
+import LikeButton from '@components/Buttons/ToogleButtons/LikedButton';
 import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import PageActions from '@components/Page/PageActions';
 import PageContent from '@components/Page/PageContent';

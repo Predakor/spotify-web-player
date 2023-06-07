@@ -29,13 +29,18 @@ function PageHeader({ children, images, className, customImage }: Props) {
   const imageURL = images?.at(0)?.url;
 
   return (
-    <header className="grid gap-8 p-4 md:grid-cols-[auto,1fr]" ref={targetRef}>
-      {imageURL && (
-        <CoverImage url={imageURL} className="aspect-square h-[25vh]" />
-      )}
+    <header
+      className="grid gap-8 p-2 md:grid-cols-[auto,1fr] md:p-4"
+      ref={targetRef}
+    >
+      <CoverImage
+        url={imageURL}
+        className="aspect-square h-[25vh] place-self-center"
+      />
+
       {customImage && customImage}
 
-      <section className={className ?? ''} ref={targetRef}>
+      <section className={className} ref={targetRef}>
         {children}
       </section>
     </header>

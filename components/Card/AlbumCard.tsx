@@ -1,5 +1,5 @@
 import Artists from '@components/Artists/Artists';
-import { CardPlaybackButton } from '@components/Button/PlaybackButtons/PlaybackButton';
+import { CardPlaybackButton } from '@components/Buttons/PlaybackButtons/PlaybackButton';
 import GoCard from '@components/Card/GoToCard/GoCard';
 import CoverImage from '@components/CoverImage/CoverImage';
 import { CardProps } from './ContentCard';

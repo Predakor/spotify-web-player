@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import LikeButton from '@components/Button/ToogleButtons/LikedButton';
+import LikeButton from '@components/Buttons/ToogleButtons/LikedButton';
 import { selectTrack } from '@store/playbackSlice';
 import Track from './Track';
 

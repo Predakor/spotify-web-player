@@ -19,6 +19,7 @@ function PagingShelf<T>({ title, paging, pagingFunction, children }: Props<T>) {
   const displayedTracks = clampArray(items, 0, shelfLimit);
 
   const moreToShow = items.length > shelfLimit;
+
   const showMoreButton = moreToShow ? (
     <button className="btn-ghost btn" onClick={fetchAll}>
       Show all

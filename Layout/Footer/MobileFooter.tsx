@@ -1,6 +1,5 @@
-import { useSelector } from 'react-redux';
-import PlaybackButton from '@components/Button/PlaybackButtons';
-import { LikeTrackButton } from '@components/Button/ToogleButtons/LikedButton';
+import PlaybackButton from '@components/Buttons/PlaybackButtons';
+import { LikeTrackButton } from '@components/Buttons/ToogleButtons/LikedButton';
 import Devices from '@components/Devices/DevicesDropdown';
 import Track from '@components/Track/Track';
 import { usePlaybackControls } from '@hooks/spotify/controls';
@@ -8,6 +7,7 @@ import usePageColor from '@hooks/usePageColor';
 import { selectPlaybackData, selectTrack } from '@store/playbackSlice';
 import { MobileNav } from 'Layout/Nav';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import { Track as TrackType } from 'types/spotifyTypes';
 
 function MobileFooter() {
@@ -26,7 +26,7 @@ function MobileFooter() {
           className="m-2 flex items-center rounded p-2"
           style={{ backgroundColor }}
         >
-          <div className="flex-1 truncate">
+          <div className="flex-1 truncate pr-2">
             {currentTrack && <Track track={currentTrack as TrackType} />}
           </div>
 
@@ -41,7 +41,7 @@ function MobileFooter() {
             />
 
             <PlaybackButton
-              className="w-fit bg-transparent "
+              className="w-fit bg-transparent text-neutral-content "
               onClick={tooglePlayBack}
               isPlaying={!is_playing}
             />

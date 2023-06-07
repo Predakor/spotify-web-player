@@ -3,12 +3,12 @@ import Button, { ButtonProps } from '../Button';
 import PlaylistPlaybackButton from './PlaylistPlaybackButton';
 
 function PlaybackButton(props: ButtonProps & { isPlaying?: boolean }) {
-  const { isPlaying, className, ...restProps } = props;
+  const { isPlaying, className = '', ...restProps } = props;
 
   return (
     <Button
       {...restProps}
-      className={`btn-circle bg-primary ${className ?? ''}`}
+      className={`btn-circle bg-primary text-base-100 ${className}`}
       aria-label={`Play/Pause ${props['aria-label']}`}
       aria-pressed={isPlaying}
       stopPrepagation
@@ -23,7 +23,7 @@ function CardPlaybackButton({ uri, label }: { uri: string; label: string }) {
     <PlaylistPlaybackButton
       uri={uri}
       ariaLabel={label}
-      className="absolute right-0 text-neutral opacity-0 duration-300 hover:scale-125 group-hover:-translate-y-full group-hover:bg-primary group-hover:opacity-100"
+      className="card-button cover-shadow absolute right-0 bg-primary opacity-0 duration-300 hover:scale-110 group-hover:-translate-y-full group-hover:bg-primary group-hover:opacity-100"
     />
   );
 }

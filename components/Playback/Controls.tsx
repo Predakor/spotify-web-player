@@ -4,7 +4,7 @@ import PlaybackButton, {
   PreviousButton,
   SkipButton,
   RepeatButton,
-} from '@components/Button/PlaybackButtons';
+} from '@components/Buttons/PlaybackButtons';
 import useSpotifyControls from '@hooks/spotify/controls/usePlaybackControls';
 import { selectPlaybackData } from '@store/playbackSlice';
 
@@ -32,11 +32,7 @@ function Controls() {
 
       <PreviousButton onClick={prevSong} disabled={disabled} />
 
-      <PlaybackButton
-        onClick={tooglePlayBack}
-        isPlaying={!is_playing}
-        className={'bg-primary-50'}
-      />
+      <PlaybackButton onClick={tooglePlayBack} isPlaying={!is_playing} />
 
       <SkipButton onClick={nextSong} disabled={disabled} />
 

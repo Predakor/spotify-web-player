@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MuteVolumeButton } from '@components/Button';
+import { MuteVolumeButton } from '@components/Buttons';
 import Range from '@components/Range/Range';
 
 interface Props {

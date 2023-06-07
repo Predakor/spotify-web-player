@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
-import { useSelector } from 'react-redux';
-import Button from '@components/Button';
+import Button, { ThemeButton } from '@components/Buttons';
 import User from '@components/User/User';
 import usePageColor from '@hooks/usePageColor';
 import { selectInView } from '@store/scrollSlice';
 import { useRouter } from 'next/router';
+import { ReactNode } from 'react';
+import { useSelector } from 'react-redux';
 import { SpotifyUser } from 'types/spotifyUser';
 
 export interface HeaderProps {
@@ -15,14 +15,12 @@ function Header({ user, children }: HeaderProps) {
   const { back } = useRouter();
   const inView = useSelector(selectInView);
   const pageColor = usePageColor({ lightness: 25 });
-  const backgroundColor = inView ? 'rgba(0,0,0,0)' : pageColor;
-
+  const backgroundColor = pageColor || 'bg-base-200';
+  const scrolledBackgroundColor = !inView ? pageColor : undefined;
   return (
     <header
-      className={`sticky top-0 z-10 flex flex-wrap items-center gap-2 p-4 transition-colors ${
-        backgroundColor ? '' : 'bg-base-200'
-      }`}
-      style={{ backgroundColor }}
+      className={`min-h-16 sticky top-0 z-10 flex flex-wrap items-center gap-2 p-4 transition-colors ${backgroundColor}`}
+      style={{ backgroundColor: scrolledBackgroundColor }}
     >
       <nav className="hidden md:block">
         <Button onClick={back}>{'<'}</Button>
@@ -30,7 +28,10 @@ function Header({ user, children }: HeaderProps) {
       </nav>
 
       {children}
-      <User user={user} />
+      <div className="ml-auto hidden gap-2 md:flex">
+        <ThemeButton />
+        <User user={user} />
+      </div>
     </header>
   );
 }

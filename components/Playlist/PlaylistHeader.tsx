@@ -1,20 +1,19 @@
 import { useSelector } from 'react-redux';
-import PlaylistPlaybackButton from '@components/Button/PlaybackButtons/PlaylistPlaybackButton';
+import PlaylistPlaybackButton from '@components/Buttons/PlaybackButtons/PlaylistPlaybackButton';
 import { usePlaylistInfo } from '@hooks/spotify/Info';
 import { selectInView } from '@store/scrollSlice';
 
 function PlaylistHeader() {
   const [playlistData] = usePlaylistInfo();
-  const coverTracks = useSelector(selectInView);
+  const inView = useSelector(selectInView);
 
   if (!playlistData.value) return null;
 
   const { name, uri } = playlistData.value;
+  const showHeader = inView ? 'opacity-0' : 'opacity-100';
   return (
     <div
-      className={`flex items-center gap-4 text-2xl ${
-        coverTracks ? 'opacity-0' : 'opacity-100'
-      } duration-150 `}
+      className={`flex items-center gap-4 text-2xl ${showHeader} duration-150 `}
     >
       <PlaylistPlaybackButton
         uri={uri}

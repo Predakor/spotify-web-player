@@ -8,7 +8,7 @@ function UserPlaylists({ activePath }: { activePath: string }) {
   return (
     <FetchingComponent fetchValue={fetchingPLaylists}>
       {({ items }) => (
-        <nav className="menu gap-1" aria-label="List of playlists">
+        <nav className="flex flex-col gap-1" aria-label="List of playlists">
           {items.map((playlist) => {
             const { id, name } = playlist;
             const href = `/playlist/${id}`;

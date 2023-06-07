@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode, useRef, useState } from 'react';
-import DropdownButton from '@components/Button/DropdownButtons';
+import DropdownButton from '@components/Buttons/DropdownButtons';
 
 export interface DropdownProps {
   children: ReactNode;
