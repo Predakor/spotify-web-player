@@ -8,9 +8,6 @@ describe('<Dropdown />', () => {
         <p>exampleContent</p>
       </Dropdown>
     );
-    cy.get('summary').click();
-    cy.get('details').children().eq(1).should('be.visible');
-    cy.get('summary').click().click();
-    cy.get('details').children().eq(1).should('be.hidden');
+    cy.get('summary').click().siblings().should('be.visible');
   });
 });

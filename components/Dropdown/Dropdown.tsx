@@ -15,12 +15,11 @@ function Dropdown(props: DropdownProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <details
-      open={!expanded}
-      onClick={() => setExpanded((prev) => !prev)}
-      className={`${dropdownParent} ${className}`}
-    >
-      <summary className="btn-ghost btn-sm btn-circle btn p-0 text-xl">
+    <details className={`${dropdownParent} ${className}`}>
+      <summary
+        onClickCapture={() => setExpanded((prev) => !prev)}
+        className="btn-ghost btn-sm btn-circle btn p-0 text-xl"
+      >
         <DropdownIcon expanded={expanded} />
       </summary>
       <div className={`dropdown-content w-full`}>{children}</div>

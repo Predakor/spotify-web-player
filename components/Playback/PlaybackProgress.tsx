@@ -31,7 +31,7 @@ function PlaybackProgress({ start, end, disabled, paused }: Props) {
       <p>{msToText(intervalProgress)}</p>
       {disabled ? (
         <progress
-          className="progress-bar progress progress-primary"
+          className="progress-bar progress-primary progress"
           value={intervalProgress}
           max={end || 1}
         />
