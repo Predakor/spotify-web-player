@@ -8,11 +8,11 @@ function TrackList({ fetchedTracks }: { fetchedTracks: Track[] }) {
   if (!ready && !tracks) {
     return (
       <div className="rounde flex animate-pulse flex-col gap-2 opacity-80">
-        <div className="h-16 bg-background-300" />
-        <div className="h-16 bg-background-300" />
-        <div className="h-16 bg-background-300" />
-        <div className="h-16 bg-background-300" />
-        <div className="h-16 bg-background-300" />
+        <div className="bg-background-300 h-16" />
+        <div className="bg-background-300 h-16" />
+        <div className="bg-background-300 h-16" />
+        <div className="bg-background-300 h-16" />
+        <div className="bg-background-300 h-16" />
       </div>
     );
   }

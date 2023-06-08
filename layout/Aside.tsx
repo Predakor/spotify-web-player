@@ -3,7 +3,7 @@ import IconLink from '@components/NavLink/IconLink';
 import UserPlaylists from '@components/UserPlaylists/UserPlaylists';
 import { useRouter } from 'next/router';
 import { useMediaQuery } from 'react-responsive';
-import { Nav } from './Nav';
+import { DesktopNav } from './Nav';
 
 function Aside() {
   const { asPath } = useRouter();
@@ -14,7 +14,7 @@ function Aside() {
   return (
     <aside className="row-span-3 bg-base-100">
       <div className="menu sticky top-0 max-h-[90vh] gap-4 p-4">
-        <Nav pathname={asPath} />
+        <DesktopNav pathname={asPath} />
         <IconLink
           href={'/library/tracks'}
           active={asPath === '/library/tracks'}

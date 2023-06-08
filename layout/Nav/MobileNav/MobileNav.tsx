@@ -1,5 +1,5 @@
 import { navItemData } from '@utils/navData';
-import NavItems from './NavItems';
+import NavItems from '../NavItems';
 
 function MobileNav({ pathname }: { pathname: string }) {
   return (

@@ -8,7 +8,7 @@ function User({ user }: { user: SpotifyUser }) {
   const { name, image } = user;
 
   return (
-    <article className="dropdown-bottom dropdown-end dropdown cursor-default items-center gap-2 rounded-full bg-neutral p-1 pr-3 md:flex">
+    <article className="dropdown-end dropdown-bottom dropdown cursor-default items-center gap-2 rounded-full bg-neutral p-1 pr-3 md:flex">
       <UserAvatar imageURL={image} />
       <p className="font-semibold text-neutral-content">{name}</p>
       <Dropdown customParent>

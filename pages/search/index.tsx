@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import BrowseGenres from '@components/BrowseGenres/BrowseGenres';
 import RecentSearches from '@components/RecentSearches/RecentSearches';
 import SearchBar from '@components/SearchBar/SearchBar';
-import Layout from 'Layout/Layouts';
+import Layout from '@layout/Layouts';
 import Head from 'next/head';
 import { NextPageWithLayout } from '../_app';
 

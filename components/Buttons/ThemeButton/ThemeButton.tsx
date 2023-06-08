@@ -5,7 +5,7 @@ function ThemeButton() {
   const [lightMode, setMode] = useTheme();
 
   return (
-    <label className="swap-rotate swap btn-neutral btn-circle btn text-2xl ">
+    <label className="swap btn-neutral swap-rotate btn-circle btn text-2xl ">
       <input type="checkbox" checked={lightMode} onChange={setMode} />
       <MdLightMode className="swap-on" />
       <MdModeNight className="swap-off" />

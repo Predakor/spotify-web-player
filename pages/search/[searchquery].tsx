@@ -4,7 +4,7 @@ import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import SearchBar from '@components/SearchBar/SearchBar';
 import SearchResults from '@components/SearchResults/SearchResults';
 import useSearchResult from '@hooks/spotify/useSearch';
-import Layout from 'Layout/Layouts/Layout';
+import Layout from '@layout/Layouts/Layout';
 import { NextPageWithLayout } from '../_app';
 
 const Search: NextPageWithLayout = () => {

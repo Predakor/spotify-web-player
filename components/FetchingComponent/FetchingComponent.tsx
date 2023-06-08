@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { FetchedValue } from '@hooks/fetch/useFetchedValue';
-import Loading from 'Layout/Loading';
+import Loading from '@layout/Loading';
 
 interface Props<T> {
   fetchValue: FetchedValue<T>;

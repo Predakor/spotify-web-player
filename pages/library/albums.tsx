@@ -5,7 +5,7 @@ import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import Grid from '@components/Grid/Grid';
 import PageContent from '@components/Page/PageContent';
 import useSavedAlbums from '@hooks/spotify/Info/useSavedAlbums';
-import Layout from 'Layout/Layouts';
+import Layout from '@layout/Layouts';
 import { useRouter } from 'next/router';
 
 const Albums = () => {

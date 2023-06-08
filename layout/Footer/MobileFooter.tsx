@@ -5,7 +5,7 @@ import Track from '@components/Track/Track';
 import { usePlaybackControls } from '@hooks/spotify/controls';
 import usePageColor from '@hooks/usePageColor';
 import { selectPlaybackData, selectTrack } from '@store/playbackSlice';
-import { MobileNav } from 'Layout/Nav';
+import { MobileNav } from '@layout/Nav';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { Track as TrackType } from 'types/spotifyTypes';

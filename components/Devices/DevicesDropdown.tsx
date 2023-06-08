@@ -21,7 +21,7 @@ function DevicesDropdown() {
 
   const color = !isActiveDevice ? 'text-primary-500' : 'text-base-content';
   return (
-    <div className="dropdown-end dropdown-top dropdown static ">
+    <div className="dropdown-top dropdown-end dropdown static ">
       <DeviceButton
         onClick={clickHandler}
         className={`${color} p-0 md:px-4`}

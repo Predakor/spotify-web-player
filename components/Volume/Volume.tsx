@@ -16,5 +16,5 @@ function Volume({ device }: { device: SpotifyApi.UserDevice }) {
     </div>
   );
 }
-0
+
 export default Volume;

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Main from 'Layout/Main';
+import Main from '@layout/Main';
 
 interface Props {
   children: ReactNode;

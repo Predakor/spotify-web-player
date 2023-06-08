@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Loading from 'Layout/Loading';
+import Loading from '@layout/Loading';
 import { useSession } from 'next-auth/react';
 import { SpotifyUser } from 'types/spotifyUser';
 import FoterWraper from '../Footer/Footer';

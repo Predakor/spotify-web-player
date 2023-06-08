@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import LibraryCategories from '@components/Categories/LibraryNav';
-import Layout from 'Layout/Layouts';
+import Layout from '@layout/Layouts';
 
 const Podcasts = ({}) => {
   return <div>Podcasts</div>;

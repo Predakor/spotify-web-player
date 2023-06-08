@@ -7,7 +7,7 @@ import PageContent from '@components/Page/PageContent';
 import SavedTracks from '@components/Track/SavedTracks';
 import useUserPlaylists from '@hooks/spotify/Info/useUserPlaylists';
 import useUserSavedTracks from '@hooks/spotify/Info/useUserSavedTracks';
-import Layout from 'Layout/Layouts';
+import Layout from '@layout/Layouts';
 import { useRouter } from 'next/router';
 
 const Playlists = () => {

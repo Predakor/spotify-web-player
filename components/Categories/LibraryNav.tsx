@@ -1,5 +1,5 @@
 import { libraryNavData } from '@utils/navData';
-import NavItems from 'Layout/Nav/NavItems';
+import NavItems from '@layout/Nav/NavItems';
 import { useRouter } from 'next/router';
 
 function LibraryNav() {
