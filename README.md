@@ -1,17 +1,37 @@
 ## Table of contents
 
-- [Installation and usage](#general-info)
-- [Technologies](#technologies)
-- [Screenshots](#creenshots)
-- [Features](#features)
+- [Installation and usage](#Installation)
+- [Screenshots](#Screenshots)
+- [Technologies](#Technologies)
+- [Features](#Features)
 
 # Spotify Clone
 
-Spotify Clone created to earn experience in using Next.js and NextAuth. You need spotify account to use most of the feature and Premium Spotify account to use web playback you also need to be added to spotify dashbord which I can't do to more than 20 people. You can still check online version with provided demo login and password
+[Check the project online](https://spotify-web-player-sandy.vercel.app/)
 
-## Demo
+Spotify Clone created to earn experience in using Next.js and NextAuth, Additionally I decided to add some extra features. You need spotify account to use most of the feature and Premium Spotify account to use web playback you also need to be added to spotify dashbord which I can't do to more than 20 people. You can still check online version with provided demo login and password
 
-[Check the project online](https://predakor.github.io/typer)
+## Features
+
+- Switchable light mode
+- Most of spotify features
+- Web Playback for premium users
+- Old Spotify layout
+- (...in progress) Track and Playlists analazyer
+- (...in progress) custom Playlist and Track recomender based on user options
+
+## Technologies
+
+- React
+- Typescript
+- Next.js
+- NextAuth
+- Tailwind
+- Daisyui
+
+## Screenshots
+
+![Screenshot 2023-06-08 at 11-45-55 Discofy](https://github.com/Predakor/spotify-web-player/assets/86599904/091504a2-a4dc-4ddc-8cb5-0087658a7d53)
 
 ## Installation
 
@@ -42,10 +62,10 @@ Login to Spotify and create new Project
 Create .env.local file with the following structure
 
 ```bash
+  CLIENT_ID = clientIdFromSpotifyDashbord
+  CLIENT_SECRET = clientSecretFromSpotifyDashbord
+  NEXTAUTH_URL = http://localhost:3000
   NEXTAUTH_SECRET = optionalValueForHashing
-  CLIENT_SECRET = spotifySecret
-  CLIENT_ID = spotifySecret
-  NEXTAUTH_URL = yourPageURL
 ```
 
 Do the same for the server variable
@@ -55,25 +75,3 @@ Start the server
 ```bash
   npm run dev
 ```
-
-## Technologies
-
-- React
-- Typescript
-- Tailwind
-- Daisyui
-- Next.js
-- NextAuth
-
-## Screenshots
-
-![App Screenshot](https://github.com/Predakor/Typer/assets/86599904/9ed3d278-a444-4ceb-aec7-b6f226bf5ee2)
-
-## Features
-
-- Switchable light mode 
-- Most of spotify features
-- Web Playback for premium users 
-- Old Spotify layout
-- (...in progress) Track and Playlists analazyer
-- (...in progress) custom Playlist and Track recomender based on user options
