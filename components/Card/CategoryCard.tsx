@@ -11,7 +11,11 @@ function GoCard({ category, onClick }: Props) {
   return (
     <article className="card card-compact bg-base-100" onClick={onClick}>
       <div className="group card-body">
-        <CoverImage url={icons[0].url} className={'aspect-square'} />
+        <CoverImage
+          urls={icons}
+          prefferdSize="big"
+          className={'aspect-square'}
+        />
         <h2 className="card-title truncate">{name}</h2>
       </div>
     </article>

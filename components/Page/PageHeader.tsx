@@ -26,17 +26,18 @@ function PageHeader({ children, images, className, customImage }: Props) {
     };
   }, [observer]);
 
-  const imageURL = images?.at(0)?.url;
-
   return (
     <header
       className="grid gap-8 p-2 md:grid-cols-[auto,1fr] md:p-4"
       ref={targetRef}
     >
-      <CoverImage
-        url={imageURL}
-        className="aspect-square h-[25vh] place-self-center"
-      />
+      {images && (
+        <CoverImage
+          urls={images}
+          prefferdSize="big"
+          className="aspect-square h-[25vh] place-self-center"
+        />
+      )}
 
       {customImage && customImage}
 

@@ -7,13 +7,12 @@ type Artist = SpotifyApi.ArtistObjectFull;
 
 function ArtistCard({ data, onClick }: CardProps<Artist>) {
   const { name, uri, images } = data;
-  const [image] = images;
 
   return (
     <GoCard title={name} content={'artist'} onClick={onClick}>
       <div className="relative">
         <CoverImage
-          url={image?.url}
+          urls={images}
           className="aspect-square h-auto rounded-full"
         />
         <CardPlaybackButton label={`artist: ${name}`} uri={uri} />

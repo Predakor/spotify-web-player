@@ -7,11 +7,12 @@ const Song = ({ track }: { track: SpotifyApi.TrackObjectFull }) => {
   return (
     <div className="flex max-w-full gap-4">
       <Image
-        src={album.images[0].url}
+        src={album.images[2].url}
         alt="current song thumbnail"
         width={50}
         height={50}
         unoptimized
+        className="aspect-square"
       />
 
       <div className="truncate">

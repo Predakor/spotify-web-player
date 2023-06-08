@@ -17,7 +17,7 @@ function TrackCard({ data, onClick }: CardProps<Track>) {
     >
       <div className="relative">
         <CoverImage
-          url={album.images[0].url}
+          urls={album.images}
           className="aspect-square h-auto w-full"
         />
         <CardPlaybackButton label={name} uri={uri} />

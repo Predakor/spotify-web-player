@@ -8,7 +8,6 @@ type Album = SpotifyApi.AlbumObjectSimplified;
 
 function AlbumCard({ data, onClick }: CardProps<Album>) {
   const { name, uri, images, artists, release_date } = data;
-  const [image] = images;
 
   const releaseDate = release_date.slice(0, 4);
 
@@ -25,7 +24,7 @@ function AlbumCard({ data, onClick }: CardProps<Album>) {
       onClick={onClick}
     >
       <div className="relative">
-        <CoverImage url={image.url} className="aspect-square h-auto w-full" />
+        <CoverImage urls={images} className="aspect-square h-auto w-full" />
         <CardPlaybackButton label={`album: ${name}`} uri={uri} />
       </div>
     </GoCard>
