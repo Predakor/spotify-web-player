@@ -38,25 +38,25 @@ Spotify Clone created to earn experience in using Next.js and NextAuth, Addition
 Clone the project
 
 ```bash
-  git clone https://github.com/Predakor/Typer
+  git clone https://github.com/Predakor/spotify-web-player
 ```
 
 Go to the project directory
 
 ```bash
-  cd typer
+  cd spotify-web-player
 ```
 
 Install dependencies
 
 ```bash
-  npm install
+  pnpm install
 ```
 
 Login to Spotify and create new Project
 
 ```bash
-  git clone https://github.com/Predakor/Typer
+  https://developer.spotify.com/dashboard
 ```
 
 Create .env.local file with the following structure
