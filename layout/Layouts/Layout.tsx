@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
-import Loading from '@layout/Loading';
 import { useSession } from 'next-auth/react';
 import { SpotifyUser } from 'types/spotifyUser';
 import FoterWraper from '../Footer/Footer';
 import Header from '../Header';
 import AuthorizedLayout from './AuthorizedLayout';
 import UnathorizedLayout from './UnathorizedLayout';
+import Loading from '@layout/Loading';
 
 interface LayoutProps {
   children?: ReactNode;

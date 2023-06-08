@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
 import useSpotifySDK from '@hooks/spotify/useSpotifySDK';
-import spotifyApi from '@utils/spotify';
 import Aside from '@layout/Aside';
 import DynamicBackground from '@layout/DynamicBackground';
 import Main from '@layout/Main';
+import spotifyApi from '@utils/spotify';
+import { ReactNode } from 'react';
 import { SpotifyUser } from 'types/spotifyUser';
 import { FoterWraper, Header } from './Layout';
 

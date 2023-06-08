@@ -5,7 +5,7 @@ import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import Grid from '@components/Grid/Grid';
 import PageContent from '@components/Page/PageContent';
 import useFollowedArtists from '@hooks/spotify/Info/useFollowedArtists';
-import Layout from '@layout/Layouts';
+import Layout from 'Layout/Layouts';
 import { useRouter } from 'next/router';
 
 const Artists = ({}) => {

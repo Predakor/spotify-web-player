@@ -6,7 +6,7 @@ import PlaylistDescription from '@components/Playlist/PlaylistDetails/PlaylistDe
 import PlaylistHeader from '@components/Playlist/PlaylistHeader';
 import PlaylistTracks from '@components/Playlist/PlaylistTracks/PlaylistTracks';
 import { usePlaylistInfo } from '@hooks/spotify/Info';
-import Layout from '@layout/Layouts/Layout';
+import Layout from '@layout/Layouts';
 import Head from 'next/head';
 import { NextPageWithLayout } from 'pages/_app';
 

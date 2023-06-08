@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from 'react';
-import Layout from '@layout/Layouts/Layout';
+import Layout from 'layout/Layouts/Layout';
 import { NextPage } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';

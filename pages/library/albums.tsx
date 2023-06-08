@@ -1,4 +1,3 @@
-import { ReactElement } from 'react';
 import CardList from '@components/Card/CardList';
 import LibraryCategories from '@components/Categories/LibraryNav';
 import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
@@ -7,6 +6,7 @@ import PageContent from '@components/Page/PageContent';
 import useSavedAlbums from '@hooks/spotify/Info/useSavedAlbums';
 import Layout from '@layout/Layouts';
 import { useRouter } from 'next/router';
+import { ReactElement } from 'react';
 
 const Albums = () => {
   const savedAlbums = useSavedAlbums();

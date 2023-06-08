@@ -1,10 +1,10 @@
-import { ReactElement } from 'react';
 import SearchCategories from '@components/Categories/SearchCategories';
 import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import SearchBar from '@components/SearchBar/SearchBar';
 import SearchResults from '@components/SearchResults/SearchResults';
 import useSearchResult from '@hooks/spotify/useSearch';
-import Layout from '@layout/Layouts/Layout';
+import Layout from '@layout/Layouts';
+import { ReactElement } from 'react';
 import { NextPageWithLayout } from '../_app';
 
 const Search: NextPageWithLayout = () => {

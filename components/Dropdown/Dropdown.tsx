@@ -1,5 +1,5 @@
-import { ReactElement, ReactNode, useRef, useState } from 'react';
-import DropdownButton from '@components/Buttons/DropdownButtons';
+import DropdownIcon from '@icons/DropdownIcon';
+import { ReactElement, ReactNode, useState } from 'react';
 
 export interface DropdownProps {
   children: ReactNode;
@@ -12,23 +12,19 @@ export interface DropdownProps {
 function Dropdown(props: DropdownProps) {
   const { children, className, icon, customParent } = props;
   const dropdownParent = customParent ? '' : 'dropdown';
-
-  const targetRef = useRef<HTMLDivElement>(null);
-  const [focus, setFocus] = useState(false);
-
-  const blurHandler = () => focus && setFocus(false);
-  const focusHandler = () => !focus && setFocus(true);
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <div
+    <details
+      open={!expanded}
+      onClick={() => setExpanded((prev) => !prev)}
       className={`${dropdownParent} ${className}`}
-      onFocus={focusHandler}
-      onBlur={blurHandler}
-      ref={targetRef}
     >
-      <DropdownButton expanded={focus}>{icon && icon(focus)}</DropdownButton>
+      <summary className="btn-ghost btn-sm btn-circle btn p-0 text-xl">
+        <DropdownIcon expanded={expanded} />
+      </summary>
       <div className={`dropdown-content w-full`}>{children}</div>
-    </div>
+    </details>
   );
 }
 
