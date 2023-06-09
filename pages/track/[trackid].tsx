@@ -13,7 +13,7 @@ function Track() {
         return (
           <div className="flex flex-col gap-4 p-4 md:flex-row md:items-center">
             <CoverImage
-              url={album.images[0].url}
+              urls={album.images}
               className={'aspect-square w-auto md:w-1/4'}
             />
             <section className="flex flex-col gap-12 text-4xl lg:justify-end">

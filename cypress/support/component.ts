@@ -15,7 +15,7 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands';
+import './commands.ts';
 import '../../styles/globals.css';
 
 // Alternatively you can use CommonJS syntax:
@@ -31,6 +31,7 @@ declare global {
   namespace Cypress {
     interface Chainable {
       mount: typeof mount;
+      login(email: string, password: string): Chainable<void>;
     }
   }
 }

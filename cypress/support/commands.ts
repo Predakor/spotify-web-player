@@ -11,27 +11,21 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+Cypress.Commands.add('login', (email, password) => {
+  cy.session([email, password], () => {
+    cy.visit('login');
+    cy.get('button').click();
+    cy.origin(
+      'https://accounts.spotify.com/',
+      { args: [email, password] },
+      ([email, password]) => {
+        cy.get('#login-username').type(email);
+        cy.get('#login-password').type(password);
+        cy.get('#login-button').click();
+      }
+    );
+    cy.getCookie('next-auth');
+    cy.getAllCookies();
+  });
+});
