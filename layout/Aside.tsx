@@ -1,12 +1,12 @@
 import SavedTracksImage from '@components/CoverImage/SavedTracksImage';
 import IconLink from '@components/NavLink/IconLink';
 import UserPlaylists from '@components/UserPlaylists/UserPlaylists';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { useMediaQuery } from 'react-responsive';
 import { DesktopNav } from './Nav';
 
 function Aside() {
-  const { asPath } = useRouter();
+  const asPath = usePathname();
   const isMobile = useMediaQuery({ maxWidth: '1024px' });
 
   if (isMobile) return null;

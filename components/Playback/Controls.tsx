@@ -1,3 +1,4 @@
+'use client';
 import { useSelector } from 'react-redux';
 import PlaybackButton, {
   ShuffleButton,
@@ -9,6 +10,7 @@ import useSpotifyControls from '@hooks/spotify/controls/usePlaybackControls';
 import { selectPlaybackData } from '@store/playbackSlice';
 
 function Controls() {
+  return '1';
   const { shuffle_state, is_playing, repeat_state } =
     useSelector(selectPlaybackData) || {};
 
