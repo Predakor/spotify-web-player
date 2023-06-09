@@ -13,7 +13,7 @@ function ArtistCard({ data, onClick }: CardProps<Artist>) {
       <div className="relative">
         <CoverImage
           urls={images}
-          className="aspect-square h-auto rounded-full"
+          className="aspect-square h-auto w-full rounded-full"
         />
         <CardPlaybackButton label={`artist: ${name}`} uri={uri} />
       </div>

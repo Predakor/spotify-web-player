@@ -30,7 +30,7 @@ function CoverImage({
   }
 
   return (
-    <figure className={`cover-shadow relative h-64 w-64 ${className}`}>
+    <figure className={`cover-shadow relative h-64 w-auto ${className}`}>
       <Image
         src={matchedImage.url}
         fill={true}
