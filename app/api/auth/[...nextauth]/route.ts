@@ -1,6 +1,6 @@
+import spotifyApi, { AUTH_URL } from '@utils/spotify';
 import NextAuth from 'next-auth/next';
 import SpotifyProvider from 'next-auth/providers/spotify';
-import spotifyApi, { AUTH_URL } from '@utils/spotify';
 import { SpotifySession, SpotifyToken } from 'types/spotifyUser';
 
 async function refreshAccesToken(token: SpotifyToken): Promise<SpotifyToken> {
@@ -23,15 +23,15 @@ async function refreshAccesToken(token: SpotifyToken): Promise<SpotifyToken> {
     };
   }
 }
-export default NextAuth({
+
+const handler = NextAuth({
   providers: [
     SpotifyProvider({
-      clientId: process.env.CLIENT_ID ?? '',
-      clientSecret: process.env.CLIENT_SECRET ?? '',
+      clientId: process.env.CLIENT_ID as string,
+      clientSecret: process.env.CLIENT_SECRET as string,
       authorization: AUTH_URL,
     }),
   ],
-  secret: process.env.SECRET,
   pages: {
     signIn: '/login',
   },
@@ -50,7 +50,7 @@ export default NextAuth({
       }
       if (Date.now() < spotifyToken.accesTokenExpires) return spotifyToken;
 
-      return await refreshAccesToken(spotifyToken);
+      return refreshAccesToken(spotifyToken);
     },
     async session({ session, token }): Promise<SpotifySession> {
       const { accesToken, refreshToken } = token as SpotifyToken;
@@ -65,3 +65,5 @@ export default NextAuth({
     },
   },
 });
+
+export { handler as GET, handler as POST };

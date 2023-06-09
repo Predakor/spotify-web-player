@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+'use client';
+
 import { idToHsl } from '@utils/idToColor';
-import { useRouter } from 'next/router';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface options {
   id?: string;
@@ -10,19 +12,20 @@ interface options {
 
 function usePageColor({ id, saturation = 70, lightness = 30 }: options = {}) {
   const [pageColor, setPageColor] = useState<string>();
-  const { query, asPath } = useRouter();
+  const pathname = usePathname() || '';
+  const query = useSearchParams;
   const [pageID] = Object.values(query);
 
   id ??= pageID?.toString();
 
   useEffect(() => {
-    const defindedColor = staticBackground[asPath];
+    const defindedColor = staticBackground[pathname];
     if (defindedColor) return setPageColor(defindedColor);
     if (!id) return setPageColor(undefined);
 
     const hue = idToHsl(id.toString());
     setPageColor(`hsl(${hue},${saturation}%,${lightness}%)`);
-  }, [asPath, id, lightness, saturation]);
+  }, [pathname, id, lightness, saturation]);
 
   return pageColor;
 }

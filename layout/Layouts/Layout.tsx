@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
+'use client';
+
+import Loading from '@layout/Loading';
 import { useSession } from 'next-auth/react';
-import { SpotifyUser } from 'types/spotifyUser';
+import { ReactNode } from 'react';
 import FoterWraper from '../Footer/Footer';
 import Header from '../Header';
 import AuthorizedLayout from './AuthorizedLayout';
-import UnathorizedLayout from './UnathorizedLayout';
-import Loading from '@layout/Loading';
 
 interface LayoutProps {
   children?: ReactNode;
@@ -15,15 +15,12 @@ interface LayoutProps {
 
 function Layout({ children, extendHeader }: LayoutProps) {
   const { status, data } = useSession();
+  console.log(data);
+
   if (status === 'loading') return <Loading />;
 
-  if (!data?.user) return <UnathorizedLayout>{children}</UnathorizedLayout>;
-
   return (
-    <AuthorizedLayout
-      user={data.user as SpotifyUser}
-      extendedHeader={extendHeader}
-    >
+    <AuthorizedLayout extendedHeader={extendHeader}>
       {children}
     </AuthorizedLayout>
   );

@@ -1,3 +1,5 @@
+'use client';
+
 import CardList from '@components/Card/CardList';
 import FetchingComponent from '@components/FetchingComponent/FetchingComponent';
 import PageContent from '@components/Page/PageContent';
@@ -5,10 +7,9 @@ import PageHeader from '@components/Page/PageHeader';
 import PagingShelf from '@components/Shelf/PagingShelf';
 import useInfo from '@hooks/spotify/Info/useInfo';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { NextPageWithLayout } from './_app';
+import { useRouter } from 'next/navigation';
 
-const Home: NextPageWithLayout = () => {
+const Home = () => {
   const { push } = useRouter();
   const info = useInfo();
 

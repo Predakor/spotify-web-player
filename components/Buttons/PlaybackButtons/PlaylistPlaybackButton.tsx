@@ -10,6 +10,7 @@ interface Props {
   className?: string;
 }
 function PlaylistPlaybackButton(props: Props) {
+  return 'playlistPlaybackButotn';
   const { uri, className, ariaLabel } = props;
 
   const { playPlaylist } = useSpotifyControls();
