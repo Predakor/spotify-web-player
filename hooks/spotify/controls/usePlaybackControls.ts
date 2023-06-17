@@ -8,10 +8,12 @@ import {
 } from '@store/playbackSlice';
 import { RepeatState } from 'types/spotifyTypes';
 import useSpotify from '../useSpotify';
+import useNotifications from '@hooks/useNotifications';
 
 function PlaybackControls() {
   const spotifyApi = useSpotify();
   const dispatch = useDispatch();
+  const [, setNotification] = useNotifications();
 
   const controlsRef = useRef({
     pause: () => spotifyApi.pause(),
@@ -23,7 +25,8 @@ function PlaybackControls() {
         await spotifyApi.skipToNext();
         controlsRef.current.getCurrentPlayback();
       } catch (error) {
-        throw error;
+        error ??= 'something went wrong' as string;
+        setNotification({ message: `${error}`, type: 'error' });
       }
     },
 
@@ -32,7 +35,8 @@ function PlaybackControls() {
         await spotifyApi.skipToPrevious();
         controlsRef.current.getCurrentPlayback();
       } catch (error) {
-        throw error;
+        error ??= 'something went wrong' as string;
+        setNotification({ message: `${error}`, type: 'error' });
       }
     },
 
@@ -42,7 +46,8 @@ function PlaybackControls() {
         spotifyApi.setShuffle(!shuffle_state);
         dispatch(setShuffleState(!shuffle_state));
       } catch (error) {
-        throw error;
+        error ??= 'something went wrong' as string;
+        setNotification({ message: `${error}`, type: 'error' });
       }
     },
 
@@ -54,7 +59,8 @@ function PlaybackControls() {
         dispatch(setIsPlaying(!is_playing));
         return !is_playing;
       } catch (error) {
-        throw error;
+        error ??= 'something went wrong' as string;
+        setNotification({ message: `${error}`, type: 'error' });
       }
     },
 
@@ -66,8 +72,8 @@ function PlaybackControls() {
         dispatch(setRepeatState(nextState));
         return nextState;
       } catch (error) {
-        console.error('error in useSpotifyControls');
-        throw error;
+        error ??= 'something went wrong' as string;
+        setNotification({ message: `${error}`, type: 'error' });
       }
     },
 
@@ -77,8 +83,8 @@ function PlaybackControls() {
         dispatch(setPlaybackData(playbackState));
         return playbackState;
       } catch (error) {
-        console.error('error in useSpotifyControls');
-        throw error;
+        error ??= 'something went wrong' as string;
+        setNotification({ message: `${error}`, type: 'error' });
       }
     },
 
@@ -90,8 +96,8 @@ function PlaybackControls() {
           position_ms: 1,
         });
       } catch (error) {
-        console.error(error + 'in spotify controls');
-        throw error;
+        error ??= 'something went wrong' as string;
+        setNotification({ message: `${error}`, type: 'error' });
       }
     },
     playSong: async (uris: string[], target: string) => {
@@ -102,8 +108,8 @@ function PlaybackControls() {
           position_ms: 1,
         });
       } catch (error) {
-        console.error(error + 'in spotify controls');
-        throw error;
+        error ??= 'something went wrong' as string;
+        setNotification({ message: `${error}`, type: 'error' });
       }
     },
   });

@@ -18,11 +18,15 @@ export const notificationSlice = createSlice({
         state.pop();
       }
     },
+    removeNotification: (state, action: { payload: string }) => {
+      return state.filter(({ message }) => message !== action.payload);
+    },
   },
 });
 
 const selectNotification = (state: AppState) => state.notification;
 
 export { selectNotification };
-export const { setNotification } = notificationSlice.actions;
+export const { setNotification, removeNotification } =
+  notificationSlice.actions;
 export default notificationSlice.reducer;
