@@ -1,4 +1,5 @@
 import Devices from '@components/Devices/DevicesDropdown';
+import Notifications from '@components/Notifications/Notification';
 import Controls from '@components/Playback/Controls';
 import PlaybackProgress from '@components/Playback/PlaybackProgress';
 import CurrentTrack from '@components/Track/CurrentTrack';
@@ -17,6 +18,8 @@ function Footer({ playback }: Props) {
   return (
     <footer className="sticky bottom-0 col-span-full border-t border-base-300 bg-base-100 p-2">
       <div className="grid grid-cols-3 items-center justify-items-center">
+        <Notifications className="mb-24" />
+
         <section className="justify-self-start" aria-label="Currently playing">
           {item && <CurrentTrack />}
         </section>
